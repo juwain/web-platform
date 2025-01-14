@@ -100,7 +100,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 ````markdown
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="utf-8" />
     <title>Example HTML5 Document</title>
@@ -116,7 +116,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="utf-8" />
     <title>Example HTML5 Document</title>

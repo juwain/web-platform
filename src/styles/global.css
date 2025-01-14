@@ -5,7 +5,7 @@
  */
 
 :root {
-  --accent: #2337ff;
+  --accent: #004ce4;
   --accent-dark: #000d8a;
   --black: 15, 18, 25;
   --gray: 96, 115, 159;
@@ -43,7 +43,7 @@ body {
   line-height: 1.7;
 }
 main {
-  width: 720px;
+  width: 900px;
   max-width: calc(100% - 2em);
   margin: auto;
   padding: 3em 1em;
@@ -102,16 +102,13 @@ table {
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
 }
 code {
   padding: 2px 5px;
   background-color: rgb(var(--gray-light));
-  border-radius: 2px;
 }
 pre {
   padding: 1.5em;
-  border-radius: 8px;
 }
 pre > code {
   all: unset;
