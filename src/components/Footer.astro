@@ -3,7 +3,7 @@ const today = new Date();
 ---
 
 <footer>
-  &copy; {today.getFullYear()} Журнал «Веб-платформа»
+  <p>&copy; {today.getFullYear()} Журнал «Веб‑платформа»</p>
   <div class="social-links">
     <a href="https://t.me/web_platform" target="_blank">
       <span class="sr-only">Канал в Telegram</span>
@@ -43,6 +43,6 @@ const today = new Date();
     color: rgb(var(--gray));
   }
   .social-links a:hover {
-    color: rgb(var(--gray-dark));
+    color: light-dark(rgb(var(--gray-dark)), rgb(var(--gray-light)));
   }
 </style>

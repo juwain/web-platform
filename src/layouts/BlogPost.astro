@@ -8,6 +8,9 @@ import FormattedDate from "../components/FormattedDate.astro";
 type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+import SkipLink from "@utils/SkipLink.astro";
+import BackToTop from "@utils/BackToTop.astro";
 ---
 
 <html lang="ru">
@@ -15,8 +18,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     <BaseHead title={title} description={description} />
     <style>
       main {
-        width: calc(100% - 2em);
-        max-width: 100%;
+        width: 100%;
         margin: 0;
       }
       .hero-image {
@@ -28,11 +30,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         box-shadow: var(--box-shadow);
       }
       .prose {
-        width: 720px;
-        max-width: calc(100% - 2em);
+        width: 900px;
+        max-width: 100%;
         margin: auto;
-        padding: 1em;
-        color: rgb(var(--gray-dark));
+        color: light-dark(rgb(var(--gray-dark)), inherit);
       }
       .title {
         margin-bottom: 1em;
@@ -56,6 +57,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
   <body>
     <Header />
     <main>
+      <SkipLink />
+      <div class="sr-only" id="start"></div>
+
+      <section aria-label="Utilities">
+        <!-- You could also add a theme switch here or anything considered a utility -->
+        <BackToTop />
+      </section>
       <article>
         <div class="hero-image">
           {
