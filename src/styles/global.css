@@ -4,47 +4,31 @@
   /* Typography */
 
   @font-face {
-    font-display: swap;
-    font-family: "Anybody";
+    font-family: "GolosUI";
+    src: url("/fonts/golos-ui_bold.woff2") format("woff2");
+    font-weight: bold;
     font-style: normal;
-    font-weight: 400;
-    src: url("/fonts/anybody-v11-latin-regular.woff2") format("woff2");
   }
 
   @font-face {
-    font-display: swap;
-    font-family: "Inter";
+    font-family: "GolosUI";
+    src: url("/fonts/golos-ui_regular.woff2") format("woff2");
+    font-weight: normal;
     font-style: normal;
-    font-weight: 400;
-    src: url("/fonts/inter-v13-latin-regular.woff2") format("woff2");
   }
 
-  /* Focus behaviour */
-
-  :is(a, button, input, textarea, summary) {
-    --outline-size: max(2px, 0.08em);
-    --outline-style: solid;
-    --outline-color: currentColor;
-    --outline-offset: 3px;
+  @font-face {
+    font-family: "PTMonoWeb";
+    src: url("/fonts/pt-mono_regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
   }
 
-  :is(a, button, input, textarea, summary):focus {
-    outline: var(--outline-size) var(--outline-style) var(--outline-color);
-    outline-offset: var(--outline-offset, var(--outline-size));
-  }
-
-  :is(a, button, input, textarea, summary):focus-visible {
-    outline: var(--outline-size) var(--outline-style) var(--outline-color);
-    outline-offset: var(--outline-offset, var(--outline-size));
-  }
-
-  :is(a, button, input, textarea, summary):focus:not(:focus-visible) {
-    outline: none;
-  }
-
-  :is(a, button, input, textarea, summary):hover {
-    outline: var(--outline-size) var(--outline-style) var(--outline-color);
-    outline-offset: var(--outline-offset, var(--outline-size));
+  @font-face {
+    font-family: "PTMonoWeb";
+    src: url("/fonts/pt-mono_bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
   }
 
   /* General */
@@ -59,7 +43,7 @@
   h3,
   h4 {
     color: light-dark(var(--color-black), var(--color-white));
-    font-family: "Anybody", sans-serif;
+    font-family: "GolosUI", sans-serif;
   }
 
   /* h1 {
@@ -73,8 +57,9 @@
   blockquote,
   ul,
   ol,
-  p {
-    font-family: "Inter", sans-serif;
+  p,
+  time {
+    font-family: "GolosUI", sans-serif;
     font-size: var(--step-1);
     hyphens: auto;
   }
@@ -82,29 +67,16 @@
   code {
     color: light-dark(var(--black), var(--color-yellow));
     font-weight: bold;
-  }
-
-  :root {
-    --accent: #004ce4;
-    --accent-dark: #000d8a;
-    --black: 15, 18, 25;
-    --gray: 96, 115, 159;
-    --gray-light: 229, 233, 240;
-    --gray-dark: 34, 41, 57;
-    --gray-gradient: rgba(var(--gray-light), 50%), #fff;
-    --box-shadow: 0 2px 6px rgba(var(--gray), 25%),
-      0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
+    font-family: "PTMonoWeb", monospace;
   }
 
   body {
     margin: 0;
     padding: 0;
     text-align: left;
-    background: linear-gradient(var(--gray-gradient)) no-repeat;
     background-size: 100% 600px;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    color: rgb(var(--gray-dark));
     font-size: 20px;
     line-height: 1.7;
   }
@@ -121,11 +93,10 @@
   h5,
   h6 {
     margin: 0 0 1rem 0;
-    color: rgb(var(--black));
     line-height: 1.2;
   }
   h1 {
-    font-size: 3.052em;
+    font-size: 2.852em;
   }
   h2 {
     font-size: 2.441em;
@@ -134,7 +105,7 @@
     font-size: 1.953em;
   }
   h4 {
-    font-size: 1.563em;
+    font-size: 1.363em;
   }
   h5 {
     font-size: 1.25em;
@@ -171,7 +142,7 @@
   }
   code {
     padding: 2px 5px;
-    background-color: rgb(var(--gray-light));
+    background-color: light-dark(rgb(var(--gray-light)), rgb(var(--gray-dark)));
   }
   pre {
     padding: 1.5em;
@@ -216,29 +187,34 @@
     clip-path: inset(50%);
     /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
     white-space: nowrap;
+  }
 
-    /* Scheme preference */
+  /* Scheme preference */
 
-    @media (prefers-contrast: more) {
-      body {
-        background: #000;
-        color: #fff;
-      }
-
-      h1,
-      h2 {
-        color: #fff;
-      }
+  @media (prefers-contrast: more) {
+    body {
+      background: #000;
+      color: #fff;
     }
 
-    /* Reduced motion preference */
+    h1,
+    h2 {
+      color: #fff;
+    }
 
-    @media (prefers-reduced-motion: no-preference) {
-      :focus,
-      :hover {
-        transition: outline-offset 0.25s ease;
-        outline-offset: 5px;
-      }
+    code {
+      background: #fff;
+      color: #000;
+    }
+  }
+
+  /* Reduced motion preference */
+
+  @media (prefers-reduced-motion: no-preference) {
+    :focus,
+    :hover {
+      transition: outline-offset 0.25s ease;
+      outline-offset: 5px;
     }
   }
 }
