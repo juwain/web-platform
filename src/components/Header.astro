@@ -10,6 +10,9 @@ interface Props {
 }
 
 import icon from "../assets/icon-burder.svg";
+import SocialLinks from "./SocialLinks.astro";
+import logo from "../assets/logo.svg";
+import { Image } from "astro:assets";
 
 const iconPath = `url(${icon.src})`;
 const iconWidth = `${icon.width}px`;
@@ -19,7 +22,10 @@ const { mode = "default", breadcrumbs } = Astro.props;
 ---
 
 <header slot="header" class="header">
-  <a class="logo" href="/"><span>+</span><span>+</span><span>+</span></a>
+  <a class="logo" href="/">
+    <Image src={logo} width={52} alt="" />
+    <span>+</span><span>+</span>
+  </a>
   {
     (mode === "editor" || mode === "content") && (
       <Breadcrumbs breadcrumbs={breadcrumbs} />
@@ -32,13 +38,7 @@ const { mode = "default", breadcrumbs } = Astro.props;
       </button>
     )
   }
-  {
-    (mode === "default" || mode === "content") && (
-      <nav>
-        <a href="/about">О проекте</a>
-      </nav>
-    )
-  }
+  {(mode === "default" || mode === "content") && <SocialLinks type="dark" />}
 </header>
 
 <style
@@ -64,6 +64,12 @@ const { mode = "default", breadcrumbs } = Astro.props;
     text-decoration: none;
     color: inherit;
     font-size: 2.5rem;
+    display: flex;
+  }
+
+  .logo img {
+    filter: invert(1);
+    margin-right: 5px;
   }
 
   .logo span {
@@ -80,10 +86,6 @@ const { mode = "default", breadcrumbs } = Astro.props;
 
   .logo span:nth-child(2) {
     animation-delay: 0.1s;
-  }
-
-  .logo span:nth-child(3) {
-    animation-delay: 0.15s;
   }
 
   .open-dialog {

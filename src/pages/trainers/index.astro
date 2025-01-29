@@ -5,6 +5,7 @@ import Lessons from "../../components/Lessons.astro";
 import TypedHeading from "../../components/TypeHeading.astro";
 
 import type { Lesson } from "../../types";
+import TextLayout from "@layouts/TextLayout.astro";
 
 const lessons = (await Astro.glob("../trainers/*/*.astro")) as Lesson[];
 const title = "Тренажёры для прокачки навыков фронтенд-разработчика";
@@ -15,6 +16,36 @@ const title = "Тренажёры для прокачки навыков фро
   <div class="main-page">
     <h1 class="sr-only">{title}</h1>
     <TypedHeading text={title} />
+    <TextLayout>
+      <p>
+        Написание кода — это следствие обучения, которое должно быть постоянным.
+        При этом только читать статьи и смотреть видео — мало. Полученную
+        информацию нужно отработать на практике, чтобы она усвоилась,
+        трансформировалась в опыт и лучше запомнилась.
+      </p>
+
+      <p>
+        Проект «Плюсы» создан, чтобы сделать прокачку востребованных навыков
+        фронтенд-разработчика легкодоступным и интересным процессом. Тренажёры
+        включают в себя теорию и практические задания, которые можно выполнить
+        прямо в браузере. Все задания доступны бесплатны.
+      </p>
+
+      <p>
+        Если вы хотите поделиться обратной связью, напишите в Телеграме <a
+          target="_blank"
+          href="https://t.me/web_platform_support">@web_platform_support</a
+        >.
+      </p>
+
+      <p>
+        <a
+          class="button"
+          href="https://pay.cloudtips.ru/p/6dc7f789"
+          target="_blank">Поддержать проект</a
+        >
+      </p>
+    </TextLayout>
     <Lessons lessons={lessons} />
   </div>
 </TrainersLayout>
