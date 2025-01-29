@@ -8,14 +8,15 @@ import type { Lesson } from "../../types";
 import TextLayout from "@layouts/TextLayout.astro";
 
 const lessons = (await Astro.glob("../trainers/*/*.astro")) as Lesson[];
-const title = "Тренажёры для прокачки навыков фронтенд-разработчика";
+const title = "Тренажёры по фронтенду";
+const description = "Тренажёры для прокачки навыков фронтенд-разработчика";
 ---
 
-<TrainersLayout title={title}>
+<TrainersLayout title={title} description={description}>
   <Header mode="default" />
   <div class="main-page">
     <h1 class="sr-only">{title}</h1>
-    <TypedHeading text={title} />
+    <TypedHeading text={description} />
     <TextLayout>
       <p>
         Написание кода — это следствие обучения, которое должно быть постоянным.
