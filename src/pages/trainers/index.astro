@@ -1,0 +1,28 @@
+---
+import TrainersLayout from "../../layouts/TrainersLayout.astro";
+import Header from "../../components/Header.astro";
+import Lessons from "../../components/Lessons.astro";
+import TypedHeading from "../../components/TypeHeading.astro";
+
+import type { Lesson } from "../../types";
+
+const lessons = (await Astro.glob("../trainers/*/*.astro")) as Lesson[];
+const title = "Тренажёры для прокачки навыков фронтенд-разработчика";
+---
+
+<TrainersLayout title={title}>
+  <Header mode="default" />
+  <div class="main-page">
+    <h1 class="sr-only">{title}</h1>
+    <TypedHeading text={title} />
+    <Lessons lessons={lessons} />
+  </div>
+</TrainersLayout>
+
+<style>
+  .main-page {
+    max-width: 1000px;
+    margin-inline: auto;
+    margin-block: 3rem;
+  }
+</style>

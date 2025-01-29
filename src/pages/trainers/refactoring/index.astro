@@ -1,0 +1,34 @@
+---
+import { getContents } from "../../../utils/getContents";
+import Contents from "../../../components/Contents.astro";
+import type { Part } from "../../../types";
+
+export const title = "Рефакторинг кода";
+export const description = `Неупорядоченный, запутанный код
+сложнее читать и понимать. В процессе знакомства и понимания кода,
+иногда нужно его по ходу дела причесать. Пригодится не только вам,
+но и потомкам, которые будут дальше работать с проектом.`;
+const longDescription = `${description}
+<br />
+Рефакторинг кода совсем не обязательно делать сразу масштабным. Наоборот,
+маленькие шаги будут внедряться безболезненно, а эффект от них
+со временем будет накапливаться.`;
+export const duration = "8 часов";
+export const level = "junior, middle";
+export const status = "completed";
+export const order = 10;
+
+import pictureObj from "./assets/_picture.svg";
+export const picture = pictureObj;
+
+export const lessonParts = getContents(
+  (await Astro.glob("./**/*.astro")) as Part[]
+);
+---
+
+<Contents
+  picture={picture}
+  parts={lessonParts}
+  title={title}
+  description={longDescription}
+/>

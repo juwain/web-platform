@@ -1,0 +1,19 @@
+---
+interface Props {
+  nextUrl: string;
+}
+
+const { nextUrl } = Astro.props;
+---
+
+<div class="content-footer">
+  <a class="button" href={nextUrl}>Перейти дальше</a>
+</div>
+
+<style>
+  .content-footer {
+    display: flex;
+    justify-content: center;
+    margin-block-end: 4rem;
+  }
+</style>

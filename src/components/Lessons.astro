@@ -1,0 +1,107 @@
+---
+import type { Lesson } from "../types";
+
+interface Props {
+  lessons: Lesson[];
+}
+
+const { lessons } = Astro.props;
+---
+
+<div class="lessons">
+  {
+    lessons
+      .sort((a, b) => a.order - b.order)
+      .map((lesson) => {
+        const isCompleted = lesson.status === "completed";
+
+        return (
+          <a class="lesson" href={isCompleted ? lesson.url : null}>
+            <img class="lesson-picture" src={lesson.picture?.src} />
+            <h2 class="lesson-title">{lesson.title}</h2>
+            <p class="lesson-description">{lesson.description}</p>
+            {isCompleted && (
+              <dl class="lesson-details">
+                <dt>Время прохождения:</dt>
+                <dd>{lesson.duration}</dd>
+                <dt>Уровень:</dt>
+                <dd>{lesson.level}</dd>
+              </dl>
+            )}
+          </a>
+        );
+      })
+  }
+</div>
+
+<style>
+  .lessons {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 0 50px;
+  }
+
+  .lessons > a {
+    margin-top: 50px;
+  }
+
+  .lesson {
+    display: grid;
+    grid-row: auto / span 4;
+    grid-template-rows: subgrid;
+    font-size: calc(1rem + 0.25vw);
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    padding: 1rem 1.2rem 0.5rem;
+    transition: border-color 150ms ease;
+  }
+
+  .lesson[href]:hover {
+    border-color: #c5c5c5;
+  }
+
+  .lesson-picture {
+    width: min(200px, 100%);
+    margin: 1rem 0 2rem;
+    justify-self: center;
+  }
+
+  .lesson-title {
+    font-size: calc(1.25rem + 0.5vw);
+    margin: 0 0 1rem;
+  }
+
+  .lesson-description {
+    margin: 0 0 1rem;
+  }
+
+  .lesson-details {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: start;
+    width: max-content;
+    gap: 10px;
+    margin: 0 0 1rem;
+    padding-block-start: 1rem;
+    font-size: calc(0.85rem + 0.25vw);
+  }
+
+  .lesson-details::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+  }
+
+  .lesson-details dd {
+    margin: 0;
+  }
+</style>

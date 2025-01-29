@@ -55,5 +55,9 @@
       0 8px 24px light-dark(rgba(var(--gray), 33%), rgba(var(--gray-dark), 85%)),
       0 16px 32px
         light-dark(rgba(var(--gray), 33%), rgba(var(--gray-dark), 85%));
+
+    --main-font-family: "PTAstraSansWeb", system-ui, sans-serif;
+    --main-font-size: calc(1.1rem + 0.25vw);
+    --main-line-height: 1.5;
   }
 }

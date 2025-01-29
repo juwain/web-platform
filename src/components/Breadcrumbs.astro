@@ -1,0 +1,34 @@
+---
+interface Props {
+  breadcrumbs?: {
+    url?: string;
+    title: string;
+  }[];
+}
+
+const { breadcrumbs } = Astro.props;
+---
+
+<>
+  {
+    breadcrumbs && (
+      <nav class="breadcrumbs">
+        {breadcrumbs.map(({ url, title }) => (
+          <a href={url}>{title}</a>
+        ))}
+      </nav>
+    )
+  }
+</>
+
+<style>
+  .breadcrumbs {
+    display: flex;
+    gap: 10px;
+  }
+
+  .breadcrumbs a:not(:first-child)::before {
+    content: "/";
+    margin-right: 10px;
+  }
+</style>
