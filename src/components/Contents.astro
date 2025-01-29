@@ -1,7 +1,7 @@
 ---
 import TrainersLayout from "../layouts/TrainersLayout.astro";
-import Header from "./Header.astro";
 import type { PartData } from "../types";
+import SiteHeader from "./SiteHeader.astro";
 
 interface Props {
   title: string;
@@ -14,7 +14,7 @@ const { parts, title, description, picture } = Astro.props;
 ---
 
 <TrainersLayout title={title}>
-  <Header mode="default" />
+  <SiteHeader slot="header" />
   <div class="contents-container">
     <h1 class="contents-title">{title}</h1>
     <img class="contents-picture" src={picture.src} alt={title} />
@@ -37,6 +37,7 @@ const { parts, title, description, picture } = Astro.props;
   .contents-container {
     max-width: min(900px, 100%);
     margin-inline: auto;
+    margin-block: 2em;
   }
 
   .contents-title {

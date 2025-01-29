@@ -74,8 +74,8 @@ const { title, description } = Astro.props;
     </style>
   </head>
   <body>
+    <slot name="header" />
     <main class="container">
-      <slot name="header" />
       <slot />
     </main>
   </body>

@@ -1,11 +1,11 @@
 ---
 import TrainersLayout from "../../layouts/TrainersLayout.astro";
-import Header from "../../components/Header.astro";
 import Lessons from "../../components/Lessons.astro";
 import TypedHeading from "../../components/TypeHeading.astro";
 
 import type { Lesson } from "../../types";
 import TextLayout from "@layouts/TextLayout.astro";
+import SiteHeader from "~/components/SiteHeader.astro";
 
 const lessons = (await Astro.glob("../trainers/*/*.astro")) as Lesson[];
 const title = "Тренажёры по фронтенду";
@@ -13,7 +13,7 @@ const description = "Тренажёры для прокачки навыков 
 ---
 
 <TrainersLayout title={title} description={description}>
-  <Header mode="default" />
+  <SiteHeader slot="header" />
   <div class="main-page">
     <h1 class="sr-only">{title}</h1>
     <TypedHeading text={description} />
