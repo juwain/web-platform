@@ -7,30 +7,32 @@ import {
   SandpackConsole,
   ConsoleIcon,
   RoundedButton,
-} from "@codesandbox/sandpack-react";
-import { useState } from "react";
-import { ServiceBar } from "../ServiceBar/ServiceBar";
-import { mapGoalsFromSpecs } from "../../utils/mapGoalsFromSpecs";
-import type { SandpackEditorProps } from "../Editor.astro";
-import type { Goal, Spec } from "../../types";
-import "./styles.css";
-import { Goals } from "../Goals/Goals";
+} from '@codesandbox/sandpack-react';
+import { useState } from 'react';
+import { ServiceBar } from '../ServiceBar/ServiceBar';
+import { mapGoalsFromSpecs } from '../../utils/mapGoalsFromSpecs';
+import type { SandpackEditorProps } from '../Editor.astro';
+import type { Goal, Spec } from '../../types';
+import './styles.css';
+import { Goals } from '../Goals/Goals';
 
 const classes = {
-  "sp-layout": "editor-layout",
-  "sp-file-explorer": "file-explorer",
-  "sp-editor": "code-editor",
-  "sp-tests": "tests-panel",
-  "sp-console": "console",
+  'sp-layout': 'editor-layout',
+  'sp-file-explorer': 'file-explorer',
+  'sp-editor': 'code-editor',
+  'sp-tests': 'tests-panel',
+  'sp-console': 'console',
 };
 
 export function SandpackEditor({
   template,
   files,
   nextUrl,
+  options,
 }: SandpackEditorProps) {
+  const { showConsole } = options ?? {};
   const visibleFiles = Object.keys(files).filter(
-    (file) => !file.includes(".test.")
+    (file) => !file.includes('.test.'),
   );
 
   return (
@@ -43,18 +45,27 @@ export function SandpackEditor({
         visibleFiles: visibleFiles,
       }}
       customSetup={{
-        dependencies: { espree: "^10.0.1" },
+        dependencies: { espree: '^10.0.1' },
       }}
     >
-      <SandpackComponents nextUrl={nextUrl} />
+      <SandpackComponents
+        nextUrl={nextUrl}
+        showConsole={Boolean(showConsole)}
+      />
     </SandpackProvider>
   );
 }
 
-const SandpackComponents = ({ nextUrl }: { nextUrl?: string }) => {
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+const SandpackComponents = ({
+  nextUrl,
+  showConsole,
+}: {
+  nextUrl?: string;
+  showConsole: boolean;
+}) => {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(showConsole);
   const [specs, setSpecs] = useState<Goal[]>();
-  const isAllSpecsPassed = specs?.every((spec) => spec.status === "pass");
+  const isAllSpecsPassed = specs?.every((spec) => spec.status === 'pass');
 
   const handleComplete = (result: Record<string, Spec>) => {
     const specs = mapGoalsFromSpecs(result);
@@ -65,7 +76,7 @@ const SandpackComponents = ({ nextUrl }: { nextUrl?: string }) => {
   };
 
   return (
-    <SandpackLayout className={isSidebarVisible ? "with-sidebar" : ""}>
+    <SandpackLayout className={isSidebarVisible ? 'with-sidebar' : ''}>
       {/* <SandpackFileExplorer /> */}
       <SandpackCodeEditor
         showInlineErrors

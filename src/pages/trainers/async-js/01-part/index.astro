@@ -42,6 +42,11 @@ const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
 
 <TrainersLayout title={title}>
   <Header mode="editor" breadcrumbs={breadcrumbs} />
-  <Editor files={files} template="vanilla" nextUrl={nextUrl} />
+  <Editor
+    files={files}
+    template="vanilla"
+    nextUrl={nextUrl}
+    options={{ showConsole: true }}
+  />
   <Theory Content={content} />
 </TrainersLayout>

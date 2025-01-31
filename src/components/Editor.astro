@@ -9,9 +9,12 @@ export interface SandpackEditorProps {
   template: SandpackPredefinedTemplate;
   files: SandpackFiles;
   nextUrl?: string;
+  options?: {
+    showConsole?: boolean;
+  };
 }
 
-const { files, template, nextUrl } = Astro.props;
+const { files, template, nextUrl, options } = Astro.props;
 ---
 
 <SandpackEditor
@@ -19,4 +22,5 @@ const { files, template, nextUrl } = Astro.props;
   client:only="react"
   files={files}
   nextUrl={nextUrl}
+  options={options}
 />
