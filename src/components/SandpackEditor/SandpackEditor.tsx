@@ -44,9 +44,9 @@ export function SandpackEditor({
         classes,
         visibleFiles: visibleFiles,
       }}
-      customSetup={{
-        dependencies: { espree: '^10.0.1' },
-      }}
+      // customSetup={{
+      //   dependencies: { espree: '^10.0.1' },
+      // }}
     >
       <SandpackComponents
         nextUrl={nextUrl}
