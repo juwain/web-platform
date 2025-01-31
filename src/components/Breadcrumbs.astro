@@ -27,6 +27,10 @@ const { breadcrumbs } = Astro.props;
     gap: 10px;
   }
 
+  .breadcrumbs a {
+    color: inherit;
+  }
+
   .breadcrumbs a:not(:first-child)::before {
     content: "/";
     margin-right: 10px;

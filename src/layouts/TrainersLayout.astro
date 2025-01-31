@@ -45,7 +45,7 @@ const { title, description } = Astro.props;
         align-items: center;
         font-size: inherit;
         font-family: inherit;
-        background-color: #2ecc40;
+        background-color: var(--color-green-accent);
         transition:
           color 150ms ease,
           background 150ms ease;
@@ -58,7 +58,7 @@ const { title, description } = Astro.props;
       }
 
       .button:hover {
-        background-color: #3bda4d;
+        background-color: var(--color-green-accent-light);
       }
     </style>
 
