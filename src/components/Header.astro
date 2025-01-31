@@ -24,7 +24,6 @@ const { mode = "default", breadcrumbs } = Astro.props;
 <header class="header">
   <a class="logo" href="/">
     <Image src={logo} width={52} alt="" />
-    <span>+</span><span>+</span>
   </a>
   {
     (mode === "editor" || mode === "content") && (
@@ -54,38 +53,12 @@ const { mode = "default", breadcrumbs } = Astro.props;
     align-items: center;
   }
 
-  @keyframes rotate {
-    to {
-      transform: rotate(90deg);
-    }
-  }
-
   .logo {
     text-decoration: none;
     color: inherit;
     font-size: 2.5rem;
     display: flex;
-  }
-
-  .logo img {
     filter: invert(1);
-    margin-right: 5px;
-  }
-
-  .logo span {
-    display: inline-block;
-  }
-
-  .logo:hover span {
-    animation: rotate 1s infinite ease-in-out;
-  }
-
-  .logo span:nth-child(1) {
-    animation-delay: 0.05s;
-  }
-
-  .logo span:nth-child(2) {
-    animation-delay: 0.1s;
   }
 
   .open-dialog {
