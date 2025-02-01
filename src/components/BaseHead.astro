@@ -163,4 +163,13 @@ const {
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
+<!-- Yandex -->
 <meta name="yandex-verification" content="8af5baffd7874edb" />
+
+<!-- RSS -->
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={title}
+  href={new URL("rss.xml", Astro.site)}
+/>
