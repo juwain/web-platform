@@ -1,0 +1,60 @@
+---
+import TrainersLayout from "../layouts/TrainersLayout.astro";
+import type { PartData } from "../types";
+import SiteHeader from "./SiteHeader.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  parts: PartData[];
+  picture: ImageMetadata;
+}
+
+const { parts, title, description, picture } = Astro.props;
+---
+
+<TrainersLayout title={title}>
+  <SiteHeader slot="header" />
+  <div class="contents-container">
+    <h1 class="contents-title">{title}</h1>
+    <img class="contents-picture" src={picture.src} alt={title} />
+    {description && <p class="contents-description" set:html={description} />}
+    <a class="button contents-button" href={parts[0].url}>Начать тренажёр</a>
+    <h2>Содержание:</h2>
+    <ul>
+      {
+        parts.map((part) => (
+          <li>
+            <a href={part.url}>{part.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</TrainersLayout>
+
+<style>
+  .contents-container {
+    max-width: min(900px, 100%);
+    margin-inline: auto;
+    margin-block: 2em;
+  }
+
+  .contents-title {
+    margin-bottom: 2rem;
+  }
+
+  .contents-description {
+    width: clamp(320px, 60vw, 900px);
+  }
+
+  .contents-picture {
+    width: min(320px, 100%);
+    margin-inline: auto;
+    margin-bottom: 2rem;
+  }
+
+  .contents-button {
+    margin: 1rem auto;
+  }
+</style>

@@ -1,0 +1,60 @@
+.goals {
+  padding: 0.5rem 10rem 0.5rem 2rem;
+}
+
+.goals-title {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: inherit;
+}
+
+.goals-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.goals-list li {
+  position: relative;
+}
+
+.goals-list li::before {
+  content: "☐";
+
+  position: absolute;
+  left: -20px;
+}
+
+.goals-list li.completed {
+  color: #2ecc40;
+}
+
+.goals-list li.completed::before {
+  content: "☑";
+}
+
+.loader {
+  color: #232323;
+  font-family: "PTMonoWeb", monospace;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.loader::before {
+  content: "{";
+  display: inline-block;
+  animation: pulse 0.4s alternate infinite ease-in-out;
+}
+
+.loader::after {
+  content: "}";
+  display: inline-block;
+  animation: pulse 0.4s 0.3s alternate infinite ease-in-out;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+}

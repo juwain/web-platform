@@ -1,0 +1,109 @@
+---
+const { Content } = Astro.props;
+
+import icon from "../assets/icon-close.svg";
+
+const iconPath = `url(${icon.src})`;
+const iconWidth = `${icon.width}px`;
+const iconHeight = `${icon.height}px`;
+---
+
+<dialog class="dialog-menu">
+  <button class="close-dialog" type="button">
+    <span class="sr-only">Закрыть</span>
+  </button>
+  <article class="theory-content">
+    <Content />
+  </article>
+</dialog>
+
+<style
+  define:vars={{
+    iconPath,
+    iconWidth,
+    iconHeight,
+  }}
+>
+  .dialog-menu,
+  .dialog-menu[open].dialog-menu--closing {
+    position: fixed;
+    transition: 0.3s transform;
+    margin: 0;
+    margin-left: auto;
+    min-height: 100vh;
+    width: max(400px, 40vw);
+    transform: translateX(100%);
+  }
+
+  .dialog-menu[open] {
+    display: flex;
+    margin: 0;
+    margin-left: auto;
+    flex-direction: column;
+    transform: translateX(0);
+    z-index: 5;
+    padding: 1rem;
+    border: none;
+  }
+
+  .dialog-menu::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .close-dialog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    transition: opacity 0.3s;
+  }
+
+  .close-dialog::before {
+    content: "";
+    display: block;
+    width: var(--iconWidth);
+    height: var(--iconHeight);
+    background-image: var(--iconPath);
+  }
+
+  .close-dialog:hover {
+    opacity: 0.7;
+  }
+
+  .theory-content {
+    font-size: 1rem;
+  }
+</style>
+
+<script>
+  const dialogMenu = document.querySelector(
+    ".dialog-menu"
+  ) as HTMLDialogElement;
+  const dialogMenuCloseButton = document.querySelector(".close-dialog");
+  const dialogMenuOpenButton = document.querySelector(".open-dialog");
+
+  dialogMenuOpenButton?.addEventListener("click", () => {
+    if (!dialogMenu) return;
+
+    dialogMenu.style.display = "flex";
+    setTimeout(() => {
+      dialogMenu?.showModal();
+    }, 100);
+  });
+
+  dialogMenuCloseButton?.addEventListener("click", () => {
+    if (!dialogMenu) return;
+
+    dialogMenu.classList.add("dialog-menu--closing");
+    setTimeout(() => {
+      dialogMenu.close();
+      dialogMenu.style.display = "none";
+      dialogMenu.classList.remove("dialog-menu--closing");
+    }, 100);
+  });
+
+  dialogMenu?.showModal();
+</script>

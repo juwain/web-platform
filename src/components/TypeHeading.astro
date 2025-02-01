@@ -1,0 +1,47 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<p class="main-page-title">
+  {text}
+</p>
+
+<style>
+  .main-page-title {
+    margin: 0;
+    font-size: calc(2.5rem + 1vw);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+</style>
+
+<script>
+  import Typed from "typed.js";
+
+  const typedContainer = document.querySelector(
+    ".main-page-title"
+  ) as HTMLElement;
+
+  const isTypedShown = sessionStorage.getItem("typed");
+
+  if (isTypedShown !== "true" && typedContainer) {
+    const text = typedContainer.textContent ?? "";
+
+    const height = typedContainer.getBoundingClientRect().height;
+    typedContainer.style.height = `${height}px`;
+    typedContainer.textContent = "";
+
+    new Typed(typedContainer, {
+      strings: [text],
+      typeSpeed: 40,
+      startDelay: 1000,
+      showCursor: false,
+    });
+
+    sessionStorage.setItem("typed", "true");
+  }
+</script>

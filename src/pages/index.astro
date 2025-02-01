@@ -1,6 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { Image } from "astro:assets";
@@ -12,6 +12,13 @@ import logoFull from "../assets/logo-full.svg";
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
+      main {
+        width: 960px;
+        max-width: 100%;
+        margin: auto;
+        padding: 3em 1em;
+      }
+
       .hero {
         background-color: var(--accent);
         padding-top: 100px;
@@ -27,15 +34,15 @@ import logoFull from "../assets/logo-full.svg";
     </style>
   </head>
   <body>
-    <Header />
+    <SiteHeader />
     <div class="hero">
       <Image src={logoFull} alt="" />
     </div>
     <main>
-      <h1 class="sr-only">Журнал «Веб-платформа»</h1>
+      <h1 class="sr-only">Веб-платформа</h1>
       <p>
-        📍 Журнал о том, как всё устроено в веб-платформе и что происходит в
-        индустрии фронтенда
+        📍 О том, как всё устроено в веб-платформе и что происходит в индустрии
+        фронтенда
       </p>
       <p>⭐️ Новости, полезные выжимки, находки и напоминания</p>
     </main>

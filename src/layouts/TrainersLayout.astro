@@ -1,0 +1,82 @@
+---
+import BaseHead from "~/components/BaseHead.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description ?? title} />
+    <style is:global>
+      a:hover {
+        text-decoration: none;
+      }
+
+      .astro-code {
+        margin: 0.5rem 0 16px;
+        padding: 0.8rem 1rem 0.9rem;
+        overflow: auto;
+        border-radius: 14px;
+        font-size: 1rem;
+        overflow-x: unset !important;
+      }
+
+      :not(pre) > code {
+        padding: 0.1em 0.3em;
+        border-radius: 0.3em;
+        white-space: pre-wrap;
+        background-color: #282a36;
+        color: #f8f8f2;
+        font-size: 1rem;
+      }
+
+      body:has(dialog[open]) {
+        overflow: hidden;
+      }
+
+      .button {
+        display: flex;
+        align-items: center;
+        font-size: inherit;
+        font-family: inherit;
+        background-color: var(--color-green-accent);
+        transition:
+          color 150ms ease,
+          background 150ms ease;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 99999px;
+        padding: 1rem;
+        height: 3rem;
+        width: fit-content;
+      }
+
+      .button:hover {
+        background-color: var(--color-green-accent-light);
+      }
+    </style>
+
+    <style>
+      .container {
+        display: grid;
+        grid-template-rows: 50px 1fr;
+        min-height: 100vh;
+        margin-inline: auto;
+        max-width: 1400px;
+        padding-inline: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <slot name="header" />
+    <main class="container">
+      <slot />
+    </main>
+  </body>
+</html>

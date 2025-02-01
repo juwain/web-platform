@@ -1,0 +1,26 @@
+---
+import type {
+  SandpackFiles,
+  SandpackPredefinedTemplate,
+} from "@codesandbox/sandpack-react";
+import { SandpackEditor } from "./SandpackEditor/SandpackEditor";
+
+export interface SandpackEditorProps {
+  template: SandpackPredefinedTemplate;
+  files: SandpackFiles;
+  nextUrl?: string;
+  options?: {
+    showConsole?: boolean;
+  };
+}
+
+const { files, template, nextUrl, options } = Astro.props;
+---
+
+<SandpackEditor
+  template={template}
+  client:only="react"
+  files={files}
+  nextUrl={nextUrl}
+  options={options}
+/>

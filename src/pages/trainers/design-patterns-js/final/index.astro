@@ -1,0 +1,10 @@
+---
+import Congrat from "../../../../components/Congrat.astro";
+import type { LessonParent } from "../../../../types";
+
+export const title = "Финал";
+
+const parent = (await Astro.glob("../index.astro"))[0] as LessonParent;
+---
+
+<Congrat title={parent.title} />

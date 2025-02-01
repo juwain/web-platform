@@ -4,20 +4,6 @@
   /* Typography */
 
   @font-face {
-    font-family: "GolosUI";
-    src: url("/fonts/golos-ui_bold.woff2") format("woff2");
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "GolosUI";
-    src: url("/fonts/golos-ui_regular.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @font-face {
     font-family: "PTMonoWeb";
     src: url("/fonts/pt-mono_regular.woff2") format("woff2");
     font-weight: normal;
@@ -31,6 +17,34 @@
     font-style: normal;
   }
 
+  @font-face {
+    font-family: "PTAstraSansWeb";
+    src: url("/fonts/pt-astra-sans_bold-italic.woff2") format("woff2");
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "PTAstraSansWeb";
+    src: url("/fonts/pt-astra-sans_italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "PTAstraSansWeb";
+    src: url("/fonts/pt-astra-sans_bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "PTAstraSansWeb";
+    src: url("/fonts/pt-astra-sans_regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+  }
+
   /* General */
 
   body {
@@ -38,20 +52,25 @@
     color: light-dark(var(--color-black), var(--color-grey-light));
   }
 
+  /* Set core body defaults */
+  body {
+    min-height: 100vh;
+    font-family: var(--main-font-family);
+    font-size: var(--main-font-size);
+    line-height: var(--main-line-height);
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
   h1,
   h2,
   h3,
   h4 {
     color: light-dark(var(--color-black), var(--color-white));
-    font-family: "GolosUI", sans-serif;
   }
-
-  /* h1 {
-    font-size: var(--step-5);
-  }
-  h2 {
-    font-size: var(--step-4);
-  } */
 
   a,
   blockquote,
@@ -59,8 +78,6 @@
   ol,
   p,
   time {
-    font-family: "GolosUI", sans-serif;
-    font-size: var(--step-1);
     hyphens: auto;
   }
 
@@ -70,22 +87,13 @@
     font-family: "PTMonoWeb", monospace;
   }
 
-  body {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    background-size: 100% 600px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    font-size: 20px;
-    line-height: 1.7;
-  }
-  main {
+  /* main {
     width: 900px;
     max-width: 100%;
     margin: auto;
     padding: 3em 1em;
-  }
+  } */
+
   h1,
   h2,
   h3,
@@ -95,61 +103,79 @@
     margin: 0 0 1rem 0;
     line-height: 1.2;
   }
+
   h1 {
-    font-size: 2.852em;
+    font-size: 2.752em;
   }
+
   h2 {
     font-size: 2.441em;
   }
+
   h3 {
     font-size: 1.953em;
   }
+
   h4 {
     font-size: 1.363em;
   }
+
   h5 {
     font-size: 1.25em;
   }
+
   strong,
   b {
     font-weight: 700;
   }
+
   a {
     color: var(--accent);
   }
+
   a:hover {
     color: var(--accent);
   }
+
   p {
     margin-bottom: 1em;
   }
+
   .prose p {
     margin-bottom: 1em;
   }
+
   textarea {
     width: 100%;
     font-size: 16px;
   }
+
   input {
     font-size: 16px;
   }
+
   table {
     width: 100%;
   }
+
   img {
     max-width: 100%;
     height: auto;
   }
+
   code {
     padding: 2px 5px;
     background-color: light-dark(rgb(var(--gray-light)), rgb(var(--gray-dark)));
   }
+
   pre {
     padding: 1.5em;
   }
+
   pre > code {
     all: unset;
   }
+
   blockquote {
     border-left: 4px solid var(--accent);
     padding: 0 0 0 20px;

@@ -1,0 +1,76 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import { Image } from "astro:assets";
+import logo from "../assets/logo.svg";
+import SocialLinks from "./SocialLinks.astro";
+---
+
+<header>
+  <nav>
+    <a href="/" class="logo">
+      <Image src={logo} width={80} alt="" />
+    </a>
+    <div class="internal-links">
+      <HeaderLink href="/">Главная</HeaderLink>
+      <HeaderLink href="/blog">Блог</HeaderLink>
+      <HeaderLink href="/trainers">Тренажёры</HeaderLink>
+    </div>
+    <SocialLinks type="light" />
+  </nav>
+</header>
+<style>
+  header {
+    margin: 0;
+    padding: 0 1em;
+    background: var(--accent);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1em;
+  }
+
+  h2 a,
+  h2 a.active {
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav a {
+    padding: 1em 0.5em;
+    color: #ffffff;
+    border-bottom: 4px solid transparent;
+    text-decoration: none;
+  }
+
+  nav a.active {
+    text-decoration: none;
+    border-bottom-color: #ffffff;
+  }
+
+  nav a.logo {
+    padding: 0;
+  }
+
+  a.logo img {
+    width: 60px;
+    display: block;
+  }
+
+  @media (max-width: 440px) {
+    nav :global(.social-links) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    nav a.logo {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,25 @@
+---
+import { getContents } from "../../../utils/getContents";
+import Contents from "../../../components/Contents.astro";
+import type { Part } from "../../../types";
+
+export const title = "Паттерны проектирования в JS";
+export const description = "🚧 Тренажёр в разработке";
+export const order = 10;
+// export const status = "completed";
+// export { default as picture } from "./assets/_picture.svg";
+
+import pictureObj from "./assets/_picture.svg";
+export const picture = pictureObj;
+
+export const lessonParts = getContents(
+  (await Astro.glob("./**/*.astro")) as Part[]
+);
+---
+
+<Contents
+  parts={lessonParts}
+  title={title}
+  description={description}
+  picture={picture}
+/>
