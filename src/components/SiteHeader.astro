@@ -22,7 +22,7 @@ import SocialLinks from "./SocialLinks.astro";
   header {
     margin: 0;
     padding: 0 1em;
-    background: #004ce4;
+    background: var(--accent);
   }
 
   h2 {
@@ -60,6 +60,12 @@ import SocialLinks from "./SocialLinks.astro";
   a.logo img {
     width: 60px;
     display: block;
+  }
+
+  @media (max-width: 390px) {
+    nav :global(.social-links) {
+      display: none;
+    }
   }
 
   @media (max-width: 720px) {

@@ -13,9 +13,9 @@ const description = "Тренажёры для прокачки навыков 
 ---
 
 <TrainersLayout title={title} description={description}>
+  <h1 class="sr-only">{title}</h1>
   <SiteHeader slot="header" />
   <div class="main-page">
-    <h1 class="sr-only">{title}</h1>
     <TypedHeading text={description} />
     <TextLayout>
       <p>
@@ -33,9 +33,10 @@ const description = "Тренажёры для прокачки навыков 
       </p>
 
       <p>
-        Если вы хотите поделиться обратной связью, напишите в Телеграме <a
-          target="_blank"
-          href="https://t.me/web_platform_support">@web_platform_support</a
+        Если вы хотите поделиться обратной связью, напишите в Телеграме <nobr
+          ><a target="_blank" href="https://t.me/web_platform_support"
+            >@web_platform_support</a
+          ></nobr
         >.
       </p>
 
@@ -56,5 +57,11 @@ const description = "Тренажёры для прокачки навыков 
     max-width: 1000px;
     margin-inline: auto;
     margin-block: 3rem;
+  }
+
+  @media (max-width: 720px) {
+    .main-page {
+      margin-block: 1rem;
+    }
   }
 </style>

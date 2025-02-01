@@ -17,7 +17,9 @@ const { lessons } = Astro.props;
 
         return (
           <a class="lesson" href={isCompleted ? lesson.url : null}>
-            <img class="lesson-picture" src={lesson.picture?.src} />
+            <div class="lesson-picture">
+              <img src={lesson.picture?.src} />
+            </div>
             <h2 class="lesson-title">{lesson.title}</h2>
             <p class="lesson-description">{lesson.description}</p>
             {isCompleted && (
@@ -45,7 +47,7 @@ const { lessons } = Astro.props;
   }
 
   .lessons > a {
-    margin-top: 50px;
+    /* margin-top: 50px; */
   }
 
   .lesson {
@@ -55,20 +57,26 @@ const { lessons } = Astro.props;
     font-size: calc(1rem + 0.25vw);
     text-decoration: none;
     color: inherit;
-    border: 1px solid #e5e5e5;
-    border-radius: 14px;
+    /* border: 1px solid #e5e5e5; */
+    /* border-radius: 14px; */
     padding: 1rem 1.2rem 0.5rem;
-    transition: border-color 150ms ease;
+    /* transition: border-color 150ms ease; */
   }
 
   .lesson[href]:hover {
-    border-color: #c5c5c5;
+    /* border-color: #c5c5c5; */
   }
 
   .lesson-picture {
+    padding: 2rem 0;
+    margin: 1rem 0;
+    background-color: var(--accent);
+  }
+
+  .lesson-picture img {
     width: min(200px, 100%);
-    margin: 1rem 0 2rem;
     justify-self: center;
+    filter: invert(1);
   }
 
   .lesson-title {
