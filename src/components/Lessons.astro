@@ -46,19 +46,13 @@ const { lessons } = Astro.props;
     gap: 0 50px;
   }
 
-  .lessons > a {
-    /* margin-top: 50px; */
-  }
-
   .lesson {
     display: grid;
-    grid-row: auto / span 4;
+    grid-row: auto / span 3;
     grid-template-rows: subgrid;
     font-size: calc(1rem + 0.25vw);
     text-decoration: none;
     color: inherit;
-    /* border: 1px solid #e5e5e5; */
-    /* border-radius: 14px; */
     padding: 1rem 1.2rem 0.5rem;
     /* transition: border-color 150ms ease; */
   }
@@ -68,6 +62,8 @@ const { lessons } = Astro.props;
   }
 
   .lesson-picture {
+    display: flex;
+    justify-content: center;
     padding: 2rem 0;
     margin: 1rem 0;
     background-color: var(--accent);
@@ -75,7 +71,7 @@ const { lessons } = Astro.props;
 
   .lesson-picture img {
     width: min(200px, 100%);
-    justify-self: center;
+    height: 100%;
     filter: invert(1);
   }
 
