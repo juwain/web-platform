@@ -22,7 +22,7 @@ const { mode = "default", breadcrumbs } = Astro.props;
 ---
 
 <header class="header">
-  <a class="logo" href="/">
+  <a class="logo" href="/trainers">
     <Image src={logo} width={52} alt="" />
   </a>
   {
@@ -58,7 +58,6 @@ const { mode = "default", breadcrumbs } = Astro.props;
     color: inherit;
     font-size: 2.5rem;
     display: flex;
-    filter: invert(1);
   }
 
   .open-dialog {
@@ -78,5 +77,17 @@ const { mode = "default", breadcrumbs } = Astro.props;
 
   .open-dialog:hover {
     opacity: 0.7;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .logo {
+      filter: invert(1);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .open-dialog {
+      filter: invert(1);
+    }
   }
 </style>

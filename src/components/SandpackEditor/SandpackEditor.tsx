@@ -38,7 +38,7 @@ export function SandpackEditor({
   return (
     <SandpackProvider
       template={template}
-      theme="light"
+      theme="auto"
       files={files}
       options={{
         classes,

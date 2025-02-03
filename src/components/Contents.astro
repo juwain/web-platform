@@ -17,7 +17,9 @@ const { parts, title, description, picture } = Astro.props;
   <SiteHeader slot="header" />
   <div class="contents-container">
     <h1 class="contents-title">{title}</h1>
-    <img class="contents-picture" src={picture.src} alt={title} />
+    <div class="contents-picture">
+      <img src={picture.src} alt={title} />
+    </div>
     {description && <p class="contents-description" set:html={description} />}
     <a class="button contents-button" href={parts[0].url}>Начать тренажёр</a>
     <h2>Содержание:</h2>
@@ -45,13 +47,19 @@ const { parts, title, description, picture } = Astro.props;
   }
 
   .contents-description {
-    width: clamp(320px, 60vw, 900px);
+    width: clamp(320px, 80vw, 900px);
   }
 
   .contents-picture {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    background-color: var(--accent);
+  }
+
+  .contents-picture img {
     width: min(320px, 100%);
-    margin-inline: auto;
-    margin-bottom: 2rem;
+    filter: invert(1);
   }
 
   .contents-button {

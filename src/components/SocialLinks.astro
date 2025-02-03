@@ -63,4 +63,10 @@ const { type } = Astro.props;
   .dark a {
     color: rgb(var(--black));
   }
+
+  @media (prefers-color-scheme: dark) {
+    .dark a {
+      color: #ffffff;
+    }
+  }
 </style>

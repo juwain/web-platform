@@ -76,6 +76,12 @@ const iconHeight = `${icon.height}px`;
   .theory-content {
     font-size: 1rem;
   }
+
+  @media (prefers-color-scheme: dark) {
+    .close-dialog {
+      filter: invert(1);
+    }
+  }
 </style>
 
 <script>
