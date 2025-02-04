@@ -1,12 +1,14 @@
 ---
 import BaseHead from "~/components/BaseHead.astro";
+import Footer from "~/components/Footer.astro";
 
 interface Props {
   title: string;
   description?: string;
+  fullScreen?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, fullScreen } = Astro.props;
 ---
 
 <!doctype html>
@@ -60,13 +62,17 @@ const { title, description } = Astro.props;
       .button:hover {
         background-color: var(--color-green-accent-light);
       }
+
+      .fullscreen {
+        display: grid;
+        grid-template-rows: 50px 1fr;
+        min-height: 100vh;
+        margin-bottom: 50px;
+      }
     </style>
 
     <style>
       .container {
-        display: grid;
-        grid-template-rows: 50px 1fr;
-        min-height: 100vh;
         margin-inline: auto;
         max-width: 1400px;
         padding-inline: 20px;
@@ -75,8 +81,9 @@ const { title, description } = Astro.props;
   </head>
   <body>
     <slot name="header" />
-    <main class="container">
+    <main class:list={["container", fullScreen && "fullscreen"]}>
       <slot />
     </main>
+    <Footer />
   </body>
 </html>

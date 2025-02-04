@@ -40,7 +40,7 @@ const breadcrumbs = getBreadcrumbs(
 const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
 ---
 
-<TrainersLayout title={title}>
+<TrainersLayout title={title} fullScreen>
   <Header mode="editor" breadcrumbs={breadcrumbs} />
   <Editor
     files={files}
