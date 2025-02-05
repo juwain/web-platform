@@ -166,14 +166,12 @@
   code {
     padding: 2px 5px;
     background-color: light-dark(rgb(var(--gray-light)), rgb(var(--gray-dark)));
+    font-size: 0.85em;
+    font-weight: 400;
   }
 
   pre {
     padding: 1.5em;
-  }
-
-  pre > code {
-    all: unset;
   }
 
   blockquote {
