@@ -4,18 +4,13 @@ import Contents from "../../../components/Contents.astro";
 import type { Part } from "../../../types";
 
 export const title = "Паттерны проектирования в JS";
-export const description = `Неупорядоченный, запутанный код
-сложнее читать и понимать. В процессе знакомства и понимания кода,
-иногда нужно его по ходу дела причесать. Пригодится не только вам,
-но и потомкам, которые будут дальше работать с проектом.`;
+export const description = `Паттерны проектирования — общепринятые переиспользуемые шаблонные решения конкретных проблем при создании софта. Они помогают сделать код более упорядоченным, предсказуемым и надёжным и позволяют говорить с другими разработчиками на одном языке.`;
 
-const longDescription = `${description}
-<br />
-Рефакторинг кода совсем не обязательно делать сразу масштабным. Наоборот,
-маленькие шаги будут внедряться безболезненно, а эффект от них
-со временем будет накапливаться.`;
-export const duration = "8 часов";
-export const level = "junior, middle";
+export const longDescription = `При работе с кодом больше всего времени уходит на его чтение и понимание, а не написание. Код — не только инструкция для компьютера, но и объяснение ваших намерений другим людям. Если написать хаотичный, но работающий код, то другим разработчикам станет труднее понимать его и вносить осмысленные изменения.
+<br><br>${description}`;
+
+export const duration = "20 часов";
+export const level = "junior+";
 
 export const order = 10;
 export const status = "completed";
@@ -31,6 +26,6 @@ export const lessonParts = getContents(
 <Contents
   parts={lessonParts}
   title={title}
-  description={description}
+  description={longDescription}
   picture={picture}
 />
