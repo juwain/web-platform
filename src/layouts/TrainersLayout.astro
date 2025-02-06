@@ -21,21 +21,8 @@ const { title, description, fullScreen } = Astro.props;
       }
 
       .astro-code {
-        margin: 0.5rem 0 16px;
-        padding: 0.8rem 1rem 0.9rem;
         overflow: auto;
-        border-radius: 14px;
-        font-size: 1rem;
         overflow-x: unset !important;
-      }
-
-      :not(pre) > code {
-        padding: 0.1em 0.3em;
-        border-radius: 0.3em;
-        white-space: pre-wrap;
-        background-color: #282a36;
-        color: #f8f8f2;
-        font-size: 1rem;
       }
 
       body:has(dialog[open]) {
