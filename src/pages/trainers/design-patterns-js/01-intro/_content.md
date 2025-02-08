@@ -1,5 +1,5 @@
 ---
-layout: ../../../../layouts/ContentLayout.astro
+layout: ~/layouts/ContentLayout.astro
 title: "Что такое паттерны проектирования и зачем они нужны"
 ---
 
