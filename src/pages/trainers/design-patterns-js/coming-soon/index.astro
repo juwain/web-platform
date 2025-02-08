@@ -1,0 +1,10 @@
+---
+import Info from "~/components/Info.astro";
+import type { LessonParent } from "~/types";
+
+export const title = "Тренажёр в разработке";
+
+const parent = (await Astro.glob("../index.astro"))[0] as LessonParent;
+---
+
+<Info title={parent.title} mode="wip" />
