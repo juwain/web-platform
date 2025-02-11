@@ -1,25 +1,26 @@
 ---
-import TrainersLayout from "../../../../layouts/TrainersLayout.astro";
-import Editor from "../../../../components/Editor.astro";
-import Theory from "../../../../components/Theory.astro";
-import Header from "../../../../components/Header.astro";
+import TrainersLayout from "~/layouts/TrainersLayout.astro";
+import Editor from "~/components/Editor.astro";
+import Theory from "~/components/Theory.astro";
+import Header from "~/components/Header.astro";
 
-export const title = "The Part One of The First Lesson";
+export const title = "Паттерн Module (Модуль), практика: кэш с WeakMap";
 
 import { Content as content } from "./theory.md";
-import { getBreadcrumbs } from "../../../../utils/getBreadcrumbs";
-import { getNextPartUrl } from "../../../../utils/getNextPartUrl";
+import { getBreadcrumbs } from "~/utils/getBreadcrumbs";
+import { getNextPartUrl } from "~/utils/getNextPartUrl";
 
-import type { LessonParent } from "../../../../types";
+import type { LessonParent } from "~/types";
 
 const getFile = async (name: string, ext: string) => {
   return {
-    [`${name}.${ext}`]: (await import(`./code/_${name}.${ext}?raw`)).default,
+    [`${name}.${ext}`]: (await import(`./_code/${name}.${ext}?raw`)).default,
   };
 };
 
 const fileNames = [
   { name: "index", ext: "js" },
+  { name: "module", ext: "js" },
   { name: "pass.test", ext: "js" },
 ];
 
