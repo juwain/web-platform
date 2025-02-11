@@ -1,7 +1,7 @@
 import { processSurveyData } from './module.js';
 
 describe('processSurveyData', () => {
-  it('should calculate the average for each user correctly', () => {
+  it('Функция processSurveyData корректно вычисляет значения и возвращает полученный массив,', () => {
     const surveyData = {
       user1: [1, 2, 3, 4, 5],
       user2: [7, 1, 5, 3, 2],
@@ -11,11 +11,11 @@ describe('processSurveyData', () => {
     };
 
     const expectedAverages = [
-      (1 + 2 + 3 + 4 + 5) / 5, // user1
-      (7 + 1 + 5 + 3 + 2) / 5, // user2
-      (1 + 2 + 1 + 2 + 1) / 5, // user3
-      (2 + 2 + 3 + 2 + 3) / 5, // user4
-      (5 + 4 + 3 + 4 + 5) / 5, // user5
+      (1 + 2 + 3 + 4 + 5) / 5,
+      (7 + 1 + 5 + 3 + 2) / 5,
+      (1 + 2 + 1 + 2 + 1) / 5,
+      (2 + 2 + 3 + 2 + 3) / 5,
+      (5 + 4 + 3 + 4 + 5) / 5,
     ];
 
     const result = processSurveyData(surveyData);
@@ -23,7 +23,7 @@ describe('processSurveyData', () => {
     expect(result).toEqual(expectedAverages);
   });
 
-  it('should return cached result if the same object is processed again', () => {
+  it('возвращает закешированный результат при повторном вызове с тем же объектом', () => {
     const surveyData = {
       user1: [1, 2, 3, 4, 5],
       user2: [7, 1, 5, 3, 2],
@@ -34,23 +34,17 @@ describe('processSurveyData', () => {
       (7 + 1 + 5 + 3 + 2) / 5, // user2
     ];
 
-    // Первый вызов
     const firstResult = processSurveyData(surveyData);
 
-    // Проверяем, что результат корректный
     expect(firstResult).toEqual(expectedAverages);
 
-    // Второй вызов
     const secondResult = processSurveyData(surveyData);
 
-    // Проверяем, что результат закэширован (тот же самый объект)
     expect(secondResult).toBe(firstResult);
-
-    // Проверяем, что результат по-прежнему корректный
     expect(secondResult).toEqual(expectedAverages);
   });
 
-  it('should handle empty survey data', () => {
+  it('и возвращает пустой массив, если передан пустой объект', () => {
     const surveyData = {};
 
     const result = processSurveyData(surveyData);
