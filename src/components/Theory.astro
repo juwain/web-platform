@@ -1,5 +1,5 @@
 ---
-const { Content } = Astro.props;
+const { Content, title } = Astro.props;
 
 import icon from "../assets/icon-close.svg";
 
@@ -13,6 +13,7 @@ const iconHeight = `${icon.height}px`;
     <span class="sr-only">Закрыть</span>
   </button>
   <article class="theory-content">
+    <h1>{title}</h1>
     <Content />
   </article>
 </dialog>

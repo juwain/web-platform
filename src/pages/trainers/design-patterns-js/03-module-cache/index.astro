@@ -4,13 +4,13 @@ import Editor from "~/components/Editor.astro";
 import Theory from "~/components/Theory.astro";
 import Header from "~/components/Header.astro";
 
-export const title = "Паттерн Module (Модуль), практика: кэш с WeakMap";
-
-import { Content as content } from "./theory.md";
+import * as content from "./theory.md";
 import { getBreadcrumbs } from "~/utils/getBreadcrumbs";
 import { getNextPartUrl } from "~/utils/getNextPartUrl";
 
 import type { LessonParent } from "~/types";
+
+export const title = content.frontmatter.title;
 
 const getFile = async (name: string, ext: string) => {
   return {
@@ -50,5 +50,5 @@ const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
     nextUrl={nextUrl}
     options={{ showConsole: true }}
   />
-  <Theory Content={content} />
+  <Theory Content={content.Content} title={title} />
 </TrainersLayout>
