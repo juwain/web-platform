@@ -13,4 +13,10 @@ const { frontmatter } = Astro.props;
     margin-inline: auto;
     margin-block-end: 1rem;
   }
+
+  @media (prefers-color-scheme: dark) {
+    :global(.content-container img[src*="svg"]) {
+      filter: invert(1);
+    }
+  }
 </style>
