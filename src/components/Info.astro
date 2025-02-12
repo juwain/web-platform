@@ -1,0 +1,94 @@
+---
+import TrainersLayout from "../layouts/TrainersLayout.astro";
+import TextLayout from "../layouts/TextLayout.astro";
+import Header from "../components/Header.astro";
+
+import congratPicture from "../assets/congrat.svg";
+import soonPicture from "../assets/soon.svg";
+
+interface Props {
+  title: string;
+  mode: "wip" | "congrat";
+}
+
+const { title, mode } = Astro.props;
+---
+
+<TrainersLayout title={title}>
+  <Header mode="default" />
+  <TextLayout>
+    <div class="info-container">
+      {
+        mode === "congrat" && (
+          <>
+            <img
+              class="info-picture"
+              src={congratPicture.src}
+              width="250"
+              alt=""
+            />
+
+            <h1>Ура, вы прокачали навык «{title}»!</h1>
+            <p>
+              Поддержите «Веб-платформу», чтобы совершенствовать и выпускать
+              новые тренажёры 🤝
+            </p>
+          </>
+        )
+      }
+
+      {
+        mode === "wip" && (
+          <>
+            <img
+              class="info-picture"
+              src={soonPicture.src}
+              width="250"
+              alt=""
+            />
+
+            <h1>Продолжение тренажёра «{title}» в разработке</h1>
+            <p>
+              Поддержите «Веб-платформу», чтобы ускорить выпуск тренажёра 🤝
+            </p>
+          </>
+        )
+      }
+
+      <a
+        class="button"
+        href="https://pay.cloudtips.ru/p/6dc7f789"
+        target="_blank">Поддержать</a
+      >
+    </div>
+  </TextLayout>
+</TrainersLayout>
+
+<style>
+  .info-container {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+    height: 100%;
+    max-width: 800px;
+    margin-inline: auto;
+    text-align: center;
+    gap: 2rem;
+    text-wrap: balance;
+  }
+
+  .info-picture {
+    padding: 2rem 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .info-picture {
+      filter: invert(1);
+    }
+  }
+
+  .info-container p {
+    margin: 0;
+  }
+</style>

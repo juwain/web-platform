@@ -1,12 +1,12 @@
 ---
-import TrainersLayout from "../../../../layouts/TrainersLayout.astro";
+import TrainersLayout from "~/layouts/TrainersLayout.astro";
 import * as content from "./_content.md";
-import ContentFooter from "../../../../components/ContentFooter.astro";
-import Header from "../../../../components/Header.astro";
-import { getNextPartUrl } from "../../../../utils/getNextPartUrl";
-import { getBreadcrumbs } from "../../../../utils/getBreadcrumbs";
+import ContentFooter from "~/components/ContentFooter.astro";
+import Header from "~/components/Header.astro";
+import { getNextPartUrl } from "~/utils/getNextPartUrl";
+import { getBreadcrumbs } from "~/utils/getBreadcrumbs";
 
-import type { LessonParent } from "../../../../types";
+import type { LessonParent } from "~/types";
 
 export const title = content.frontmatter.title;
 

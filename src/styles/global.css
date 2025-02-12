@@ -82,8 +82,6 @@
   }
 
   code {
-    color: light-dark(var(--black), var(--color-yellow));
-    font-weight: bold;
     font-family: "PTMonoWeb", monospace;
   }
 
@@ -105,23 +103,23 @@
   }
 
   h1 {
-    font-size: 2.752em;
+    font-size: 2em;
   }
 
   h2 {
-    font-size: 2.441em;
+    font-size: 1.8em;
   }
 
   h3 {
-    font-size: 1.953em;
+    font-size: 1.553em;
   }
 
   h4 {
-    font-size: 1.363em;
+    font-size: 1.163em;
   }
 
   h5 {
-    font-size: 1.25em;
+    font-size: 1em;
   }
 
   strong,
@@ -166,6 +164,8 @@
   code {
     padding: 2px 5px;
     background-color: light-dark(rgb(var(--gray-light)), rgb(var(--gray-dark)));
+    font-size: 0.85em;
+    font-weight: 400;
   }
 
   pre {
@@ -173,7 +173,8 @@
   }
 
   pre > code {
-    all: unset;
+    background: none;
+    padding: 0;
   }
 
   blockquote {

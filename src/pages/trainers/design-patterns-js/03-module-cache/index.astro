@@ -1,25 +1,27 @@
 ---
-import TrainersLayout from "../../../../layouts/TrainersLayout.astro";
-import Editor from "../../../../components/Editor.astro";
-import Theory from "../../../../components/Theory.astro";
-import Header from "../../../../components/Header.astro";
+import TrainersLayout from "~/layouts/TrainersLayout.astro";
+import Editor from "~/components/Editor.astro";
+import Theory from "~/components/Theory.astro";
+import Header from "~/components/Header.astro";
 
-export const title = "The Part One of The First Lesson";
+import * as content from "./theory.md";
+import { getBreadcrumbs } from "~/utils/getBreadcrumbs";
+import { getNextPartUrl } from "~/utils/getNextPartUrl";
 
-import { Content as content } from "./theory.md";
-import { getBreadcrumbs } from "../../../../utils/getBreadcrumbs";
-import { getNextPartUrl } from "../../../../utils/getNextPartUrl";
+import type { LessonParent } from "~/types";
 
-import type { LessonParent } from "../../../../types";
+export const title = content.frontmatter.title;
 
 const getFile = async (name: string, ext: string) => {
   return {
-    [`${name}.${ext}`]: (await import(`./code/_${name}.${ext}?raw`)).default,
+    [`${name}.${ext}`]: (await import(`./_code/${name}.${ext}?raw`)).default,
   };
 };
 
 const fileNames = [
   { name: "index", ext: "js" },
+  { name: "module", ext: "js" },
+  { name: "lib", ext: "js" },
   { name: "pass.test", ext: "js" },
 ];
 
@@ -40,7 +42,7 @@ const breadcrumbs = getBreadcrumbs(
 const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
 ---
 
-<TrainersLayout title={title}>
+<TrainersLayout title={title} fullScreen>
   <Header mode="editor" breadcrumbs={breadcrumbs} />
   <Editor
     files={files}
@@ -48,5 +50,5 @@ const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
     nextUrl={nextUrl}
     options={{ showConsole: true }}
   />
-  <Theory Content={content} />
+  <Theory Content={content.Content} title={title} />
 </TrainersLayout>
