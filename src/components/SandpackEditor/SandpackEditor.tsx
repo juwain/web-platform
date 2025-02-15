@@ -30,7 +30,7 @@ export function SandpackEditor({
   nextUrl,
   options,
 }: SandpackEditorProps) {
-  const { showConsole } = options ?? {};
+  const { showConsole, customSetup } = options ?? {};
   const visibleFiles = Object.keys(files).filter(
     (file) => !file.includes('.test.'),
   );
@@ -47,9 +47,7 @@ export function SandpackEditor({
         recompileMode: 'delayed',
         recompileDelay: 500,
       }}
-      // customSetup={{
-      //   dependencies: { espree: '^10.0.1' },
-      // }}
+      customSetup={customSetup}
     >
       <SandpackComponents
         nextUrl={nextUrl}
