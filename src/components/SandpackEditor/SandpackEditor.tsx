@@ -43,6 +43,7 @@ export function SandpackEditor({
       options={{
         classes,
         visibleFiles: visibleFiles,
+        bundlerURL: 'https://thunderous-pudding-7f56a7.netlify.app',
       }}
       // customSetup={{
       //   dependencies: { espree: '^10.0.1' },
