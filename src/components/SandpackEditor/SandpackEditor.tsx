@@ -43,7 +43,7 @@ export function SandpackEditor({
       options={{
         classes,
         visibleFiles: visibleFiles,
-        bundlerURL: 'https://thunderous-pudding-7f56a7.netlify.app',
+        bundlerURL: import.meta.env.VITE_BUNDLER_URL,
         recompileMode: 'delayed',
         recompileDelay: 500,
       }}
