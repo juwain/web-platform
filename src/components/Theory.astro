@@ -87,6 +87,13 @@ const iconHeight = `${icon.height}px`;
       filter: invert(1);
     }
   }
+
+  @media (max-width: 720px) {
+    .dialog-menu[open],
+    .dialog-menu[open].dialog-menu--closing {
+      width: 100vw;
+    }
+  }
 </style>
 
 <script>

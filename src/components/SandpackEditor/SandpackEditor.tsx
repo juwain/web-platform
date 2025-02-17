@@ -104,11 +104,9 @@ const SandpackComponents = ({
           </a>
         )}
       </ServiceBar>
-      {isSidebarVisible && (
-        <div className="side-bar">
-          <SandpackConsole resetOnPreviewRestart />
-        </div>
-      )}
+      <div className="side-bar">
+        <SandpackConsole resetOnPreviewRestart />
+      </div>
     </SandpackLayout>
   );
 };
