@@ -1,44 +1,40 @@
-// MySingleton.test.js
+import UserStore from './store';
 
-import MySingleton from './store';
+describe('SingletonStore', () => {
+  it('Стор SingletonStore – это Синглтон,', () => {
+    const store1 = new UserStore();
+    const store2 = new UserStore();
 
-describe('MySingleton', () => {
-  it('should always return the same instance', () => {
-    const instance1 = new MySingleton();
-    const instance2 = new MySingleton();
-
-    // Проверяем, что это один и тот же экземпляр
-    expect(instance1).toBe(instance2);
+    expect(store1).toBe(store2);
   });
 
-  it('should have public properties and methods', () => {
-    const instance = new MySingleton();
+  it('в нём есть методы set() и get(),', () => {
+    const store = new UserStore();
 
-    // Проверяем публичное свойство
-    expect(instance.publicProperty).toBe('I am also public');
+    store.set('name', 'Alice');
+    expect(store.get('name')).toBe('Alice');
 
-    // Проверяем публичный метод
-    expect(typeof instance.publicMethod).toBe('function');
-
-    // Проверяем метод getRandomNumber
-    expect(typeof instance.getRandomNumber).toBe('function');
-    expect(typeof instance.getRandomNumber()).toBe('number');
+    store.set('age', 30);
+    expect(store.get('age')).toBe(30);
   });
 
-  it('should return the same random number for all instances', () => {
-    const instance1 = new MySingleton();
-    const instance2 = new MySingleton();
+  it('также есть методы has() и delete()', () => {
+    const store = new UserStore();
 
-    // Проверяем, что метод getRandomNumber возвращает одно и то же число
-    expect(instance1.getRandomNumber()).toBe(instance2.getRandomNumber());
+    store.set('email', 'alice@example.com');
+    store.set('a', 1);
+    store.delete('a');
+
+    expect(store.has('email')).toBe(true);
+    expect(store.has('phone')).toBe(false);
+    expect(store.has('a')).toBe(false);
   });
 
-  it('should not expose private methods and variables', () => {
-    const instance = new MySingleton();
+  it('и при многократном создании инстанс класса один', () => {
+    const store1 = new UserStore();
+    const store2 = new UserStore();
 
-    // Проверяем, что приватные методы и переменные недоступны
-    expect(instance.privateMethod).toBeUndefined();
-    expect(instance.privateVariable).toBeUndefined();
-    expect(instance.randomNumber).toBeUndefined();
+    store1.set('shared', true);
+    expect(store2.get('shared')).toBe(true);
   });
 });

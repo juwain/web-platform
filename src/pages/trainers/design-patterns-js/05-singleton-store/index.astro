@@ -39,22 +39,10 @@ const breadcrumbs = getBreadcrumbs(
 );
 
 const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
-const options = {
-  // customSetup: {
-  //   dependencies: {
-  //     mobx: "6.13.5",
-  //   },
-  // },
-};
 ---
 
 <TrainersLayout title={title} fullScreen>
   <Header mode="editor" breadcrumbs={breadcrumbs} />
-  <Editor
-    files={files}
-    template="vanilla"
-    nextUrl={nextUrl}
-    options={options}
-  />
+  <Editor files={files} template="vanilla" nextUrl={nextUrl} />
   <Theory Content={content.Content} title={title} />
 </TrainersLayout>

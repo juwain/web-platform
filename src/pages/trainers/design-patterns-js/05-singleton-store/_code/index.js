@@ -1,8 +1,3 @@
-// Usage:
-import MySingleton from './store';
+import UserStore from './store';
 
-const singleA = new MySingleton();
-const singleB = new MySingleton();
-
-console.log(singleA.getRandomNumber() === singleB.getRandomNumber());
-// true
+const store = new UserStore();
