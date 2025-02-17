@@ -23,16 +23,30 @@ const { breadcrumbs } = Astro.props;
 
 <style>
   .breadcrumbs {
-    display: flex;
-    gap: 10px;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: calc(100vw - 100px);
   }
 
   .breadcrumbs a {
     color: inherit;
   }
 
+  .breadcrumbs a[href] {
+    margin-right: 10px;
+  }
+
   .breadcrumbs a:not(:first-child)::before {
     content: "/";
     margin-right: 10px;
+  }
+
+  @media (max-width: 720px) {
+    .breadcrumbs a[href],
+    .breadcrumbs a:not(:first-child)::before {
+      display: none;
+    }
   }
 </style>
