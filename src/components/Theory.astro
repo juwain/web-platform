@@ -15,6 +15,7 @@ const iconHeight = `${icon.height}px`;
   <article class="theory-content">
     <h1>{title}</h1>
     <Content />
+    <button class="button theory-close-dialog">Начать</button>
   </article>
 </dialog>
 
@@ -78,6 +79,11 @@ const iconHeight = `${icon.height}px`;
     font-size: 1rem;
   }
 
+  .theory-close-dialog {
+    height: auto;
+    padding: 6px 12px;
+  }
+
   :global(.theory-content h1) {
     padding-right: 30px;
   }
@@ -100,19 +106,32 @@ const iconHeight = `${icon.height}px`;
   const dialogMenu = document.querySelector(
     ".dialog-menu"
   ) as HTMLDialogElement;
-  const dialogMenuCloseButton = document.querySelector(".close-dialog");
-  const dialogMenuOpenButton = document.querySelector(".open-dialog");
+  const dialogMenuOpenButton = document.querySelector(
+    ".open-dialog"
+  ) as HTMLButtonElement;
+  const dialogMenuCloseButton = document.querySelector(
+    ".close-dialog"
+  ) as HTMLButtonElement;
+  const dialogMenuStartButton = document.querySelector(
+    ".theory-close-dialog"
+  ) as HTMLButtonElement;
 
-  dialogMenuOpenButton?.addEventListener("click", () => {
+  const onDialogClick = (event: Event) => {
+    if (event.target === dialogMenu) {
+      closeMenu();
+    }
+  };
+
+  const openMenu = () => {
     if (!dialogMenu) return;
 
     dialogMenu.style.display = "flex";
     setTimeout(() => {
       dialogMenu?.showModal();
     }, 100);
-  });
+  };
 
-  dialogMenuCloseButton?.addEventListener("click", () => {
+  const closeMenu = () => {
     if (!dialogMenu) return;
 
     dialogMenu.classList.add("dialog-menu--closing");
@@ -121,7 +140,14 @@ const iconHeight = `${icon.height}px`;
       dialogMenu.style.display = "none";
       dialogMenu.classList.remove("dialog-menu--closing");
     }, 100);
-  });
+  };
 
-  dialogMenu?.showModal();
+  dialogMenuOpenButton.addEventListener("click", openMenu);
+
+  dialogMenuCloseButton.addEventListener("click", closeMenu);
+  dialogMenuStartButton.addEventListener("click", closeMenu);
+
+  dialogMenu.addEventListener("click", onDialogClick);
+
+  dialogMenu.showModal();
 </script>

@@ -40,10 +40,11 @@ const { title, description, fullScreen } = Astro.props;
           background 150ms ease;
         color: #ffffff;
         text-decoration: none;
-        border-radius: 99999px;
+        border-radius: var(--border-radius);
         padding: 1rem;
         height: 3rem;
         width: fit-content;
+        border: none;
       }
 
       .button:hover {
