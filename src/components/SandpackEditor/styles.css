@@ -47,17 +47,15 @@
 
 .next-task-button {
   position: absolute;
-  bottom: var(--sp-space-2);
-  right: var(--sp-space-2);
+  top: var(--sp-space-2);
+  right: var(--sp-space-11);
   padding: var(--sp-space-3);
   height: var(--sp-space-7);
 }
 
 @media (max-width: 720px) {
-  .editor-layout {
-    &.with-sidebar {
-      grid-template-columns: 1fr;
-    }
+  .editor-layout.with-sidebar {
+    grid-template-columns: 1fr;
   }
 
   .side-bar {
