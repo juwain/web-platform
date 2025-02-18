@@ -11,6 +11,9 @@ export interface SandpackEditorProps {
   nextUrl?: string;
   options?: {
     showConsole?: boolean;
+    customSetup: {
+      dependencies: Record<string, string>;
+    };
   };
 }
 

@@ -30,7 +30,7 @@ export function SandpackEditor({
   nextUrl,
   options,
 }: SandpackEditorProps) {
-  const { showConsole } = options ?? {};
+  const { showConsole, customSetup } = options ?? {};
   const visibleFiles = Object.keys(files).filter(
     (file) => !file.includes('.test.'),
   );
@@ -43,11 +43,11 @@ export function SandpackEditor({
       options={{
         classes,
         visibleFiles: visibleFiles,
-        bundlerURL: 'https://thunderous-pudding-7f56a7.netlify.app',
+        bundlerURL: import.meta.env.VITE_BUNDLER_URL,
+        recompileMode: 'delayed',
+        recompileDelay: 500,
       }}
-      // customSetup={{
-      //   dependencies: { espree: '^10.0.1' },
-      // }}
+      customSetup={customSetup}
     >
       <SandpackComponents
         nextUrl={nextUrl}
@@ -104,11 +104,9 @@ const SandpackComponents = ({
           </a>
         )}
       </ServiceBar>
-      {isSidebarVisible && (
-        <div className="side-bar">
-          <SandpackConsole resetOnPreviewRestart />
-        </div>
-      )}
+      <div className="side-bar">
+        <SandpackConsole resetOnPreviewRestart />
+      </div>
     </SandpackLayout>
   );
 };

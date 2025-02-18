@@ -5,8 +5,17 @@
   height: max(400px, 100%);
 
   --sp-layout-height: 100%;
+
+  .side-bar {
+    display: none;
+  }
+
   &.with-sidebar {
     grid-template-columns: 1fr 300px;
+
+    .side-bar {
+      display: block;
+    }
   }
 }
 
@@ -38,8 +47,18 @@
 
 .next-task-button {
   position: absolute;
-  bottom: var(--sp-space-2);
-  right: var(--sp-space-2);
+  top: var(--sp-space-2);
+  right: var(--sp-space-11);
   padding: var(--sp-space-3);
   height: var(--sp-space-7);
+}
+
+@media (max-width: 720px) {
+  .editor-layout.with-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .side-bar {
+    grid-area: 1 / 1 / 2 / 2;
+  }
 }
