@@ -3,8 +3,9 @@
 }
 
 .goals-title {
-  margin: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+  margin-left: 0.5rem;
+  margin-top: 0.25rem;
   font-size: inherit;
 }
 
@@ -22,7 +23,7 @@
   content: "☐";
 
   position: absolute;
-  left: -20px;
+  left: -17px;
 }
 
 .goals-list li.completed {
@@ -56,4 +57,20 @@
     transform: scale(0.8);
     opacity: 0.5;
   }
+}
+
+.need-help {
+  width: var(--sp-space-7);
+  position: absolute;
+  top: var(--sp-space-2);
+  left: var(--sp-space-2);
+}
+
+.need-help span {
+  min-width: var(--sp-space-4);
+  width: var(--sp-space-4);
+  height: var(--sp-space-4);
+  line-height: var(--sp-space-4);
+  margin: auto;
+  font-size: 15px;
 }
