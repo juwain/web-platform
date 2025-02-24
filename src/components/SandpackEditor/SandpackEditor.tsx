@@ -105,6 +105,7 @@ const SandpackComponents = ({
         )}
       </ServiceBar>
       <div className="side-bar">
+        <p className="side-bar-title">Console</p>
         <SandpackConsole resetOnPreviewRestart />
       </div>
     </SandpackLayout>
