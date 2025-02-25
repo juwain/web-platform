@@ -1,4 +1,4 @@
-import { createProtectedObject } from './createProtectedObject';
+import { createProtectedObject } from './lib';
 
 describe('Защищённый объект', () => {
   const user = { name: 'Test', age: 20 };
@@ -16,9 +16,9 @@ describe('Защищённый объект', () => {
     expect(protectedUser.age).toBe(30);
   });
 
-  it('но при попытке добавить новое свойство должна бросаться ошибка', () => {
+  it('но при попытке добавить новое свойство бросается ошибка "В объект нельзя добавлять  новые свойства"', () => {
     expect(() => {
       protectedUser.email = 'test@mail.ru';
-    }).toThrow();
+    }).toThrow('В объект нельзя добавлять  новые свойства');
   });
 });

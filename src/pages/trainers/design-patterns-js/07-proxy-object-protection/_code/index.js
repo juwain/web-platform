@@ -1,4 +1,4 @@
-import { createProtectedObject } from './createProtectedObject';
+import { createProtectedObject } from './lib';
 
 // Исходный объект
 const user = {
@@ -9,13 +9,11 @@ const user = {
 // Создаём защищённый объект
 const protectedUser = createProtectedObject(user);
 
-// Примеры использования
+// Пример использования
 // try {
-//   protectedUser.name = 'Анна';    // Успешно
-//   protectedUser.age = 25;         // Успешно
-//   console.log(protectedUser);     // {name: 'Анна', age: 25}
-
+//   protectedUser.name = 'Анна'; // Успешно
+//   protectedUser.age = 25; // Успешно
 //   protectedUser.email = 'test@mail.ru'; // Ошибка!
 // } catch (e) {
-//   console.error('Ошибка:', e.message); // "Свойство 'email' запрещено"
+//   console.error('Ошибка:', e.message);
 // }
