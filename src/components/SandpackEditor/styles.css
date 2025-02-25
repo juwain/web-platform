@@ -27,8 +27,22 @@
   display: none !important;
 }
 
+.console-item > pre {
+  white-space: normal;
+}
+
 .side-bar {
   grid-area: 1 / 2 / 3 / 3;
+  background-color: var(--sp-colors-surface1);
+}
+
+.side-bar-title {
+  border-bottom: 1px solid var(--sp-colors-surface2);
+  padding: 0 var(--sp-space-2);
+  margin: 2px 0;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .service-bar {
@@ -60,5 +74,9 @@
 
   .side-bar {
     grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .side-bar-title {
+    display: none;
   }
 }
