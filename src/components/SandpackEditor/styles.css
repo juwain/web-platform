@@ -27,6 +27,10 @@
   display: none !important;
 }
 
+.console-item > pre {
+  white-space: normal;
+}
+
 .side-bar {
   grid-area: 1 / 2 / 3 / 3;
   background-color: var(--sp-colors-surface1);
