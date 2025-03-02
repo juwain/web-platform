@@ -166,6 +166,7 @@
     background-color: light-dark(rgb(var(--gray-light)), rgb(var(--gray-dark)));
     font-size: 0.85em;
     font-weight: 400;
+    hyphens: none;
   }
 
   pre {
