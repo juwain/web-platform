@@ -44,7 +44,7 @@ export function SandpackEditor({
       options={{
         classes,
         visibleFiles: visibleFiles,
-        bundlerURL: import.meta.env.VITE_BUNDLER_URL,
+        bundlerURL: import.meta.env.PUBLIC_BUNDLER_URL,
         recompileMode: 'delayed',
         recompileDelay: 500,
       }}
