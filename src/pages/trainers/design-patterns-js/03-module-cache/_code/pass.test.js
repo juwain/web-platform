@@ -9,7 +9,6 @@ describe('processSurveyData', () => {
       user4: [2, 2, 3, 2, 3],
       user5: [5, 4, 3, 4, 5],
     };
-
     const expectedAverages = [
       (1 + 2 + 3 + 4 + 5) / 5,
       (7 + 1 + 5 + 3 + 2) / 5,
@@ -17,9 +16,7 @@ describe('processSurveyData', () => {
       (2 + 2 + 3 + 2 + 3) / 5,
       (5 + 4 + 3 + 4 + 5) / 5,
     ];
-
     const result = processSurveyData(surveyData);
-
     expect(result).toEqual(expectedAverages);
   });
 
@@ -28,27 +25,20 @@ describe('processSurveyData', () => {
       user1: [1, 2, 3, 4, 5],
       user2: [7, 1, 5, 3, 2],
     };
-
     const expectedAverages = [
       (1 + 2 + 3 + 4 + 5) / 5, // user1
       (7 + 1 + 5 + 3 + 2) / 5, // user2
     ];
-
     const firstResult = processSurveyData(surveyData);
-
     expect(firstResult).toEqual(expectedAverages);
-
     const secondResult = processSurveyData(surveyData);
-
     expect(secondResult).toBe(firstResult);
     expect(secondResult).toEqual(expectedAverages);
   });
 
   it('и возвращает пустой массив, если передан пустой объект', () => {
     const surveyData = {};
-
     const result = processSurveyData(surveyData);
-
     expect(result).toEqual([]);
   });
 });
