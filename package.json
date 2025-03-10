@@ -26,7 +26,8 @@
     "react-dom": "^18.3.1",
     "sanitize-html": "^2.14.0",
     "typed.js": "^2.1.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "use-matching-media-queries": "^1.0.2"
   },
   "devDependencies": {
     "husky": "^9.1.7",
