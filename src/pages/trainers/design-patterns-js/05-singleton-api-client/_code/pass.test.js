@@ -1,16 +1,7 @@
-// import axios from 'axios';
 import apiClient from './apiClient';
 
-// Мокаем axios
-// jest.mock('axios');
-
 describe('ApiClient', () => {
-  beforeEach(() => {
-    // Очищаем моки перед каждым тестом
-    // jest.clearAllMocks();
-  });
-
-  it('Класс ApiClient должен быть синглтоном,', () => {
+  it('Класс ApiClient должен быть Синглтоном,', () => {
     const client1 = new apiClient.constructor();
     const client2 = new apiClient.constructor();
     expect(client1).toBe(client2);
