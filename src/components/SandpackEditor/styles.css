@@ -2,7 +2,7 @@
   display: grid !important;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr minmax(min-content, auto);
-  height: max(400px, calc(100vh - 50px));
+  height: clamp(400px, calc(100vh - 50px), 2000px);
 
   --sp-layout-height: 100%;
 
