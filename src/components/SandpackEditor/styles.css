@@ -50,6 +50,7 @@
   align-items: center;
   background: var(--sp-colors-surface1);
   z-index: 1;
+  color: var(--sp-syntax-color-plain);
 
   &:not(:first-child) {
     border-top: 1px solid var(--sp-colors-surface2);
