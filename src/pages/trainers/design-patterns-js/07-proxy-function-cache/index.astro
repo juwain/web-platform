@@ -19,8 +19,8 @@ const getFile = async (name: string, ext: string) => {
 };
 
 const fileNames = [
-  { name: "index", ext: "js" },
-  { name: "store", ext: "js" },
+  { name: "App", ext: "js" },
+  { name: "lib", ext: "js" },
   { name: "pass.test", ext: "js" },
 ];
 
@@ -43,6 +43,13 @@ const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
 
 <TrainersLayout title={title} fullScreen>
   <Header mode="editor" breadcrumbs={breadcrumbs} />
-  <Editor files={files} template="vanilla" nextUrl={nextUrl} />
+  <Editor
+    files={files}
+    template="react"
+    nextUrl={nextUrl}
+    options={{
+      showSidebar: true,
+    }}
+  />
   <Theory Content={content.Content} title={title} />
 </TrainersLayout>

@@ -7,8 +7,10 @@ import {
   SandpackConsole,
   ConsoleIcon,
   RoundedButton,
+  SandpackPreview,
 } from '@codesandbox/sandpack-react';
 import { useState } from 'react';
+import { useMatchingMediaQueries } from 'use-matching-media-queries';
 import { ServiceBar } from '../ServiceBar/ServiceBar';
 import { mapGoalsFromSpecs } from '../../utils/mapGoalsFromSpecs';
 import type { SandpackEditorProps } from '../Editor.astro';
@@ -31,10 +33,11 @@ export function SandpackEditor({
   nextUrl,
   options,
 }: SandpackEditorProps) {
-  const { showConsole, customSetup } = options ?? {};
+  const { showSidebar, customSetup } = options ?? {};
   const visibleFiles = Object.keys(files).filter(
     (file) => !file.includes('.test.'),
   );
+  const isMobile = useMatchingMediaQueries('(max-width: 720px)');
 
   return (
     <SandpackProvider
@@ -52,7 +55,7 @@ export function SandpackEditor({
     >
       <SandpackComponents
         nextUrl={nextUrl}
-        showConsole={Boolean(showConsole)}
+        showSidebar={!isMobile && Boolean(showSidebar)}
       />
     </SandpackProvider>
   );
@@ -60,12 +63,12 @@ export function SandpackEditor({
 
 const SandpackComponents = ({
   nextUrl,
-  showConsole,
+  showSidebar,
 }: {
   nextUrl?: string;
-  showConsole: boolean;
+  showSidebar: boolean;
 }) => {
-  const [isSidebarVisible, setIsSidebarVisible] = useState(showConsole);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(showSidebar);
   const [specs, setSpecs] = useState<Goal[]>();
   const isAllSpecsPassed = specs?.every((spec) => spec.status === 'pass');
 
@@ -106,7 +109,12 @@ const SandpackComponents = ({
         )}
       </ServiceBar>
       <div className="side-bar">
-        <p className="side-bar-title">Console</p>
+        <p className="side-bar-title">Просмотр</p>
+        <SandpackPreview
+          showOpenInCodeSandbox={false}
+          showSandpackErrorOverlay={false}
+        />
+        <p className="side-bar-title">Консоль</p>
         <SandpackConsole resetOnPreviewRestart />
       </div>
     </SandpackLayout>

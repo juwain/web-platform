@@ -2,7 +2,7 @@
   display: grid !important;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr minmax(min-content, auto);
-  height: max(400px, 100%);
+  height: clamp(400px, calc(100vh - 50px), 2000px);
 
   --sp-layout-height: 100%;
 
@@ -11,10 +11,11 @@
   }
 
   &.with-sidebar {
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr 500px;
 
     .side-bar {
-      display: block;
+      display: grid;
+      grid-template-rows: auto 1fr auto 1fr;
     }
   }
 }
@@ -25,6 +26,10 @@
 
 .tests-panel {
   display: none !important;
+}
+
+.console {
+  overflow-y: auto;
 }
 
 .console-item > pre {
@@ -39,10 +44,17 @@
 .side-bar-title {
   border-bottom: 1px solid var(--sp-colors-surface2);
   padding: 0 var(--sp-space-2);
-  margin: 2px 0;
-  min-height: 40px;
+  margin: 0;
+  min-height: 42px;
   display: flex;
   align-items: center;
+  background: var(--sp-colors-surface1);
+  z-index: 1;
+  color: var(--sp-syntax-color-plain);
+
+  &:not(:first-child) {
+    border-top: 1px solid var(--sp-colors-surface2);
+  }
 }
 
 .service-bar {
@@ -74,9 +86,5 @@
 
   .side-bar {
     grid-area: 1 / 1 / 2 / 2;
-  }
-
-  .side-bar-title {
-    display: none;
   }
 }
