@@ -17,18 +17,13 @@ function memoize(fn) {
     apply: (fn, _, args) => {
       const key = JSON.stringify(args);
 
-      // если результат есть в кэше, возвращаем его
+      // если результат есть в кеше, возвращаем его
       /* ... */
-      if (cache.has(key)) {
-        console.log(`Результат для ${args} взят из кэша`);
-        return cache.get(key);
-      }
 
       const result = fn(...args);
 
-      // записываем результат в кэш
+      // записываем результат в кеш
       /* ... */
-      cache.set(key, result);
 
       return result;
     },
