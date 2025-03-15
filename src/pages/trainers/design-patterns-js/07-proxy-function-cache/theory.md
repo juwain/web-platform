@@ -8,9 +8,9 @@ title: "Паттерн Proxy (Прокси), практика: кеширова�
 const func = () => {};
 
 const proxyFunc = new Proxy(func, {
-  apply: (target, thisArg, argumentsList) => {
+  apply: (func, _, args) => {
     // перехватчик вызова
-    console.log(`Вызвана функция ${func} с параметрами ${argumentsList}`);
+    console.log(`Вызвана функция ${func} с параметрами ${args}`);
   },
 });
 
