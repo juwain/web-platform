@@ -1,4 +1,31 @@
 .service-bar {
+  position: relative;
   background-color: var(--sp-colors-surface1);
   color: var(--sp-syntax-color-plain);
+  font-family: var(--main-font-family);
+  font-size: calc(0.85 * var(--main-font-size));
+  line-height: var(--main-line-height);
+
+  display: grid;
+}
+
+.service-bar-controls {
+  position: absolute;
+  top: var(--sp-space-2);
+  right: var(--sp-space-2);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-text-button {
+  font-size: var(--sp-font-size);
+  font-family: var(--sp-font-body);
+}
+
+.next-task-button {
+  position: absolute;
+  top: var(--sp-space-2);
+  right: var(--sp-space-11);
+  padding: var(--sp-space-3);
+  height: var(--sp-space-7);
 }

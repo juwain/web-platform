@@ -4,7 +4,6 @@
 
 .goals-title {
   margin-bottom: 0.25rem;
-  margin-left: 0.5rem;
   margin-top: 0.25rem;
   font-size: inherit;
 }
@@ -26,8 +25,12 @@
   left: -20px;
 }
 
-.goals-list li.completed {
+.goals-list li.pass {
   color: #2ecc40;
+}
+
+.goals-list li.fail {
+  color: #c80000;
 }
 
 .goals-list li.completed::before {

@@ -6,10 +6,12 @@ import {
   SandpackTests,
   SandpackConsole,
   ConsoleIcon,
+  RunIcon,
   RoundedButton,
   SandpackPreview,
+  useSandpack,
 } from '@codesandbox/sandpack-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState, type EventHandler } from 'react';
 import { useMatchingMediaQueries } from 'use-matching-media-queries';
 import { ServiceBar } from '../ServiceBar/ServiceBar';
 import { mapGoalsFromSpecs } from '../../utils/mapGoalsFromSpecs';
@@ -71,14 +73,36 @@ const SandpackComponents = ({
   const [isSidebarVisible, setIsSidebarVisible] = useState(showSidebar);
   const [specs, setSpecs] = useState<Goal[]>();
   const isAllSpecsPassed = specs?.every((spec) => spec.status === 'pass');
+  const [needHighlight, setNeedHighlight] = useState(false);
+
+  const { dispatch } = useSandpack();
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  const isTablet = useMatchingMediaQueries('(min-width: 960px)');
 
   const handleComplete = (result: Record<string, Spec>) => {
     const specs = mapGoalsFromSpecs(result);
 
-    if (specs.length !== 0) {
+    if (specs?.length !== 0) {
       queueMicrotask(() => setSpecs(specs));
     }
   };
+
+  const handleRunTests = (event: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch({ type: 'run-all-tests' });
+    setNeedHighlight(event.isTrusted);
+  };
+
+  useEffect(() => {
+    new MutationObserver(function (_, observer) {
+      const btn = ref.current?.querySelector('button');
+
+      btn?.click();
+
+      observer.disconnect();
+    }).observe(document.querySelector('.tests-panel')!, { childList: true });
+  }, []);
 
   return (
     <SandpackLayout className={isSidebarVisible ? 'with-sidebar' : ''}>
@@ -91,17 +115,31 @@ const SandpackComponents = ({
       <SandpackTests
         hideTestsAndSupressLogs
         showVerboseButton={false}
-        watchMode={true}
+        watchMode={false}
         onComplete={handleComplete}
       />
       <ServiceBar>
-        <Goals specs={specs} />
-        <RoundedButton
-          onClick={() => setIsSidebarVisible((prevState) => !prevState)}
-          className="toggle-sidebar"
-        >
-          <ConsoleIcon />
-        </RoundedButton>
+        <Goals specs={specs} highlight={needHighlight} />
+        <div className="service-bar-controls">
+          <div ref={ref}>
+            <RoundedButton
+              onClick={handleRunTests}
+              className="icon-text-button"
+            >
+              <RunIcon />
+              {isTablet && <span>Запустить проверку</span>}
+            </RoundedButton>
+          </div>
+          <RoundedButton
+            onClick={() => setIsSidebarVisible((prevState) => !prevState)}
+            className="icon-text-button"
+          >
+            <ConsoleIcon />
+            {isTablet && (
+              <span>{isSidebarVisible ? 'Скрыть' : 'Показать'} консоль</span>
+            )}
+          </RoundedButton>
+        </div>
         {isAllSpecsPassed && nextUrl && (
           <a className="button next-task-button" href={nextUrl}>
             Перейти дальше
