@@ -61,19 +61,3 @@
     opacity: 0.5;
   }
 }
-
-.need-help {
-  width: var(--sp-space-7);
-  position: absolute;
-  top: var(--sp-space-2);
-  left: var(--sp-space-2);
-}
-
-.need-help span {
-  min-width: var(--sp-space-4);
-  width: var(--sp-space-4);
-  height: var(--sp-space-4);
-  line-height: var(--sp-space-4);
-  margin: auto;
-  font-size: 15px;
-}

@@ -23,9 +23,6 @@
 }
 
 .next-task-button {
-  position: absolute;
-  top: var(--sp-space-2);
-  right: var(--sp-space-11);
   padding: var(--sp-space-3);
   height: var(--sp-space-7);
 }

@@ -39,7 +39,7 @@ export function SandpackEditor({
   const visibleFiles = Object.keys(files).filter(
     (file) => !file.includes('.test.'),
   );
-  const isMobile = useMatchingMediaQueries('(max-width: 720px)');
+  const isMobile = useMatchingMediaQueries('(max-width: 850px)');
 
   return (
     <SandpackProvider
@@ -79,7 +79,7 @@ const SandpackComponents = ({
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const isTablet = useMatchingMediaQueries('(min-width: 960px)');
+  const isTablet = useMatchingMediaQueries('(min-width: 1100px)');
 
   const handleComplete = (result: Record<string, Spec>) => {
     const specs = mapGoalsFromSpecs(result);
@@ -121,6 +121,11 @@ const SandpackComponents = ({
       <ServiceBar>
         <Goals specs={specs} highlight={needHighlight} />
         <div className="service-bar-controls">
+          {isAllSpecsPassed && nextUrl && (
+            <a className="button next-task-button" href={nextUrl}>
+              Перейти дальше
+            </a>
+          )}
           <div ref={ref}>
             <RoundedButton
               onClick={handleRunTests}
@@ -140,11 +145,6 @@ const SandpackComponents = ({
             )}
           </RoundedButton>
         </div>
-        {isAllSpecsPassed && nextUrl && (
-          <a className="button next-task-button" href={nextUrl}>
-            Перейти дальше
-          </a>
-        )}
       </ServiceBar>
       <div className="side-bar">
         <p className="side-bar-title">Просмотр</p>
