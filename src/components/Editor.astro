@@ -17,7 +17,8 @@ export interface SandpackEditorProps {
   };
 }
 
-const { files, template, nextUrl, options } = Astro.props;
+const { files, template, nextUrl, options } =
+  Astro.props as SandpackEditorProps;
 ---
 
 <SandpackEditor
