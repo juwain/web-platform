@@ -19,6 +19,7 @@ import type { SandpackEditorProps } from '../Editor.astro';
 import type { Goal, Spec } from '../../types';
 import './styles.css';
 import { Goals } from '../Goals/Goals';
+import { usePersistCode } from '../utils/usePersistCode';
 
 const classes = {
   'sp-layout': 'editor-layout',
@@ -76,6 +77,8 @@ const SandpackComponents = ({
   const [needHighlight, setNeedHighlight] = useState(false);
 
   const { dispatch } = useSandpack();
+
+  usePersistCode();
 
   const ref = useRef<HTMLDivElement>(null);
 
