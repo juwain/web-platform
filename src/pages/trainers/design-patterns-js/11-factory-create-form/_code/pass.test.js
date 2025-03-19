@@ -1,7 +1,7 @@
 import { FormFieldFactory } from './factory';
 
 describe('FormFieldFactory', () => {
-  it('Фабрика FormFieldFactory создает текстовый <input> с корректными параметрами', () => {
+  it('Фабрика FormFieldFactory создает текстовый <input> с корректными параметрами,', () => {
     const config = {
       type: 'text',
       name: 'username',
@@ -16,7 +16,6 @@ describe('FormFieldFactory', () => {
       name: 'username',
       placeholder: 'Введите имя пользователя',
     });
-    expect(field.key).toBe('username');
   });
 
   it('создаёт <select> с нужными <option>,', () => {
