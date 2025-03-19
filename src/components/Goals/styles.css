@@ -4,7 +4,6 @@
 
 .goals-title {
   margin-bottom: 0.25rem;
-  margin-left: 0.5rem;
   margin-top: 0.25rem;
   font-size: inherit;
 }
@@ -26,8 +25,12 @@
   left: -20px;
 }
 
-.goals-list li.completed {
+.goals-list li.pass {
   color: #2ecc40;
+}
+
+.goals-list li.fail {
+  color: #c80000;
 }
 
 .goals-list li.completed::before {
@@ -57,20 +60,4 @@
     transform: scale(0.8);
     opacity: 0.5;
   }
-}
-
-.need-help {
-  width: var(--sp-space-7);
-  position: absolute;
-  top: var(--sp-space-2);
-  left: var(--sp-space-2);
-}
-
-.need-help span {
-  min-width: var(--sp-space-4);
-  width: var(--sp-space-4);
-  height: var(--sp-space-4);
-  line-height: var(--sp-space-4);
-  margin: auto;
-  font-size: 15px;
 }
