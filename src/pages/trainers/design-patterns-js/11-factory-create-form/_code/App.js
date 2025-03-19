@@ -1,4 +1,5 @@
 import { FormFieldFactory } from './factory';
+import './style.css';
 
 const formConfig = [
   { type: 'text', label: 'Ваше имя', name: 'name' },
