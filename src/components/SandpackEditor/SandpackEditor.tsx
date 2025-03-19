@@ -10,8 +10,9 @@ import {
   RoundedButton,
   SandpackPreview,
   useSandpack,
+  RefreshIcon,
 } from '@codesandbox/sandpack-react';
-import { useEffect, useRef, useState, type EventHandler } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMatchingMediaQueries } from 'use-matching-media-queries';
 import { ServiceBar } from '../ServiceBar/ServiceBar';
 import { mapGoalsFromSpecs } from '../../utils/mapGoalsFromSpecs';
@@ -78,7 +79,7 @@ const SandpackComponents = ({
 
   const { dispatch } = useSandpack();
 
-  usePersistCode();
+  const { resetAllFiles } = usePersistCode();
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -107,14 +108,24 @@ const SandpackComponents = ({
     }).observe(document.querySelector('.tests-panel')!, { childList: true });
   }, []);
 
+  const handleReset = () => {
+    resetAllFiles();
+  };
+
   return (
     <SandpackLayout className={isSidebarVisible ? 'with-sidebar' : ''}>
       {/* <SandpackFileExplorer /> */}
-      <SandpackCodeEditor
-        showInlineErrors
-        showLineNumbers
-        showTabs
-      ></SandpackCodeEditor>
+      <div className="code-editor-wrapper">
+        <SandpackCodeEditor
+          showInlineErrors
+          showLineNumbers
+          showTabs
+        ></SandpackCodeEditor>
+        <RoundedButton className="code-reset" onClick={handleReset}>
+          <RefreshIcon />
+          {isTablet && <span>Сбросить всё</span>}
+        </RoundedButton>
+      </div>
       <SandpackTests
         hideTestsAndSupressLogs
         showVerboseButton={false}

@@ -15,6 +15,10 @@ class LocalStorage {
   set(key: string, value: string) {
     localStorage.setItem(key, value);
   }
+
+  remove(key: string) {
+    localStorage.removeItem(key);
+  }
 }
 
 const ls = Object.freeze(new LocalStorage());

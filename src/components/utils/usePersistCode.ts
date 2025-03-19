@@ -17,12 +17,26 @@ export const usePersistCode = () => {
     });
   }, [sandpack.visibleFiles]);
 
+  const currentFileKey = `${location.pathname}${sandpack.activeFile}`;
+
   useEffect(() => {
-    const currentFileKey = `${location.pathname}${sandpack.activeFile}`;
     const currentPersistedCode = ls.get(currentFileKey);
 
     if (currentPersistedCode !== code) {
       ls.set(currentFileKey, code);
     }
   }, [sandpack.activeFile, code]);
+
+  return {
+    resetAllFiles: () => {
+      sandpack.resetAllFiles();
+
+      sandpack.visibleFiles.forEach((file) => {
+        const currentFileKey = `${location.pathname}${file}`;
+        ls.remove(currentFileKey);
+      });
+
+      location.reload();
+    },
+  };
 };
