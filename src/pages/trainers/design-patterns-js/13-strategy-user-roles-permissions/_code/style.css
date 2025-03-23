@@ -1,0 +1,15 @@
+.article {
+  padding-inline: 20px;
+  border: 1px solid #cccccc;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
