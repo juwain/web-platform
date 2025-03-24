@@ -2,10 +2,10 @@
  * Стратегии управления правами доступа по ролям пользователей
  * @example
  * // Проверка прав администратора
- * permissionStrategies.admin.canEdit(); // true
+ * permissionStrategies['admin'].canEdit(); // true
  *
  * // Проверка прав пользователя на редактирование
- * const isOwner = permissionStrategies.user.canEdit(1001, 1001); // true
+ * const isOwner = permissionStrategies['user'].canEdit(1001, 1001); // true
  *
  * @description
  * Реализует паттерн Стратегия для проверки прав:
