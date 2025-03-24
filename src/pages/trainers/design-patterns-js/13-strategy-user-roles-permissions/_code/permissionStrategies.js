@@ -14,18 +14,9 @@
  * 3. guest - минимальные права
  */
 const permissionStrategies = {
-  admin: {
-    // canEdit: () => true,
-    // canDelete: () => true,
-  },
-  user: {
-    // canEdit: (ownerId, currentUserId) => ownerId === currentUserId,
-    // canDelete: () => false,
-  },
-  guest: {
-    // canEdit: () => false,
-    // canDelete: () => false,
-  },
+  admin: {},
+  user: {},
+  guest: {},
 };
 
 export { permissionStrategies };
