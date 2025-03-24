@@ -11,6 +11,8 @@ import {
   SandpackPreview,
   useSandpack,
   RefreshIcon,
+  BackwardIcon,
+  ForwardIcon,
 } from '@codesandbox/sandpack-react';
 import { useEffect, useRef, useState } from 'react';
 import { useMatchingMediaQueries } from 'use-matching-media-queries';
@@ -21,6 +23,7 @@ import type { Goal, Spec } from '../../types';
 import './styles.css';
 import { Goals } from '../Goals/Goals';
 import { usePersistCode } from '../utils/usePersistCode';
+import { Tutorial } from '../Tutorial/Tutorial';
 
 const classes = {
   'sp-layout': 'editor-layout',
@@ -38,9 +41,17 @@ export function SandpackEditor({
   options,
 }: SandpackEditorProps) {
   const { showSidebar, customSetup } = options ?? {};
-  const visibleFiles = Object.keys(files).filter(
-    (file) => !file.includes('.test.'),
-  );
+
+  const visibleFiles = Object.keys(files).filter((file) => {
+    return ['.test.', '.source.'].every(
+      (exception) => !file.includes(exception),
+    );
+  });
+  const hasTutorial = Boolean(files['tutorial.source.json']);
+  const tutorialSource = hasTutorial
+    ? JSON.parse(files['tutorial.source.json'] as string)
+    : null;
+
   const isMobile = useMatchingMediaQueries('(max-width: 850px)');
 
   return (
@@ -60,6 +71,7 @@ export function SandpackEditor({
       <SandpackComponents
         nextUrl={nextUrl}
         showSidebar={!isMobile && Boolean(showSidebar)}
+        tutorialSource={tutorialSource}
       />
     </SandpackProvider>
   );
@@ -68,22 +80,36 @@ export function SandpackEditor({
 const SandpackComponents = ({
   nextUrl,
   showSidebar,
+  tutorialSource,
 }: {
   nextUrl?: string;
   showSidebar: boolean;
+  tutorialSource?: Record<
+    string,
+    Array<Record<string, string | Record<string, string>>>
+  >;
 }) => {
+  const [currentTutorialStep, setCurrentTutorialStep] = useState(0);
+
+  const isTutorial = Boolean(tutorialSource);
+  const tutorialContent = tutorialSource?.content;
+  const isFirstTutorialStep = currentTutorialStep === 0;
+  const isLastTutorialStep =
+    currentTutorialStep === Number(tutorialContent?.length) - 1;
+  const tutorialStep = tutorialContent?.[currentTutorialStep];
+  const tutorialStepDescription = tutorialStep?.description as string;
+  const tutorialStepCode = tutorialStep?.code as Record<string, string>;
+
   const [isSidebarVisible, setIsSidebarVisible] = useState(showSidebar);
   const [specs, setSpecs] = useState<Goal[]>();
-  const isAllSpecsPassed = specs?.every((spec) => spec.status === 'pass');
   const [needHighlight, setNeedHighlight] = useState(false);
 
-  const { dispatch } = useSandpack();
-
-  const { resetAllFiles } = usePersistCode();
-
+  const isAllSpecsPassed = specs?.every((spec) => spec.status === 'pass');
+  const isTablet = useMatchingMediaQueries('(min-width: 1100px)');
   const ref = useRef<HTMLDivElement>(null);
 
-  const isTablet = useMatchingMediaQueries('(min-width: 1100px)');
+  const { dispatch, sandpack } = useSandpack();
+  const { resetAllFiles } = usePersistCode();
 
   const handleComplete = (result: Record<string, Spec>) => {
     const specs = mapGoalsFromSpecs(result);
@@ -99,17 +125,31 @@ const SandpackComponents = ({
   };
 
   useEffect(() => {
-    new MutationObserver(function (_, observer) {
-      const btn = ref.current?.querySelector('button');
+    if (!isTutorial) {
+      new MutationObserver(function (_, observer) {
+        const btn = ref.current?.querySelector('button');
 
-      btn?.click();
+        btn?.click();
 
-      observer.disconnect();
-    }).observe(document.querySelector('.tests-panel')!, { childList: true });
+        observer.disconnect();
+      }).observe(document.querySelector('.tests-panel')!, { childList: true });
+    }
   }, []);
+
+  useEffect(() => {
+    if (isTutorial) {
+      const [fileName, fileContent] = Object.entries(tutorialStepCode)[0];
+
+      sandpack.updateFile(fileName, fileContent);
+    }
+  }, [tutorialStepCode]);
 
   const handleReset = () => {
     resetAllFiles();
+  };
+
+  const handleToggleTutorial = (direction: -1 | 1) => {
+    setCurrentTutorialStep((prev) => prev + direction);
   };
 
   return (
@@ -126,29 +166,62 @@ const SandpackComponents = ({
           {isTablet && <span>Сбросить всё</span>}
         </RoundedButton>
       </div>
-      <SandpackTests
-        hideTestsAndSupressLogs
-        showVerboseButton={false}
-        watchMode={false}
-        onComplete={handleComplete}
-      />
+      {!isTutorial && (
+        <SandpackTests
+          hideTestsAndSupressLogs
+          showVerboseButton={false}
+          watchMode={false}
+          onComplete={handleComplete}
+        />
+      )}
       <ServiceBar>
-        <Goals specs={specs} highlight={needHighlight} />
+        {isTutorial ? (
+          <Tutorial
+            currentStep={currentTutorialStep}
+            totalSteps={tutorialContent?.length}
+            content={tutorialStepDescription}
+          />
+        ) : (
+          <Goals specs={specs} highlight={needHighlight} />
+        )}
         <div className="service-bar-controls">
-          {isAllSpecsPassed && nextUrl && (
-            <a className="button next-task-button" href={nextUrl}>
-              Перейти дальше
-            </a>
+          {isTutorial ? (
+            <>
+              <RoundedButton
+                onClick={() => handleToggleTutorial(-1)}
+                className={`icon-text-button ${isFirstTutorialStep ? 'disabled' : ''}`}
+              >
+                <BackwardIcon />
+                {isTablet && <span>Назад</span>}
+              </RoundedButton>
+              <RoundedButton
+                onClick={() => handleToggleTutorial(1)}
+                className={`icon-text-button ${isLastTutorialStep ? 'disabled' : ''}`}
+              >
+                <ForwardIcon />
+                {isTablet && <span>Вперёд</span>}
+              </RoundedButton>
+            </>
+          ) : (
+            <>
+              {isAllSpecsPassed && nextUrl && (
+                <a className="button next-task-button" href={nextUrl}>
+                  Перейти дальше
+                </a>
+              )}
+              <div ref={ref}>
+                {!isTutorial ? (
+                  <RoundedButton
+                    onClick={handleRunTests}
+                    className="icon-text-button"
+                  >
+                    <RunIcon />
+                    {isTablet && <span>Запустить проверку</span>}
+                  </RoundedButton>
+                ) : null}
+              </div>
+            </>
           )}
-          <div ref={ref}>
-            <RoundedButton
-              onClick={handleRunTests}
-              className="icon-text-button"
-            >
-              <RunIcon />
-              {isTablet && <span>Запустить проверку</span>}
-            </RoundedButton>
-          </div>
           <RoundedButton
             onClick={() => setIsSidebarVisible((prevState) => !prevState)}
             className="icon-text-button"

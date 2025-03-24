@@ -1,0 +1,13 @@
+.tutorial {
+  padding: 0.5rem 2rem;
+}
+
+.tutorial-title {
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+  font-size: inherit;
+}
+
+.tutorial-text {
+  margin-block: 0.5em;
+}

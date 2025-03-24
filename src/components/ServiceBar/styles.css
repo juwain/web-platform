@@ -20,6 +20,11 @@
 .icon-text-button {
   font-size: var(--sp-font-size) !important;
   font-family: var(--sp-font-body) !important;
+
+  &.disabled {
+    color: var(--sp-colors-disabled);
+    pointer-events: none;
+  }
 }
 
 .next-task-button {
