@@ -140,6 +140,7 @@ const SandpackComponents = ({
     if (isTutorial) {
       const [fileName, fileContent] = Object.entries(tutorialStepCode)[0];
 
+      sandpack.openFile(fileName);
       sandpack.updateFile(fileName, fileContent);
     }
   }, [tutorialStepCode]);
