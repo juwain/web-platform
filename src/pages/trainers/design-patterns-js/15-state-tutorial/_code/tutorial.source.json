@@ -2,19 +2,37 @@
   "content": [
     {
       "code": {
-        "App.js": "export default function App() {\n  return <>Step 1</>;\n}\n"
+        "/App.js": "export default function App() {\n  return <>Step 1</>;\n}\n"
       },
       "description": "text 1"
     },
     {
       "code": {
-        "App.js": "export default function App() {\n  return <>Step 2</>;\n}\n"
+        "/App.js": "export default function App() {\n  return <>Step 2</>;\n}\n"
       },
       "description": "text 2"
     },
     {
       "code": {
-        "App.js": "export default function App() {\n  return <>Step 3</>;\n}\n"
+        "/lib.js": "const a = 1;\n"
+      },
+      "description": "text 3"
+    },
+    {
+      "code": {
+        "/lib.js": "const a = 2;\n"
+      },
+      "description": "text 3"
+    },
+    {
+      "code": {
+        "/lib.js": "const a = 3;\n"
+      },
+      "description": "text 3"
+    },
+    {
+      "code": {
+        "/App.js": "export default function App() {\n  return <>Step 3</>;\n}\n"
       },
       "description": "text 3"
     }
