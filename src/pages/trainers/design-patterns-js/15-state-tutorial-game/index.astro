@@ -20,7 +20,8 @@ const getFile = async (name: string, ext: string) => {
 
 const fileNames = [
   { name: "App", ext: "js" },
-  { name: "lib", ext: "js" },
+  { name: "guessMachine", ext: "js" },
+  { name: "style", ext: "css" },
   { name: "tutorial.source", ext: "json" },
 ];
 
@@ -49,6 +50,12 @@ const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
     nextUrl={nextUrl}
     options={{
       showSidebar: true,
+      customSetup: {
+        dependencies: {
+          "@xstate/react": "5.0.3",
+          xstate: "5.19.2",
+        },
+      },
     }}
   />
   <Theory Content={content.Content} title={title} />

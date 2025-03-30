@@ -1,0 +1,191 @@
+{
+  "content": [
+    {
+      "code": {
+        "/App.js": "import React from 'react';\nimport './style.css';\n\nexport default function App() {\n  return (\n    <div className=\"container\">\n      <h1>Игра «Угадай число от 1 до 10»</h1>\n    </div>\n  );\n}\n"
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/guessMachine.js": "import { createMachine } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n\n  states: {\n    idle: {},\n  },\n});\n\nexport { guessMachine };\n"
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/App.js": "import React from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state] = useMachine(guessMachine);\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button>Начать игру</button>\n        </>\n      )}\n    </div>\n  );\n}\n"
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/guessMachine.js": "import { createMachine } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n\n  states: {\n    idle: {\n      on: {\n        START: 'playing',\n      },\n    },\n    playing: {},\n  },\n});\n\nexport { guessMachine };\n"
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/App.js": "import React from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n\n  const handleStart = () => send({ type: 'START' });\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n    </div>\n  );\n}\n"
+      },
+      "description": "text"
+    },
+
+    {
+      "code": {
+        "/App.js": "import React from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n\n  const handleStart = () => send({ type: 'START' });\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && <h1>Игра запущена</h1>}\n    </div>\n  );\n}\n"
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    },
+    {
+      "code": {
+        "/.js": ""
+      },
+      "description": "text"
+    }
+  ]
+}
