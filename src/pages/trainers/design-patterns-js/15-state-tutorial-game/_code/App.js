@@ -45,7 +45,7 @@ export default function App() {
 
       {state.matches('success') && (
         <>
-          <h1>Поздравляем, вы угадали!</h1>
+          <h1>Поздравляем, правильно!</h1>
           <p>Загаданное число: {state.context.number}</p>
         </>
       )}
@@ -53,7 +53,7 @@ export default function App() {
       {state.matches('failure') && (
         <>
           <h1>Игра окончена!</h1>
-          <p>Загаданное число было: {state.context.number}</p>
+          <p>Загаданное число: {state.context.number}</p>
           <p>{state.context.message}</p>
         </>
       )}

@@ -18,7 +18,7 @@ const guessMachine = createMachine({
       on: {
         GUESS: [
           {
-            guard: ({ context, event }) => {
+            guard: ({ event, context }) => {
               return event.guess === context.number;
             },
             target: 'success',
@@ -36,7 +36,7 @@ const guessMachine = createMachine({
               attempts: ({ context }) => {
                 return context.attempts - 1;
               },
-              message: ({ context, event }) => {
+              message: ({ event, context }) => {
                 return event.guess < context.number
                   ? 'Слишком мало'
                   : 'Слишком много';
