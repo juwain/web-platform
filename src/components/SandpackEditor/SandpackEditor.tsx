@@ -109,7 +109,6 @@ const SandpackComponents = ({
   const ref = useRef<HTMLDivElement>(null);
 
   const { dispatch, sandpack } = useSandpack();
-  const { resetAllFiles } = usePersistCode();
 
   const handleComplete = (result: Record<string, Spec>) => {
     const specs = mapGoalsFromSpecs(result);
@@ -145,13 +144,11 @@ const SandpackComponents = ({
     }
   }, [tutorialStepCode]);
 
-  const handleReset = () => {
-    resetAllFiles();
-  };
-
   const handleToggleTutorial = (direction: -1 | 1) => {
     setCurrentTutorialStep((prev) => prev + direction);
   };
+
+  const { resetAllFiles } = usePersistCode(!isTutorial);
 
   return (
     <SandpackLayout className={isSidebarVisible ? 'with-sidebar' : ''}>
@@ -162,10 +159,12 @@ const SandpackComponents = ({
           showLineNumbers
           showTabs
         ></SandpackCodeEditor>
-        <RoundedButton className="code-reset" onClick={handleReset}>
-          <RefreshIcon />
-          {isTablet && <span>Сбросить всё</span>}
-        </RoundedButton>
+        {!isTutorial && (
+          <RoundedButton className="code-reset" onClick={resetAllFiles}>
+            <RefreshIcon />
+            {isTablet && <span>Сбросить всё</span>}
+          </RoundedButton>
+        )}
       </div>
       {!isTutorial && (
         <SandpackTests
