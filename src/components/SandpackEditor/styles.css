@@ -83,6 +83,7 @@
   }
 }
 
+/* CodeMirror */
 .cm-line-highlight {
   position: relative;
 
@@ -97,3 +98,7 @@
     z-index: -1;
   }
 }
+
+/* .cm-scroller {
+  overscroll-behavior: contain;
+} */

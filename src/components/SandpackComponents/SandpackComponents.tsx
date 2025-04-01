@@ -108,22 +108,49 @@ export const SandpackComponents = ({
         const cm = codemirrorInstance.current?.getCodemirror();
         if (!cm) return;
 
-        const decorations = [];
-        for (const range of highlights) {
+        let firstHighlight: number | null = null;
+        const decorations: any = [];
+
+        highlights.forEach((range) => {
           const [start, end] = parseRange(range);
           for (let line = start; line <= end; line++) {
-            const linePos = cm.state.doc.line(line + 1);
-            decorations.push(
-              Decoration.line({
-                class: 'cm-line-highlight',
-              }).range(linePos.from),
-            );
+            try {
+              const linePos = cm.state.doc.line(line + 1);
+              decorations.push(
+                Decoration.line({ class: 'cm-line-highlight' }).range(
+                  linePos.from,
+                ),
+              );
+
+              // Track first highlight position
+              if (firstHighlight === null) {
+                firstHighlight = linePos.from;
+              }
+            } catch (e) {
+              console.warn(`Line ${line + 1} not found`);
+            }
           }
+        });
+
+        const effects = [];
+
+        if (decorations.length > 0) {
+          effects.push(highlightEffect.of(Decoration.set(decorations)));
         }
 
-        cm.dispatch({
-          effects: highlightEffect.of(Decoration.set(decorations)),
-        });
+        const scrollContainer = cm.scrollDOM;
+        const hasVerticalScroll =
+          scrollContainer.scrollHeight > scrollContainer.clientHeight;
+
+        if (hasVerticalScroll && firstHighlight !== null) {
+          effects.push(
+            EditorView.scrollIntoView(firstHighlight, {
+              y: 'center',
+            }),
+          );
+        }
+
+        cm.dispatch({ effects });
       }, 50);
     }
   }, [tutorialStepCode]);
