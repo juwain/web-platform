@@ -16,7 +16,8 @@
       "code": {
         "/App.js": "import React from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state] = useMachine(guessMachine);\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button>Начать игру</button>\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
-      "description": "Возвращаемся в App.js и импортируем хук useMachine вместе с созданной машиной. В этом шаге добавляем отображение кнопки «Начать игру» в состоянии idle. Хотя обработчик ещё не подключён, вы уже видите, как state machine влияет на отображение."
+      "description": "Возвращаемся в App.js и импортируем хук useMachine вместе с созданной машиной. В этом шаге добавляем отображение кнопки «Начать игру» в состоянии idle. Хотя обработчик ещё не подключён, вы уже видите, как state machine влияет на отображение.",
+      "highlight": ["2-3"]
     },
     {
       "code": {

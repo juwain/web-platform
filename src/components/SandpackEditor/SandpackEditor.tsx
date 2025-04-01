@@ -13,6 +13,7 @@ import {
   RefreshIcon,
   BackwardIcon,
   ForwardIcon,
+  type CodeEditorRef,
 } from '@codesandbox/sandpack-react';
 import { useEffect, useRef, useState } from 'react';
 import { useMatchingMediaQueries } from 'use-matching-media-queries';
@@ -24,6 +25,23 @@ import './styles.css';
 import { Goals } from '../Goals/Goals';
 import { usePersistCode } from '../utils/usePersistCode';
 import { Tutorial } from '../Tutorial/Tutorial';
+import { parseRange } from '~/utils/parseRange';
+
+import { StateEffect, StateField } from '@codemirror/state';
+import { Decoration, EditorView } from '@codemirror/view'; // Correct import
+
+const highlightEffect = StateEffect.define<any>();
+const highlightField = StateField.define<any>({
+  create: () => Decoration.none,
+  update: (value, tr) => {
+    value = value.map(tr.changes);
+    tr.effects.forEach((effect) => {
+      if (effect.is(highlightEffect)) value = effect.value;
+    });
+    return tr.docChanged && tr.isUserEvent('input') ? Decoration.none : value;
+  },
+  provide: (f) => EditorView.decorations.from(f),
+});
 
 const classes = {
   'sp-layout': 'editor-layout',
@@ -86,7 +104,7 @@ const SandpackComponents = ({
   showSidebar: boolean;
   tutorialSource?: Record<
     string,
-    Array<Record<string, string | Record<string, string>>>
+    Array<Record<string, string | Record<string, string> | Array<string>>>
   >;
 }) => {
   const [currentTutorialStep, setCurrentTutorialStep] = useState(0);
@@ -99,6 +117,7 @@ const SandpackComponents = ({
   const tutorialStep = tutorialContent?.[currentTutorialStep];
   const tutorialStepDescription = tutorialStep?.description as string;
   const tutorialStepCode = tutorialStep?.code as Record<string, string>;
+  const tutorialStepHighlight = tutorialStep?.highlight as Array<string>;
 
   const [isSidebarVisible, setIsSidebarVisible] = useState(showSidebar);
   const [specs, setSpecs] = useState<Goal[]>();
@@ -138,9 +157,32 @@ const SandpackComponents = ({
   useEffect(() => {
     if (isTutorial) {
       const [fileName, fileContent] = Object.entries(tutorialStepCode)[0];
+      const highlights = tutorialStepHighlight || [];
 
-      sandpack.openFile(fileName);
       sandpack.updateFile(fileName, fileContent);
+      sandpack.openFile(fileName);
+
+      setTimeout(() => {
+        const cm = codemirrorInstance.current?.getCodemirror();
+        if (!cm) return;
+
+        const decorations = [];
+        for (const range of highlights) {
+          const [start, end] = parseRange(range);
+          for (let line = start; line <= end; line++) {
+            const linePos = cm.state.doc.line(line + 1); // 1-based lines
+            decorations.push(
+              Decoration.line({
+                class: 'cm-line-highlight',
+              }).range(linePos.from),
+            );
+          }
+        }
+
+        cm.dispatch({
+          effects: highlightEffect.of(Decoration.set(decorations)),
+        });
+      }, 50); // Small delay for content update
     }
   }, [tutorialStepCode]);
 
@@ -150,6 +192,8 @@ const SandpackComponents = ({
 
   const { resetAllFiles } = usePersistCode(!isTutorial);
 
+  const codemirrorInstance = useRef<CodeEditorRef>(null);
+
   return (
     <SandpackLayout className={isSidebarVisible ? 'with-sidebar' : ''}>
       {/* <SandpackFileExplorer /> */}
@@ -158,6 +202,8 @@ const SandpackComponents = ({
           showInlineErrors
           showLineNumbers
           showTabs
+          ref={codemirrorInstance}
+          extensions={[highlightField]}
         ></SandpackCodeEditor>
         {!isTutorial && (
           <RoundedButton className="code-reset" onClick={resetAllFiles}>

@@ -82,3 +82,18 @@
     grid-area: 1 / 1 / 2 / 2;
   }
 }
+
+.cm-line-highlight {
+  position: relative;
+
+  &::before {
+    content: "+";
+    position: absolute;
+    background-color: #3bff492b;
+    width: calc(100% + var(--sp-space-4) * 2);
+    pointer-events: none;
+    left: calc(var(--sp-space-4) * -1);
+    padding-left: 7px;
+    z-index: -1;
+  }
+}
