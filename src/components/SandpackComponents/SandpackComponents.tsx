@@ -233,11 +233,6 @@ export const SandpackComponents = ({
             </>
           ) : (
             <>
-              {isAllSpecsPassed && nextUrl && (
-                <a className="button next-task-button" href={nextUrl}>
-                  Перейти дальше
-                </a>
-              )}
               <div ref={ref}>
                 {!isTutorial ? (
                   <RoundedButton
@@ -249,11 +244,16 @@ export const SandpackComponents = ({
                   </RoundedButton>
                 ) : null}
               </div>
+              {isAllSpecsPassed && nextUrl && (
+                <a className="button next-task-button" href={nextUrl}>
+                  Перейти дальше
+                </a>
+              )}
             </>
           )}
           <RoundedButton
             onClick={() => setIsSidebarVisible((prevState) => !prevState)}
-            className="icon-text-button"
+            className="icon-text-button side-button"
           >
             <ConsoleIcon />
             {isTablet && (

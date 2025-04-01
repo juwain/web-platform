@@ -12,7 +12,7 @@ interface GoalsProps {
 export const Goals: FC<GoalsProps> = ({ specs, highlight }) => {
   return (
     <div className="goals">
-      <h2 className="goals-title">Цели:</h2>
+      <h2 className="goals-title">Задачи:</h2>
       <ul className="goals-list">
         {specs ? (
           specs.map((spec) => (
