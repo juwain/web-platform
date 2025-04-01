@@ -1,3 +1,4 @@
+import Markdown from 'react-markdown';
 import './styles.css';
 
 interface TutorialProps {
@@ -12,7 +13,9 @@ export function Tutorial({ currentStep, content, totalSteps }: TutorialProps) {
       <h2 className="tutorial-title">
         Шаг {currentStep + 1} {totalSteps && `из ${totalSteps}`}
       </h2>
-      <p className="tutorial-text">{content}</p>
+      <div className="tutorial-text">
+        <Markdown>{content}</Markdown>
+      </div>
     </div>
   );
 }
