@@ -27,6 +27,7 @@ import { parseRange } from '~/utils/parseRange';
 
 import { StateEffect, StateField } from '@codemirror/state';
 import { Decoration, EditorView } from '@codemirror/view'; // Correct import
+import type { Range } from '@codemirror/state';
 
 const highlightEffect = StateEffect.define<any>();
 const highlightField = StateField.define<any>({
@@ -102,6 +103,15 @@ export const SandpackComponents = ({
 
   useEffect(() => {
     if (isTutorial) {
+      const [fileName, fileContent] = Object.entries(tutorialStepCode)[0];
+
+      sandpack.updateFile(fileName, fileContent);
+      sandpack.openFile(fileName);
+    }
+  }, [tutorialStepCode]);
+
+  useEffect(() => {
+    if (isTutorial) {
       const highlights = tutorialStepHighlight || [];
 
       setTimeout(() => {
@@ -109,7 +119,7 @@ export const SandpackComponents = ({
         if (!cm) return;
 
         let firstHighlight: number | null = null;
-        const decorations: any = [];
+        const decorations: Range<Decoration>[] = [];
 
         highlights.forEach((range) => {
           const [start, end] = parseRange(range);
@@ -152,15 +162,6 @@ export const SandpackComponents = ({
 
         cm.dispatch({ effects });
       }, 50);
-    }
-  }, [tutorialStepCode]);
-
-  useEffect(() => {
-    if (isTutorial) {
-      const [fileName, fileContent] = Object.entries(tutorialStepCode)[0];
-
-      sandpack.updateFile(fileName, fileContent);
-      sandpack.openFile(fileName);
     }
   }, [tutorialStepCode]);
 
