@@ -65,6 +65,7 @@ export const SandpackComponents = ({
   const tutorialStepDescription = tutorialStep?.description as string;
   const tutorialStepCode = tutorialStep?.code as Record<string, string>;
   const tutorialStepHighlight = tutorialStep?.highlight as Array<string>;
+  const tutorialStepActiveFile = tutorialStep?.activeFile as string;
 
   const [isSidebarVisible, setIsSidebarVisible] = useState(showSidebar);
   const [specs, setSpecs] = useState<Goal[]>();
@@ -103,10 +104,13 @@ export const SandpackComponents = ({
 
   useEffect(() => {
     if (isTutorial) {
-      const [fileName, fileContent] = Object.entries(tutorialStepCode)[0];
+      Object.entries(tutorialStepCode).forEach(([fileName, fileContent]) => {
+        sandpack.updateFile(fileName, fileContent);
 
-      sandpack.updateFile(fileName, fileContent);
-      sandpack.openFile(fileName);
+        if (fileName === tutorialStepActiveFile) {
+          sandpack.openFile(fileName);
+        }
+      });
     }
   }, [tutorialStepCode]);
 
