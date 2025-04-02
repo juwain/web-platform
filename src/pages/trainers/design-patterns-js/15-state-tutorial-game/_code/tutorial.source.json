@@ -6,7 +6,7 @@
         "/guessMachine.js": ""
       },
       "activeFile": "/App.js",
-      "description": "Начинаем с создания файла App.js. Здесь мы создаём минимальный React-компонент, который отображает контейнер с заголовком. Это позволит убедиться, что приложение загружается правильно."
+      "description": "Начинаем с создания файла `App.js`. Здесь создаём минимальный React-компонент, который включает текстовый блок с заголовком."
     },
     {
       "code": {
@@ -14,7 +14,8 @@
         "/App.js": "import React from 'react';\nimport './style.css';\n\nexport default function App() {\n  return (\n    <div className=\"container\">\n      <h1>Игра «Угадай число от 1 до 10»</h1>\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "Переходим к файлу guessMachine.js. Создаём простую state machine с помощью функции createMachine из xstate. Пока машина имеет лишь одно состояние idle. State machine – это способ формального описания всех возможных состояний вашего приложения и переходов между ними."
+      "description": "Переходим к файлу `guessMachine.js` – конечному автомату игры. Создаём простой автомат с помощью функции `createMachine` из `xState`. Пока машина имеет лишь одно состояние `idle`, оно же указано как изначальное (в поле `initial`). В поле `states` будут перечислены все состояния системы, пока там только пустая заготовка состояния `idle`.",
+      "highlight": ["5", "7-9"]
     },
     {
       "code": {
@@ -22,7 +23,7 @@
         "/guessMachine.js": "import { createMachine } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n\n  states: {\n    idle: {},\n  },\n});\n\nexport { guessMachine };\n"
       },
       "activeFile": "/App.js",
-      "description": "Возвращаемся в App.js и импортируем хук useMachine вместе с созданной машиной. В этом шаге добавляем отображение кнопки «Начать игру» в состоянии idle. Хотя обработчик ещё не подключён, вы уже видите, как state machine влияет на отображение.",
+      "description": "Возвращаемся в `App.js`, и в хук `useMachine` передаём импортированную `guessMachine`. Хук возвращает объект `state` с состоянием автомата. Чтобы проверить текущее состояние, используется функция `state.matches('idle')`. В случае соответствия состоянию `idle` показываем текстовую заглушку и добавляем отображение кнопки «Начать игру».",
       "highlight": ["2-3", "7", "11", "14", "16"]
     },
     {
@@ -31,7 +32,7 @@
         "/App.js": "import React from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state] = useMachine(guessMachine);\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button>Начать игру</button>\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "Редактируем guessMachine.js. Добавляем в состояние idle обработчик события START, который переводит машину в новое состояние playing. Также добавляем пустое состояние playing, чтобы иметь задел для дальнейшей логики. Теперь наша машина способна реагировать на начало игры.",
+      "description": "В `guessMachine.js` добавляем в состояние `idle` обработчик события `START`, которое переводит машину в новое состояние `playing`(пока оно пустое). Теперь автомат способен реагировать на начало игры.",
       "highlight": ["8-13"]
     },
     {
@@ -40,7 +41,7 @@
         "/guessMachine.js": "import { createMachine } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n\n  states: {\n    idle: {\n      on: {\n        START: 'playing',\n      },\n    },\n    playing: {},\n  },\n});\n\nexport { guessMachine };\n"
       },
       "activeFile": "/App.js",
-      "description": "В App.js добавляем функцию handleStart, которая отправляет событие START при клике на кнопку. Это позволяет перевести машину из состояния idle в состояние playing и запустить игру.",
+      "description": "В `App.js` добавляем функцию `handleStart`, которая отправляет событие `START` в автомат при клике на кнопку «Начать игру». Отправка события производится специальной фукнцией `send`, которую также возвращает хук `useMachine` вторым параметром. В функцию `send` передаётся тип события, которое нужно вызвать `type: 'START'`. Событие переводит автомат из состояния `idle` в состояние `playing` и запускает игру. Отображения состояния самой игры пока нет, поэтому при нажатии на кнопку просто перестаёт показываться состояние `idle`.",
       "highlight": ["7", "9", "16"]
     },
 
@@ -50,7 +51,7 @@
         "/guessMachine.js": "import { createMachine } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n\n  states: {\n    idle: {\n      on: {\n        START: 'playing',\n      },\n    },\n    playing: {},\n  },\n});\n\nexport { guessMachine };\n"
       },
       "activeFile": "/App.js",
-      "description": "Расширяем App.js, чтобы при переходе в состояние playing выводилось сообщение «Игра запущена». Теперь, запустив игру, вы увидите мгновенную реакцию интерфейса – визуальное подтверждение смены состояния state machine.",
+      "description": "Теперь добавим обработку состояния `playing`, чтобы в нём при нажатии на кнопку «Начать игру» выводилось сообщение «Игра запущена».",
       "highlight": ["19"]
     },
     {
@@ -59,7 +60,7 @@
         "/guessMachine.js": "import { createMachine } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n\n  states: {\n    idle: {\n      on: {\n        START: 'playing',\n      },\n    },\n    playing: {},\n  },\n});\n\nexport { guessMachine };\n"
       },
       "activeFile": "/App.js",
-      "description": "Чтобы пользователю можно было вводить число, добавляем локальное состояние input в App.js. Теперь в состоянии playing появляется поле ввода и кнопка, хотя кнопка пока не отправляет событие проверки.",
+      "description": "Чтобы у пользователя была возможность вводить числа, добавляем в `App.js` локальное состояние компонента `input`, а также обработчик ввода `handleInput` в текстовое поле . Теперь в состоянии `playing` появляется поле ввода и кнопка, которая пока ничего не делает.",
       "highlight": ["1", "8", "12-14", "27-35"]
     },
     {
@@ -68,7 +69,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Игра запущена</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button>Проверить</button>\n          </div>\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "В guessMachine.js добавляем в состояние playing заглушку для события GUESS. На данном этапе мы просто резервируем место для логики проверки числа, что демонстрирует, как machine может обрабатывать разные события.",
+      "description": "В `guessMachine.js` добавляем в состояние `playing` заглушку для события `GUESS`.",
       "highlight": ["14-16"]
     },
     {
@@ -77,7 +78,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Игра запущена</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button>Проверить</button>\n          </div>\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "Расширяем state machine, добавляя в контекст поле message, которое будет использоваться для вывода подсказок и уведомлений игроку. Теперь, при срабатывании события GUESS, машина может обновлять сообщение в своём состоянии.",
+      "description": "Расширяем внутреннее состояние автомата, добавляя в специальное поле `context` поле `message`, которое будет использоваться для вывода подсказок и уведомлений игроку. Теперь, при срабатывании события `GUESS`, автомат меняет поле `message` в своём состоянии и добавляет в него полученное извне пользовательское введённое число. Менять внутренее состояние автомата в xState можно в поле `actions` через специальную функцию `assign`, в которой указывается изменяемое поле и функция-обработчик, возвращающая новое значение. В обработчике параметром идёт объект события, в которое можно извне пробросить нужную информацию. В нашем случае ожидаем число, введённое пользователем, в поле `guess` события.",
       "highlight": ["1", "6-8", "18-20"]
     },
     {
@@ -86,7 +87,7 @@
         "/guessMachine.js": "import { createMachine, assign } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n  context: {\n    message: '', // сообщение пользователю,\n  },\n  states: {\n    idle: {\n      on: {\n        START: 'playing',\n      },\n    },\n    playing: {\n      on: {\n        GUESS: {\n          actions: assign({\n            message: ({ event }) => `Вы ввели: ${event.guess}`,\n          }),\n        },\n      },\n    },\n  },\n});\n\nexport { guessMachine };\n"
       },
       "activeFile": "/App.js",
-      "description": "В App.js создаём функции-обработчики для ввода и проверки: handleInput обновляет локальное состояние, а handleGuess отправляет событие GUESS вместе с введённым числом. Таким образом, интерфейс начинает взаимодействовать с логикой state machine.",
+      "description": "Автомат `guessMachine` теперь готов принимать и обрабатывать событие `GUESS`. Поэтому в `App.js` создаём функцию-обработчик проверки `handleGuess`, которая отправляет событие `GUESS` вместе с введённым числом в поле `guess`. Также добавляем вывод сообщения из `state.context.message`. Таким образом, на этом шаге интерфейс начинает взаимодействовать с логикой автомата и выводить его состояние.",
       "highlight": ["16-19", "39", "41"]
     },
     {
@@ -95,7 +96,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Игра запущена</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "В guessMachine.js временно устанавливаем загаданное число равным 5. Теперь обработчик GUESS может выводить сообщение с введённым числом, что помогает отладить логику и увидеть, как machine использует контекст.",
+      "description": "В автомат добавляем поле `number`, которое будет хранить загаданное число. Временно установим его равным `5`.",
       "highlight": ["7"]
     },
     {
@@ -104,7 +105,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Игра запущена</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "Модифицируем обработчик события GUESS так, чтобы он выводил сообщение, показывающее и введённое число, и загаданное число из контекста. Это позволяет наглядно увидеть, какие данные хранятся в state machine.",
+      "description": "Для наглядности изменим в обработчике события `GUESS` задание `message`, чтобы выводилось сообщение, показывающее и введённое число, и загаданное число из контекста.",
       "highlight": ["20-21"]
     },
     {
@@ -113,7 +114,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Игра запущена</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "В guessMachine.js добавляем условие: если введённое число меньше или больше загаданного, выводится подсказка «Слишком мало» или «Слишком много». Теперь машина начинает обрабатывать разные варианты ввода, показывая пользователю, насколько его догадка близка к правильной.",
+      "description": "Теперь в обработчике давайте добавим условие: если введённое число меньше загаданного, то сообщение будет «Слишком мало», иначе – «Слишком много». Это будет подсказывать пользователю, какое число проверить следующим.",
       "highlight": ["21-23"]
     },
     {
@@ -122,7 +123,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Игра запущена</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "Расширяем обработчик GUESS: если введённое число совпадает с загаданным, машина переходит в состояние success и устанавливает сообщение «Угадал!». Это демонстрирует концепцию переходов между состояниями в state machine.",
+      "description": "Теперь нужно обработать случай, когда пользователь угадал загаданное число. Для этого расширяем обработчик `GUESS`: теперь туда передаём массив «действий» и перед уже имеющимся блоком с логикой добавляем ещё один (они будут выполняться в порядке объявления). Внутри для `message` задаётся значение `Угадал!`, но только при соблюдении условия, что пользовательское `event.guess` равно загаданному `context.number`. Проверка условия кладётся в специальное поле `guard`, которое «пропускает» действие при соблюдении условия или наоборот не допускает его выполнения.",
       "highlight": ["18-24", "34"]
     },
     {
@@ -131,7 +132,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Игра запущена</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "В guessMachine.js объявляем новое состояние success с типом final. Это состояние сигнализирует об успешном завершении игры, когда игрок угадывает число.",
+      "description": "Теперь, когда в автомате готова логика для перехода в состояние выигрыша (игрок угадал число), создадим состояние `success`. У нового состояния задан специальный тип `{ type: 'final' }`, что означает, что это состояние системы конечное, то есть из него больше перехода нет. Добавим также переход в это состояние указанием поля `target` в первом блоке с `guard` и `actions`.",
       "highlight": ["23", "38"]
     },
     {
@@ -140,7 +141,7 @@
         "/guessMachine.js": "import { createMachine, assign } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n  context: {\n    number: 5,\n    message: '', // сообщение пользователю,\n  },\n  states: {\n    idle: {\n      on: {\n        START: 'playing',\n      },\n    },\n    playing: {\n      on: {\n        GUESS: [\n          {\n            guard: ({ event, context }) => {\n              return event.guess === context.number;\n            },\n            target: 'success',\n            actions: assign({ message: () => 'Угадал!' }),\n          },\n          {\n            actions: assign({\n              message: ({ event, context }) => {\n                return event.guess < context.number\n                  ? 'Слишком мало'\n                  : 'Слишком много';\n              },\n            }),\n          },\n        ],\n      },\n    },\n    success: { type: 'final' },\n  },\n});\n\nexport { guessMachine };\n"
       },
       "activeFile": "/App.js",
-      "description": "В App.js добавляем отображение для состояния success: при достижении этого состояния выводится сообщение «Поздравляем, правильно!» и показывается загаданное число. Пользователь видит финальный результат игры.",
+      "description": "В `App.js` добавляем отображение для состояния `success`: выводится сообщение «Поздравляем, правильно!» и показывается загаданное число, пользователь видит финальный результат игры.",
       "highlight": ["44-49"]
     },
     {
@@ -149,7 +150,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Игра запущена</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n      {state.matches('success') && (\n        <>\n          <h1>Поздравляем, правильно!</h1>\n          <p>Загаданное число: {state.context.number}</p>\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "Расширяем контекст state machine, добавляя поле attempts, которое изначально равно 3. Это позволит отслеживать, сколько попыток осталось у игрока, и вводить новую логику для контроля ошибок.",
+      "description": "Основная игровая часть уже готова, но нужно добавить ещё логику списания попыток. Для этого добавим в контекст поле `attempts`, изначально равное `3`. Это поле позволит отслеживать, сколько попыток осталось у игрока.",
       "highlight": ["8"]
     },
     {
@@ -158,7 +159,7 @@
         "/guessMachine.js": "import { createMachine, assign } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n  context: {\n    number: 5,\n    attempts: 3, // число попыток\n    message: '', // сообщение пользователю,\n  },\n  states: {\n    idle: {\n      on: {\n        START: 'playing',\n      },\n    },\n    playing: {\n      on: {\n        GUESS: [\n          {\n            guard: ({ event, context }) => {\n              return event.guess === context.number;\n            },\n            target: 'success',\n            actions: assign({ message: () => 'Угадал!' }),\n          },\n          {\n            actions: assign({\n              message: ({ event, context }) => {\n                return event.guess < context.number\n                  ? 'Слишком мало'\n                  : 'Слишком много';\n              },\n            }),\n          },\n        ],\n      },\n    },\n    success: { type: 'final' },\n  },\n});\n\nexport { guessMachine };\n"
       },
       "activeFile": "/App.js",
-      "description": "В App.js выводим на экран количество оставшихся попыток. Это даёт игроку обратную связь о его текущем прогрессе и помогает принимать решения по дальнейшим догадкам.",
+      "description": "В игровом экране выведем количество оставшихся попыток из контекста `state.context.attempts`.",
       "highlight": ["31"]
     },
     {
@@ -167,7 +168,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Осталось попыток: {state.context.attempts}</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n      {state.matches('success') && (\n        <>\n          <h1>Поздравляем, правильно!</h1>\n          <p>Загаданное число: {state.context.number}</p>\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "Модифицируем обработчик GUESS так, чтобы при неверной догадке число оставшихся попыток уменьшалось на 1, а сообщение обновлялось с соответствующей подсказкой. Теперь игра становится динамичнее и отслеживает ошибки игрока.",
+      "description": "В обработчике события `GUESS` добавим логику, чтобы при неверной догадке число оставшихся попыток уменьшалось на `1`. Для этого будем перезадавать поле `attempts` значением на `1` меньше предыдущего.",
       "highlight": ["29-31"]
     },
     {
@@ -176,7 +177,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Осталось попыток: {state.context.attempts}</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n      {state.matches('success') && (\n        <>\n          <h1>Поздравляем, правильно!</h1>\n          <p>Загаданное число: {state.context.number}</p>\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "В guessMachine.js добавляем условный переход: если оставшихся попыток становится меньше или равно 1, машина переходит в состояние failure и выводит сообщение «Попытки закончились!». Это позволяет ограничить число попыток и завершить игру, если игрок не угадал число вовремя.",
+      "description": "Добавим в обработчик ещё один блок действий: если оставшихся попыток меньше `1`, автомат обновляет сообщение на «Попытки закончились!». Условие оформляется в соответствующий `guard`.",
       "highlight": ["27-32"]
     },
     {
@@ -185,7 +186,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Осталось попыток: {state.context.attempts}</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n      {state.matches('success') && (\n        <>\n          <h1>Поздравляем, правильно!</h1>\n          <p>Загаданное число: {state.context.number}</p>\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "В guessMachine.js добавляем условный переход: если оставшихся попыток становится меньше или равно 1, машина переходит в состояние failure и выводит сообщение «Попытки закончились!». Это позволяет ограничить число попыток и завершить игру, если игрок не угадал число вовремя.",
+      "description": "Логика перехода в состояние проигрыша готова (игрок не угадал число с 3 попыток), поэтому добавим состояние `failure`. У состояния `failure` также тип `{ type: 'final' }`, из него никуда больше не перейти. Добавим также переход в это состояние.",
       "highlight": ["31", "50"]
     },
     {
@@ -194,7 +195,7 @@
         "/guessMachine.js": "import { createMachine, assign } from 'xstate';\n\nconst guessMachine = createMachine({\n  id: 'guessGame',\n  initial: 'idle',\n  context: {\n    number: 5,\n    attempts: 3, // число попыток\n    message: '', // сообщение пользователю,\n  },\n  states: {\n    idle: {\n      on: {\n        START: 'playing',\n      },\n    },\n    playing: {\n      on: {\n        GUESS: [\n          {\n            guard: ({ event, context }) => {\n              return event.guess === context.number;\n            },\n            target: 'success',\n            actions: assign({ message: () => 'Угадал!' }),\n          },\n          {\n            guard: ({ context }) => {\n              return context.attempts <= 1;\n            },\n            target: 'failure',\n            actions: assign({ message: () => 'Попытки закончились!' }),\n          },\n          {\n            actions: assign({\n              attempts: ({ context }) => {\n                return context.attempts - 1;\n              },\n              message: ({ event, context }) => {\n                return event.guess < context.number\n                  ? 'Слишком мало'\n                  : 'Слишком много';\n              },\n            }),\n          },\n        ],\n      },\n    },\n    success: { type: 'final' },\n    failure: { type: 'final' },\n  },\n});\n\nexport { guessMachine };\n"
       },
       "activeFile": "/App.js",
-      "description": "Добавляем в App.js отображение состояния failure: если попытки закончились, выводится сообщение об окончании игры, показывается загаданное число и уведомление о том, что больше попыток нет. Это завершает логику игры для неудачного исхода.",
+      "description": "Добавляем в `App.js` отображение состояния `failure`: если попытки закончились, выводится сообщение об окончании игры, показывается загаданное число и уведомление о том, что больше попыток нет.",
       "highlight": ["50-56"]
     },
     {
@@ -203,7 +204,7 @@
         "/App.js": "import React, { useState } from 'react';\nimport { useMachine } from '@xstate/react';\nimport { guessMachine } from './guessMachine';\nimport './style.css';\n\nexport default function App() {\n  const [state, send] = useMachine(guessMachine);\n  const [input, setInput] = useState('');\n\n  const handleStart = () => send({ type: 'START' });\n\n  const handleInput = (event) => {\n    setInput(event.target.value);\n  };\n\n  const handleGuess = () => {\n    send({ type: 'GUESS', guess: Number(input) });\n    setInput('');\n  };\n\n  return (\n    <div className=\"container\">\n      {state.matches('idle') && (\n        <>\n          <h1>Игра «Угадай число от 1 до 10»</h1>\n          <button onClick={handleStart}>Начать игру</button>\n        </>\n      )}\n      {state.matches('playing') && (\n        <>\n          <h1>Осталось попыток: {state.context.attempts}</h1>\n          <div className=\"controls\">\n            <input\n              type=\"number\"\n              value={input}\n              onChange={handleInput}\n              placeholder=\"Введите число\"\n            />\n            <button onClick={handleGuess}>Проверить</button>\n          </div>\n          {state.context.message && <p>{state.context.message}</p>}\n        </>\n      )}\n      {state.matches('success') && (\n        <>\n          <h1>Поздравляем, правильно!</h1>\n          <p>Загаданное число: {state.context.number}</p>\n        </>\n      )}\n      {state.matches('failure') && (\n        <>\n          <h1>Игра окончена!</h1>\n          <p>Загаданное число: {state.context.number}</p>\n          <p>{state.context.message}</p>\n        </>\n      )}\n    </div>\n  );\n}\n"
       },
       "activeFile": "/guessMachine.js",
-      "description": "На финальном шаге обновляем контекст в guessMachine.js: вместо фиксированного числа 5 теперь загаданное число генерируется случайным образом от 1 до 10. Это делает игру более интересной и разнообразной при каждом запуске.",
+      "description": "На финальном шаге обновляем контекст в `guessMachine.js`: изменим фиксированное загаданное число `5` на сгенерированное случайным образом (от `1` до `10`). Игра готова!",
       "highlight": ["7"]
     }
   ]
