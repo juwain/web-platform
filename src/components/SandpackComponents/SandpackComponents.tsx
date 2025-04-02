@@ -159,7 +159,8 @@ export const SandpackComponents = ({
         if (hasVerticalScroll && firstHighlight !== null) {
           effects.push(
             EditorView.scrollIntoView(firstHighlight, {
-              y: 'center',
+              y: 'nearest',
+              yMargin: 100,
             }),
           );
         }
