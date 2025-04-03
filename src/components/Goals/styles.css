@@ -61,3 +61,10 @@
     opacity: 0.5;
   }
 }
+
+@media (max-width: 850px) {
+  .goals {
+    max-height: 200px;
+    overflow: auto;
+  }
+}
