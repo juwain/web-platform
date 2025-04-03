@@ -88,6 +88,11 @@ const iconHeight = `${icon.height}px`;
     padding-right: 30px;
   }
 
+  :global(.theory-content p:has(img)) {
+    max-width: max(350px, 50%);
+    margin-inline: auto;
+  }
+
   @media (prefers-color-scheme: dark) {
     .close-dialog {
       filter: invert(1);

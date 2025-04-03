@@ -1,0 +1,20 @@
+.tutorial {
+  padding: 0.5rem 1rem;
+}
+
+.tutorial-title {
+  margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
+  font-size: inherit;
+}
+
+.tutorial-text p {
+  margin-block: 0;
+}
+
+@media (max-width: 850px) {
+  .tutorial {
+    max-height: 210px;
+    overflow: auto;
+  }
+}

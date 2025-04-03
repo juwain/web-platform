@@ -17,7 +17,7 @@ export default function App() {
         <h1>Title: {data.title}</h1>
         <p>Id: {data.userId}</p>
         <p>UserId: {data.userId}</p>
-        <p>Completed: {data.completed}</p>
+        <p>Completed: {String(data.completed)}</p>
       </div>
     )
   );
