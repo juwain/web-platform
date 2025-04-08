@@ -174,6 +174,36 @@ export const SandpackComponents = ({
     setCurrentTutorialStep((prev) => prev + direction);
   };
 
+  const handleSaveTutorialStep = () => {
+    let step: any = {
+      code: {},
+      activeFile: '',
+      description: '',
+    };
+
+    sandpack.visibleFiles.forEach((file) => {
+      console.log('step.code', step.code);
+
+      step.code[file] = sandpack.files[file].code;
+    });
+
+    step.activeFile = sandpack.activeFile;
+
+    const currentCode = JSON.parse(
+      sandpack.files['/tutorial.source.json'].code,
+    );
+
+    currentCode.content.push(step);
+
+    const code = JSON.stringify(currentCode);
+
+    sandpack.updateFile('/tutorial.source.json', code, false);
+  };
+
+  const handleOpenTutorialSource = () => {
+    sandpack.openFile('/tutorial.source.json');
+  };
+
   const { resetAllFiles } = usePersistCode(!isTutorial);
 
   const codemirrorInstance = useRef<CodeEditorRef>(null);
@@ -189,11 +219,22 @@ export const SandpackComponents = ({
           ref={codemirrorInstance}
           extensions={[highlightField]}
         ></SandpackCodeEditor>
-        {!isTutorial && (
-          <RoundedButton className="code-reset" onClick={resetAllFiles}>
+        {!isTutorial ? (
+          <RoundedButton className="top-bar-controls" onClick={resetAllFiles}>
             <RefreshIcon />
             {isTablet && <span>Сбросить всё</span>}
           </RoundedButton>
+        ) : (
+          import.meta.env.MODE === 'development' && (
+            <div className="top-bar-controls">
+              <RoundedButton onClick={handleSaveTutorialStep}>
+                <span>Сохранить</span>
+              </RoundedButton>
+              <RoundedButton onClick={handleOpenTutorialSource}>
+                <span>Открыть</span>
+              </RoundedButton>
+            </div>
+          )
         )}
       </div>
       {!isTutorial && (
