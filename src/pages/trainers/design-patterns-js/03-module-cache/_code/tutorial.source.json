@@ -1,0 +1,13 @@
+{
+  "content": [
+    {
+      "code": {
+        "/App.js": "export default function App() {\n\n  return (\n    <p>Данные пользователей</p>\n  );\n}\n",
+        "/module.js": "",
+        "/lib.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": ""
+    }
+  ]
+}
