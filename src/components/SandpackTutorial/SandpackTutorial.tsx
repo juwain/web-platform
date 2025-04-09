@@ -9,7 +9,7 @@ import {
   ForwardIcon,
   type CodeEditorRef,
 } from '@codesandbox/sandpack-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useMatchingMediaQueries } from 'use-matching-media-queries';
 import { ServiceBar } from '../ServiceBar/ServiceBar';
 import './styles.css';
@@ -17,7 +17,7 @@ import { Tutorial } from '../Tutorial/Tutorial';
 import { parseRange } from '~/utils/parseRange';
 
 import { StateEffect, StateField } from '@codemirror/state';
-import { Decoration, EditorView } from '@codemirror/view'; // Correct import
+import { Decoration, EditorView } from '@codemirror/view';
 import type { Range } from '@codemirror/state';
 import { SandpackSidebar } from '../SandpackSidebar/SandpackSidebar';
 
@@ -64,7 +64,7 @@ export const SandpackTutorial = ({
 
   const { sandpack } = useSandpack();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     Object.entries(tutorialStepCode).forEach(([fileName, fileContent]) => {
       sandpack.updateFile(fileName, fileContent);
 
@@ -125,7 +125,7 @@ export const SandpackTutorial = ({
       }
 
       cm.dispatch({ effects });
-    }, 50);
+    }, 100);
   }, [tutorialStepCode]);
 
   const handleToggleTutorial = (direction: -1 | 1) => {
@@ -137,11 +137,12 @@ export const SandpackTutorial = ({
       code: {},
       activeFile: '',
       description: '',
+      highlight: [],
     };
 
-    step.code = sandpack.visibleFiles.map((file) => ({
-      [file]: sandpack.files[file].code,
-    }));
+    step.code = Object.fromEntries(
+      sandpack.visibleFiles.map((file) => [file, sandpack.files[file].code]),
+    );
     step.activeFile = sandpack.activeFile;
 
     const currentCode = JSON.parse(
