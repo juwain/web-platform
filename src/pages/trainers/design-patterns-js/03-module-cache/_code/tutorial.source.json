@@ -2,12 +2,102 @@
   "content": [
     {
       "code": {
-        "/App.js": "export default function App() {\n\n  return (\n    <p>Данные пользователей</p>\n  );\n}\n",
+        "/App.js": "export default function App() {\n  return (\n    <p>Данные пользователей:</p>\n  );\n}\n",
         "/module.js": "",
         "/lib.js": ""
       },
       "activeFile": "/App.js",
-      "description": ""
+      "description": "Начинаем с файла `App.js`. Создаём базовый React-компонент, который отображает текстовый блок с заголовком."
+    },
+    {
+      "code": {
+        "/App.js": "const surveyData = {   \n  user1: [1, 2, 3, 4, 5],   \n  user2: [7, 1, 5, 3, 2],   \n  user3: [1, 2, 1, 2, 1],   \n  user4: [2, 2, 3, 2, 3],   \n  user5: [5, 4, 3, 4, 5], \n};\n\nexport default function App() {\n  return (\n    <p>Данные пользователей:</p>\n  );\n}\n",
+        "/module.js": "",
+        "/lib.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем в `App.js` объект `surveyData` с тестовыми данными пользователей. Ключи — это ID пользователей, а значения — массивы с их ответами в опроснике.",
+      "highlight": ["1-7"]
+    },
+    {
+      "code": {
+        "/App.js": "const surveyData = {   \n  user1: [1, 2, 3, 4, 5],   \n  user2: [7, 1, 5, 3, 2],   \n  user3: [1, 2, 1, 2, 1],   \n  user4: [2, 2, 3, 2, 3],   \n  user5: [5, 4, 3, 4, 5], \n};\n\nexport default function App() {\n  return (\n    <>\n      <p>Данные пользователей:</p>\n      <ul>         \n        {Object.entries(surveyData).map(([user, data]) => (           \n          <li key={user}>             \n            {user}: {data.join(', ')}         \n          </li>       \n        ))}      \n      </ul>\n    </>\n  );\n}\n",
+        "/module.js": "",
+        "/lib.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем рендеринг списка данных через `Object.entries()` и `map()`. Теперь интерфейс отображает всех пользователей и их ответы в виде форматированного списка.",
+      "highlight": ["12", "14-21"]
+    },
+    {
+      "code": {
+        "/App.js": "const surveyData = {   \n  user1: [1, 2, 3, 4, 5],   \n  user2: [7, 1, 5, 3, 2],   \n  user3: [1, 2, 1, 2, 1],   \n  user4: [2, 2, 3, 2, 3],   \n  user5: [5, 4, 3, 4, 5], \n};\n\nexport default function App() {\n  return (\n    <>\n      <p>Данные пользователей:</p>\n      <ul>         \n        {Object.entries(surveyData).map(([user, data]) => (           \n          <li key={user}>             \n            {user}: {data.join(', ')}         \n          </li>       \n        ))}      \n      </ul>\n    </>\n  );\n}\n",
+        "/module.js": "",
+        "/lib.js": "function calculateAverage(answers) {   \n  const sum = answers.reduce((acc, val) => acc + val, 0);  \n  return sum / answers.length; \n} \n\nexport { calculateAverage }; "
+      },
+      "activeFile": "/lib.js",
+      "description": "Переходим к файлу `lib.js`. Создаём утилитарную функцию `calculateAverage` для расчёта среднего значения массива чисел. Функция использует метод `reduce()` для суммирования элементов и делит результат на количество элементов.",
+      "highlight": ["1-6"]
+    },
+    {
+      "code": {
+        "/App.js": "const surveyData = {   \n  user1: [1, 2, 3, 4, 5],   \n  user2: [7, 1, 5, 3, 2],   \n  user3: [1, 2, 1, 2, 1],   \n  user4: [2, 2, 3, 2, 3],   \n  user5: [5, 4, 3, 4, 5], \n};\n\nexport default function App() {\n  return (\n    <>\n      <p>Данные пользователей:</p>\n      <ul>         \n        {Object.entries(surveyData).map(([user, data]) => (           \n          <li key={user}>             \n            {user}: {data.join(', ')}         \n          </li>       \n        ))}      \n      </ul>\n    </>\n  );\n}\n",
+        "/module.js": "function processSurveyData(obj) {}\n\nexport { processSurveyData };",
+        "/lib.js": "function calculateAverage(answers) {   \n  const sum = answers.reduce((acc, val) => acc + val, 0);  \n  return sum / answers.length; \n} \n\nexport { calculateAverage }; "
+      },
+      "activeFile": "/module.js",
+      "description": "Создаём файл `module.js` с заготовкой функции `processSurveyData`. Эта функция, которая принимает объект, вычисляет для каждого пользователя средний балл по его ответам и возвращает массив с результатами.",
+      "highlight": ["1-3"]
+    },
+    {
+      "code": {
+        "/App.js": "const surveyData = {   \n  user1: [1, 2, 3, 4, 5],   \n  user2: [7, 1, 5, 3, 2],   \n  user3: [1, 2, 1, 2, 1],   \n  user4: [2, 2, 3, 2, 3],   \n  user5: [5, 4, 3, 4, 5], \n};\n\nexport default function App() {\n  return (\n    <>\n      <p>Данные пользователей:</p>\n      <ul>         \n        {Object.entries(surveyData).map(([user, data]) => (           \n          <li key={user}>             \n            {user}: {data.join(', ')}         \n          </li>       \n        ))}      \n      </ul>\n    </>\n  );\n}\n",
+        "/module.js": "import { calculateAverage } from './lib';\n\nfunction processSurveyData(obj) {\n  // Тяжёлые вычисления: средний балл для каждого пользователя   \n  const result = Object.values(obj).map((value) => calculateAverage(value));\n\n  return result;\n}\n\nexport { processSurveyData };",
+        "/lib.js": "function calculateAverage(answers) {   \n  const sum = answers.reduce((acc, val) => acc + val, 0);  \n  return sum / answers.length; \n} \n\nexport { calculateAverage }; "
+      },
+      "activeFile": "/module.js",
+      "description": "Реализуем основную логику в `processSurveyData`: импортируем `calculateAverage` и используем её для преобразования данных. Функция теперь возвращает массив средних значений для каждого пользователя.",
+      "highlight": ["1", "4-7"]
+    },
+    {
+      "code": {
+        "/App.js": "import { processSurveyData } from './module';\n\nconst surveyData = {   \n  user1: [1, 2, 3, 4, 5],   \n  user2: [7, 1, 5, 3, 2],   \n  user3: [1, 2, 1, 2, 1],   \n  user4: [2, 2, 3, 2, 3],   \n  user5: [5, 4, 3, 4, 5], \n};\n\nexport default function App() {\n  const result = processSurveyData(surveyData);\n  \n  return (\n    <>\n      <p>Данные пользователей:</p>\n      <ul>         \n        {Object.entries(surveyData).map(([user, data]) => (           \n          <li key={user}>             \n            {user}: {data.join(', ')}         \n          </li>       \n        ))}      \n      </ul>\n      <p>Средние результаты пользователей:</p>\n      <p>{result && result.join(', ')}</p>\n    </>\n  );\n}\n",
+        "/module.js": "import { calculateAverage } from './lib';\n\nfunction processSurveyData(obj) {\n  // Тяжёлые вычисления: средний балл для каждого пользователя   \n  const result = Object.values(obj).map((value) => calculateAverage(value));\n\n  return result;\n}\n\nexport { processSurveyData };",
+        "/lib.js": "function calculateAverage(answers) {   \n  const sum = answers.reduce((acc, val) => acc + val, 0);  \n  return sum / answers.length; \n} \n\nexport { calculateAverage }; "
+      },
+      "activeFile": "/App.js",
+      "description": "Интегрируем логику обработки данных в компонент: импортируем `processSurveyData` и выводим результаты вычислений со средними значениями ответов под списком пользователей.",
+      "highlight": ["1", "12", "24-25"]
+    },
+    {
+      "code": {
+        "/App.js": "import { processSurveyData } from './module';\n\nconst surveyData = {   \n  user1: [1, 2, 3, 4, 5],   \n  user2: [7, 1, 5, 3, 2],   \n  user3: [1, 2, 1, 2, 1],   \n  user4: [2, 2, 3, 2, 3],   \n  user5: [5, 4, 3, 4, 5], \n};\n\nexport default function App() {\n  const result = processSurveyData(surveyData);\n  \n  return (\n    <>\n      <p>Данные пользователей:</p>\n      <ul>         \n        {Object.entries(surveyData).map(([user, data]) => (           \n          <li key={user}>             \n            {user}: {data.join(', ')}         \n          </li>       \n        ))}      \n      </ul>\n      <p>Средние результаты пользователей:</p>\n      <p>{result && result.join(', ')}</p>\n    </>\n  );\n}\n",
+        "/module.js": "import { calculateAverage } from './lib';\n\nconst cache = new WeakMap();\n\nfunction processSurveyData(obj) {\n  // Тяжёлые вычисления: средний балл для каждого пользователя   \n  const result = Object.values(obj).map((value) => calculateAverage(value));\n\n  return result;\n}\n\nexport { processSurveyData };",
+        "/lib.js": "function calculateAverage(answers) {   \n  const sum = answers.reduce((acc, val) => acc + val, 0);  \n  return sum / answers.length; \n} \n\nexport { calculateAverage }; "
+      },
+      "activeFile": "/module.js",
+      "description": "Чтобы не выполнять повторно вычисления для одного и того же объекта, можно организовать внутри `module.js` кеш, о котором ничего не будет известно снаружи. Тогда при повторном вызове функции `processSurveyData` результат не будет вычисляться заново, а ранее вычисленное значение просто возьмётся из кеша, и функция отработает быстрее. Подходящий инструмент для организации кеша – структура данных `WeakMap`. `WeakMap`, как и обычный `Map`, умеет хранить пары ключ-значение, но ключом в нём может быть только объект.",
+      "highlight": ["3"]
+    },
+    {
+      "code": {
+        "/App.js": "import { processSurveyData } from './module';\n\nconst surveyData = {   \n  user1: [1, 2, 3, 4, 5],   \n  user2: [7, 1, 5, 3, 2],   \n  user3: [1, 2, 1, 2, 1],   \n  user4: [2, 2, 3, 2, 3],   \n  user5: [5, 4, 3, 4, 5], \n};\n\nexport default function App() {\n  const result = processSurveyData(surveyData);\n  \n  return (\n    <>\n      <p>Данные пользователей:</p>\n      <ul>         \n        {Object.entries(surveyData).map(([user, data]) => (           \n          <li key={user}>             \n            {user}: {data.join(', ')}         \n          </li>       \n        ))}      \n      </ul>\n      <p>Средние результаты пользователей:</p>\n      <p>{result && result.join(', ')}</p>\n    </>\n  );\n}\n",
+        "/module.js": "import { calculateAverage } from './lib';\n\nconst cache = new WeakMap();\n\nfunction processSurveyData(obj) {\n  // Тяжёлые вычисления: средний балл для каждого пользователя   \n  const result = Object.values(obj).map((value) => calculateAverage(value));\n\n  // Запись вычисленного значения в кеш\n  cache.set(obj, result);\n  \n  return result;\n}\n\nexport { processSurveyData };",
+        "/lib.js": "function calculateAverage(answers) {   \n  const sum = answers.reduce((acc, val) => acc + val, 0);  \n  return sum / answers.length; \n} \n\nexport { calculateAverage }; "
+      },
+      "activeFile": "/module.js",
+      "description": "После выполнения вычислений внутри `processSurveyData` результат записываем в кеш перед возвращением.",
+      "highlight": ["9-10"]
+    },
+    {
+      "code": {
+        "/App.js": "import { processSurveyData } from './module';\n\nconst surveyData = {   \n  user1: [1, 2, 3, 4, 5],   \n  user2: [7, 1, 5, 3, 2],   \n  user3: [1, 2, 1, 2, 1],   \n  user4: [2, 2, 3, 2, 3],   \n  user5: [5, 4, 3, 4, 5], \n};\n\nexport default function App() {\n  const result = processSurveyData(surveyData);\n  \n  return (\n    <>\n      <p>Данные пользователей:</p>\n      <ul>         \n        {Object.entries(surveyData).map(([user, data]) => (           \n          <li key={user}>             \n            {user}: {data.join(', ')}         \n          </li>       \n        ))}      \n      </ul>\n      <p>Средние результаты пользователей:</p>\n      <p>{result && result.join(', ')}</p>\n    </>\n  );\n}\n",
+        "/module.js": "import { calculateAverage } from './lib';\n\nconst cache = new WeakMap();\n\nfunction processSurveyData(obj) {\n  // Проверка наличия вычисленного значения в кеше перед вычислением\n  if (cache.has(obj)) {\n    return cache.get(obj);\n  }\n  \n  // Тяжёлые вычисления: средний балл для каждого пользователя   \n  const result = Object.values(obj).map((value) => calculateAverage(value));\n\n  // Запись вычисленного значения в кеш\n  cache.set(obj, result);\n  \n  return result;\n}\n\nexport { processSurveyData };",
+        "/lib.js": "function calculateAverage(answers) {   \n  const sum = answers.reduce((acc, val) => acc + val, 0);  \n  return sum / answers.length; \n} \n\nexport { calculateAverage }; "
+      },
+      "activeFile": "/module.js",
+      "description": "Перед вычислением проверяем наличие уже вычисленного значения в кеше, и в случае его наличия, сразу же возвращаем его. Кеш с `WeakMap` готов.",
+      "highlight": ["6-9"]
     }
   ]
 }
