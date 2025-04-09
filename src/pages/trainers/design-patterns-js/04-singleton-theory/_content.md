@@ -20,10 +20,14 @@ let instance;
 
 class Singleton {
   constructor() {
-    // Если инстанса ещё не было создано, «кешируем» его в переменную
-    if (!instance) {
-      instance = this;
+    // Если инстанс уже был создан ранее, возвращаем ссылку на него
+    if (instance) {
+      return instance;
     }
+
+    // «Кешируем» инстанс в переменную
+    instance = this;
+
     return instance;
   }
 }
@@ -50,9 +54,12 @@ let instance;
 
 class Singleton {
   constructor() {
-    if (!instance) {
-      instance = this;
+    if (instance) {
+      return instance;
     }
+
+    instance = this;
+
     return instance;
   }
 

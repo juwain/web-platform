@@ -1,0 +1,102 @@
+{
+  "content": [
+    {
+      "code": {
+        "/App.js": "export default function App() {\n  return <></>;\n}\n",
+        "/apiClient.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Начинаем с файла `App.js`. Создаём базовый React-компонент, который возвращает пустой фрагмент. Это стартовая точка для нашего приложения, где позже будет реализована логика работы с API-клиентом."
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n  \n  return <></>;\n}\n",
+        "/apiClient.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем в компонент App состояние `data` в хуке `useState`. В нём будем хранить данные, полученные от API.",
+      "highlight": ["1", "4"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n  \n  return <></>;\n}\n",
+        "/apiClient.js": "class ApiClient {\n  constructor() {}\n}\n\nconst apiClient = new ApiClient();\n\nexport default apiClient;\n"
+      },
+      "activeFile": "/apiClient.js",
+      "description": "Создаём файл `apiClient.js` с заготовкой класса `ApiClient`. Этот класс служит обёрткой для удобной работы с сетевой библиотекой `axios`.",
+      "highlight": ["1-7"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n  \n  return <></>;\n}\n",
+        "/apiClient.js": "import axios from 'axios';\n\nclass ApiClient {\n  constructor() {\n    this.client = axios.create({\n      baseURL: 'https://jsonplaceholder.typicode.com',\n      timeout: 5000,\n      headers: { 'Content-Type': 'application/json' },\n    });\n  }\n}\n\nconst apiClient = new ApiClient();\n\nexport default apiClient;\n"
+      },
+      "activeFile": "/apiClient.js",
+      "description": "Внутри конструктора класса инициализируем `axios` и инстанс сохраняем в поле класса `this.client`. Настраиваем базовую конфигурацию axios в конструкторе класса `ApiClient`. Задаём параметры: базовый URL, таймаут 5 секунд и стандартный заголовок для запросов JSON.",
+      "highlight": ["1", "5-9"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n  \n  return <></>;\n}\n",
+        "/apiClient.js": "import axios from 'axios';\n\nclass ApiClient {\n  constructor() {\n    this.client = axios.create({\n      baseURL: 'https://jsonplaceholder.typicode.com',\n      timeout: 5000,\n      headers: { 'Content-Type': 'application/json' },\n    });\n  }\n\n  get(endpoint) {\n    return this.client.get(endpoint);\n  }\n}\n\nconst apiClient = new ApiClient();\n\nexport default apiClient;\n"
+      },
+      "activeFile": "/apiClient.js",
+      "description": "Добавляем метод `get` в класс `ApiClient`. Метод внутри себя вызывает метод `.get(endpoint)` из axios, обеспечивая единую точку для выполнения GET-запросов.",
+      "highlight": ["12-14"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState, useEffect } from 'react';\nimport apiClient from './apiClient';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n\n  useEffect(() => {\n    apiClient\n      .get('/todos/1')\n      .then((response) => setData(response.data))\n      .catch((error) => console.error('Ошибка:', error));\n  }, []);\n  \n  return <></>;\n}\n",
+        "/apiClient.js": "import axios from 'axios';\n\nclass ApiClient {\n  constructor() {\n    this.client = axios.create({\n      baseURL: 'https://jsonplaceholder.typicode.com',\n      timeout: 5000,\n      headers: { 'Content-Type': 'application/json' },\n    });\n  }\n\n  get(endpoint) {\n    return this.client.get(endpoint);\n  }\n}\n\nconst apiClient = new ApiClient();\n\nexport default apiClient;\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Интегрируем API-клиент в компонент App: импортируем `apiClient` и используем хук `useEffect` для выполнения запроса при монтировании компонента. Данные сохраняются в состоянии и готовы для последующего отображения.",
+      "highlight": ["1-2", "7-12"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState, useEffect } from 'react';\nimport apiClient from './apiClient';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n\n  useEffect(() => {\n    apiClient\n      .get('/todos/1')\n      .then((response) => setData(response.data))\n      .catch((error) => console.error('Ошибка:', error));\n  }, []);\n  \n  return (\n    data && (\n      <div>\n        <h1>Title: {data.title}</h1>\n        <p>Id: {data.userId}</p>\n        <p>UserId: {data.userId}</p>\n        <p>Completed: {String(data.completed)}</p>\n      </div>\n    )\n  );\n}\n",
+        "/apiClient.js": "import axios from 'axios';\n\nclass ApiClient {\n  constructor() {\n    this.client = axios.create({\n      baseURL: 'https://jsonplaceholder.typicode.com',\n      timeout: 5000,\n      headers: { 'Content-Type': 'application/json' },\n    });\n  }\n\n  get(endpoint) {\n    return this.client.get(endpoint);\n  }\n}\n\nconst apiClient = new ApiClient();\n\nexport default apiClient;\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем отображение полученных данных. Реализуем условный рендеринг: при наличии данных выводим заголовок задачи, данные пользователя и статус выполнения. Интерфейс теперь показывает реальные данные с сервера.",
+      "highlight": ["15-22"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState, useEffect } from 'react';\nimport apiClient from './apiClient';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n\n  useEffect(() => {\n    apiClient\n      .get('/todos/1')\n      .then((response) => setData(response.data))\n      .catch((error) => console.error('Ошибка:', error));\n  }, []);\n  \n  return (\n    data && (\n      <div>\n        <h1>Title: {data.title}</h1>\n        <p>Id: {data.userId}</p>\n        <p>UserId: {data.userId}</p>\n        <p>Completed: {String(data.completed)}</p>\n      </div>\n    )\n  );\n}\n",
+        "/apiClient.js": "import axios from 'axios';\n\nlet instance;\n\nclass ApiClient {\n  constructor() {\n    this.client = axios.create({\n      baseURL: 'https://jsonplaceholder.typicode.com',\n      timeout: 5000,\n      headers: { 'Content-Type': 'application/json' },\n    });\n  }\n\n  get(endpoint) {\n    return this.client.get(endpoint);\n  }\n}\n\nconst apiClient = new ApiClient();\n\nexport default apiClient;\n"
+      },
+      "activeFile": "/apiClient.js",
+      "description": "Добавляем переменную `instance`, в ней будет храниться ссылка на инстанс API-клиента.",
+      "highlight": ["3"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState, useEffect } from 'react';\nimport apiClient from './apiClient';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n\n  useEffect(() => {\n    apiClient\n      .get('/todos/1')\n      .then((response) => setData(response.data))\n      .catch((error) => console.error('Ошибка:', error));\n  }, []);\n  \n  return (\n    data && (\n      <div>\n        <h1>Title: {data.title}</h1>\n        <p>Id: {data.userId}</p>\n        <p>UserId: {data.userId}</p>\n        <p>Completed: {String(data.completed)}</p>\n      </div>\n    )\n  );\n}\n",
+        "/apiClient.js": "import axios from 'axios';\n\nlet instance;\n\nclass ApiClient {\n  constructor() {\n    this.client = axios.create({\n      baseURL: 'https://jsonplaceholder.typicode.com',\n      timeout: 5000,\n      headers: { 'Content-Type': 'application/json' },\n    });\n\n    instance = this;\n\n    return instance;\n  }\n\n  get(endpoint) {\n    return this.client.get(endpoint);\n  }\n}\n\nconst apiClient = new ApiClient();\n\nexport default apiClient;\n"
+      },
+      "activeFile": "/apiClient.js",
+      "description": "Добавляем в конструктор сохранение ссылки на инстанс в переменную `instance` и возвращаем её при создании.",
+      "highlight": ["13", "15"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState, useEffect } from 'react';\nimport apiClient from './apiClient';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n\n  useEffect(() => {\n    apiClient\n      .get('/todos/1')\n      .then((response) => setData(response.data))\n      .catch((error) => console.error('Ошибка:', error));\n  }, []);\n  \n  return (\n    data && (\n      <div>\n        <h1>Title: {data.title}</h1>\n        <p>Id: {data.userId}</p>\n        <p>UserId: {data.userId}</p>\n        <p>Completed: {String(data.completed)}</p>\n      </div>\n    )\n  );\n}\n",
+        "/apiClient.js": "import axios from 'axios';\n\nlet instance;\n\nclass ApiClient {\n  constructor() {\n    if (instance) {\n      return instance;\n    }\n    \n    this.client = axios.create({\n      baseURL: 'https://jsonplaceholder.typicode.com',\n      timeout: 5000,\n      headers: { 'Content-Type': 'application/json' },\n    });\n\n    instance = this;\n\n    return instance;\n  }\n\n  get(endpoint) {\n    return this.client.get(endpoint);\n  }\n}\n\nconst apiClient = new ApiClient();\n\nexport default apiClient;\n"
+      },
+      "activeFile": "/apiClient.js",
+      "description": "Завершаем реализацию Синглтона: добавляем проверку существования экземпляра в конструкторе. Теперь при повторных вызовах конструктора будет возвращаться существующий экземпляр, предотвращая повторную инициализацию.",
+      "highlight": ["7-9"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState, useEffect } from 'react';\nimport apiClient from './apiClient';\n\nexport default function App() {\n  const [data, setData] = useState(null);\n\n  useEffect(() => {\n    apiClient\n      .get('/todos/1')\n      .then((response) => setData(response.data))\n      .catch((error) => console.error('Ошибка:', error));\n  }, []);\n  \n  return (\n    data && (\n      <div>\n        <h1>Title: {data.title}</h1>\n        <p>Id: {data.userId}</p>\n        <p>UserId: {data.userId}</p>\n        <p>Completed: {String(data.completed)}</p>\n      </div>\n    )\n  );\n}\n",
+        "/apiClient.js": "import axios from 'axios';\n\nlet instance;\n\nclass ApiClient {\n  constructor() {\n    if (instance) {\n      return instance;\n    }\n    \n    this.client = axios.create({\n      baseURL: 'https://jsonplaceholder.typicode.com',\n      timeout: 5000,\n      headers: { 'Content-Type': 'application/json' },\n    });\n\n    instance = this;\n\n    return instance;\n  }\n\n  get(endpoint) {\n    return this.client.get(endpoint);\n  }\n}\n\nconst apiClient = Object.freeze(new ApiClient());\n\nexport default apiClient;\n"
+      },
+      "activeFile": "/apiClient.js",
+      "description": "Финализируем реализацию API-клиента: замораживаем экземпляр с помощью `Object.freeze()`. Это защищает объект от случайных изменений его свойств и методов. Одиночный API-клиент готов!",
+      "highlight": ["27"]
+    }
+  ]
+}
