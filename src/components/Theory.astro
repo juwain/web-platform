@@ -106,6 +106,12 @@ const iconHeight = `${icon.height}px`;
       width: 100vw;
     }
   }
+
+  @media (prefers-color-scheme: dark) {
+    :global(.theory-content img[src*="svg"]) {
+      filter: invert(1);
+    }
+  }
 </style>
 
 <script>
