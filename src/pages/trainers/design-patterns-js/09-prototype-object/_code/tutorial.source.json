@@ -2,11 +2,93 @@
   "content": [
     {
       "code": {
-        "/App.js": "export default function App() {\n  return <></>;\n}\n",
-        "/apiClient.js": ""
+        "/App.js": "const users = [\n  {\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  },\n  {\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  },\n];\n\nexport default function App() {\n  return <></>;\n}\n",
+        "/user.js": ""
       },
       "activeFile": "/App.js",
-      "description": ""
+      "description": "В файле `App.js` определяем массив тестовых пользователей с данными. Каждый пользователь содержит идентификатор, имя, фамилию, email и роль.",
+      "highlight": ["1-16"]
+    },
+    {
+      "code": {
+        "/App.js": "const users = [\n  {\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  },\n  {\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  },\n];\n\nexport default function App() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.id} {user.firstName} {user.lastName} {user.email}\n        </li>\n      ))}\n    </ul>\n  );\n}\n",
+        "/user.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Реализуем рендеринг списка пользователей. Используем метод `map` для преобразования массива данных в элементы списка `<li>`.",
+      "highlight": ["20-26"]
+    },
+    {
+      "code": {
+        "/App.js": "const users = [\n  {\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  },\n  {\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  },\n];\n\nexport default function App() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.id} {user.firstName} {user.lastName} {user.email}\n        </li>\n      ))}\n    </ul>\n  );\n}\n",
+        "/user.js": "export class User {\n  constructor(data) {\n  }\n}\n"
+      },
+      "activeFile": "/user.js",
+      "description": "Создаём заготовку класса `User` в отдельном файле `user.js`.",
+      "highlight": ["1-4"]
+    },
+    {
+      "code": {
+        "/App.js": "const users = [\n  {\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  },\n  {\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  },\n];\n\nexport default function App() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.id} {user.firstName} {user.lastName} {user.email}\n        </li>\n      ))}\n    </ul>\n  );\n}\n",
+        "/user.js": "export class User {\n  constructor(data) {\n    const { id, firstName, lastName, email, role } = data;\n\n    this.id = id;\n    this.firstName = firstName;\n    this.lastName = lastName;\n    this.email = email;\n    this.role = role;\n  }\n}\n"
+      },
+      "activeFile": "/user.js",
+      "description": "Наполняем конструктор класса `User` логикой. Используем деструктуризацию объекта данных для явного назначения свойств экземпляра.",
+      "highlight": ["3-9"]
+    },
+    {
+      "code": {
+        "/App.js": "import { User } from './user';\n\nconst users = [\n  {\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  },\n  {\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  },\n];\n\nexport default function App() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.id} {user.firstName} {user.lastName} {user.email}\n        </li>\n      ))}\n    </ul>\n  );\n}\n",
+        "/user.js": "export class User {\n  constructor(data) {\n    const { id, firstName, lastName, email, role } = data;\n\n    this.id = id;\n    this.firstName = firstName;\n    this.lastName = lastName;\n    this.email = email;\n    this.role = role;\n  }\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Импортируем класс `User` в `App.js`",
+      "highlight": ["1"]
+    },
+    {
+      "code": {
+        "/App.js": "import { User } from './user';\n\nconst users = [\n  new User({\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  }),\n  new User({\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  }),\n];\n\nexport default function App() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.id} {user.firstName} {user.lastName} {user.email}\n        </li>\n      ))}\n    </ul>\n  );\n}\n",
+        "/user.js": "export class User {\n  constructor(data) {\n    const { id, firstName, lastName, email, role } = data;\n\n    this.id = id;\n    this.firstName = firstName;\n    this.lastName = lastName;\n    this.email = email;\n    this.role = role;\n  }\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Дополняем массив пользовательских данных: вместо простых объектов создаём экземпляры класса `User`.",
+      "highlight": ["4", "10-11", "17"]
+    },
+    {
+      "code": {
+        "/App.js": "import { User } from './user';\n\nconst users = [\n  new User({\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  }),\n  new User({\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  }),\n];\n\nexport default function App() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.id} {user.firstName} {user.lastName} {user.email}\n        </li>\n      ))}\n    </ul>\n  );\n}\n",
+        "/user.js": "export class User {\n  constructor(data) {\n    const { id, firstName, lastName, email, role } = data;\n\n    this.id = id;\n    this.firstName = firstName;\n    this.lastName = lastName;\n    this.email = email;\n    this.role = role;\n  }\n\n  get fullName() {\n    return `${this.firstName} ${this.lastName}`;\n  }\n}\n"
+      },
+      "activeFile": "/user.js",
+      "description": "Расширяем функциональность класса `User` геттером `fullName`. Вычисляемое свойство объединяет имя и фамилию пользователя.",
+      "highlight": ["12-14"]
+    },
+    {
+      "code": {
+        "/App.js": "import { User } from './user';\n\nconst users = [\n  new User({\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  }),\n  new User({\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  }),\n];\n\nexport default function App() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.id} {user.fullName} {user.email}\n        </li>\n      ))}\n    </ul>\n  );\n}\n",
+        "/user.js": "export class User {\n  constructor(data) {\n    const { id, firstName, lastName, email, role } = data;\n\n    this.id = id;\n    this.firstName = firstName;\n    this.lastName = lastName;\n    this.email = email;\n    this.role = role;\n  }\n\n  get fullName() {\n    return `${this.firstName} ${this.lastName}`;\n  }\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Заменяем ручное объединение имени и фамилии на использование геттера `fullName`.",
+      "highlight": ["25"]
+    },
+    {
+      "code": {
+        "/App.js": "import { User } from './user';\n\nconst users = [\n  new User({\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  }),\n  new User({\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  }),\n];\n\nexport default function App() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.id} {user.fullName} {user.email}\n        </li>\n      ))}\n    </ul>\n  );\n}\n",
+        "/user.js": "export class User {\n  constructor(data) {\n    const { id, firstName, lastName, email, role } = data;\n\n    this.id = id;\n    this.firstName = firstName;\n    this.lastName = lastName;\n    this.email = email;\n    this.role = role;\n  }\n\n  get fullName() {\n    return `${this.firstName} ${this.lastName}`;\n  }\n\n  isAdmin() {\n    return this.role === 'admin';\n  }\n}\n"
+      },
+      "activeFile": "/user.js",
+      "description": "Добавляем в класс `User` метод проверки прав администратора `isAdmin()`. Инкапсулируем бизнес-логику определения ролей внутри модели данных, а не в компоненте интерфейса.",
+      "highlight": ["16-18"]
+    },
+    {
+      "code": {
+        "/App.js": "import { User } from './user';\n\nconst users = [\n  new User({\n    id: 1,\n    firstName: 'Иван',\n    lastName: 'Иванов',\n    email: 'ivan.ivanov@mail.ru',\n    role: 'user',\n  }),\n  new User({\n    id: 2,\n    firstName: 'Петр',\n    lastName: 'Петров',\n    email: 'petr.petrov@mail.ru',\n    role: 'admin',\n  }),\n];\n\nexport default function App() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.id} {user.fullName} {user.email} {user.isAdmin() && '⭐️'}\n        </li>\n      ))}\n    </ul>\n  );\n}\n",
+        "/user.js": "export class User {\n  constructor(data) {\n    const { id, firstName, lastName, email, role } = data;\n\n    this.id = id;\n    this.firstName = firstName;\n    this.lastName = lastName;\n    this.email = email;\n    this.role = role;\n  }\n\n  get fullName() {\n    return `${this.firstName} ${this.lastName}`;\n  }\n\n  isAdmin() {\n    return this.role === 'admin';\n  }\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Визуально выделяем администраторов в списке: используем метод `isAdmin` для условного отображения иконки-звёздочки.",
+      "highlight": ["25"]
     }
   ]
 }
