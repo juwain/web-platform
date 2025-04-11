@@ -40,7 +40,7 @@ export { publicProperty, publicMethod };
 // app.js
 
 // Публичные поля импортируются потребителем
-import { publicProperty, publicMethod } from "module.js";
+import { publicProperty, publicMethod } from "./module";
 
 publicMethod(publicProperty);
 // выведет в консоль 'public 123'

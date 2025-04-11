@@ -47,6 +47,8 @@ console.log(formatText("WORLD", "lowercase")); // world
 Как будет выглядеть Стратегия с таким подходом:
 
 ```js
+// textFormatter.js
+
 // Базовый класс стратегии
 class TextFormatStrategy {
   format(text) {
@@ -74,7 +76,7 @@ class CapitalizeStrategy extends TextFormatStrategy {
 }
 
 // Контекст
-class TextFormatter {
+export class TextFormatter {
   constructor(strategy) {
     this.strategy = strategy;
   }
@@ -87,6 +89,12 @@ class TextFormatter {
     return this.strategy.format(text);
   }
 }
+```
+
+```js
+// app.js
+
+import { TextFormatter } from "./textFormatter";
 
 // Использование
 const formatter = new TextFormatter();
@@ -111,6 +119,7 @@ class ReverseStrategy extends TextFormatStrategy {
 }
 
 formatter.setStrategy(new ReverseStrategy());
+
 console.log(formatter.formatText("hello")); // olleh
 ```
 

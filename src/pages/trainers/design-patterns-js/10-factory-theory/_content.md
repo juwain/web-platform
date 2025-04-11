@@ -17,7 +17,8 @@ type: "theory"
 В упрощенном виде фабрика — это одна функция/«суперкласс», который отвечает за всё сразу:
 
 ```js
-class FileProcessor {
+// fileProcessor.js
+export class FileProcessor {
   static processFile(type, content) {
     if (type === "image") {
       // Уникальная логика для изображений
@@ -43,6 +44,11 @@ class FileProcessor {
     }
   }
 }
+```
+
+```js
+// app.js
+import { FileProcessor } from "./fileProcessor";
 
 // Использование
 const imageFile = FileProcessor.processFile("image", "photo.jpg");
@@ -70,6 +76,8 @@ textFile.createTextFile(); // Создание текстового файла�
 При таких условиях стоит выделить каждый «фабричный» тип объекта в отдельный класс/функцию. Как будет выглядеть класс фабрики с таким подходом:
 
 ```js
+// fileFactory.js
+
 // Базовый класс File
 class File {
   constructor(content) {
@@ -101,7 +109,7 @@ class PDFFile extends File {
 }
 
 // Фабрика
-class FileFactory {
+export class FileFactory {
   static processFile(type, content) {
     switch (type) {
       case "image":
@@ -115,6 +123,12 @@ class FileFactory {
     }
   }
 }
+```
+
+```js
+// app.js
+
+import { FileFactory } from "./fileFactory";
 
 // Использование
 const imageFile = FileFactory.processFile("image", "photo.jpg");
