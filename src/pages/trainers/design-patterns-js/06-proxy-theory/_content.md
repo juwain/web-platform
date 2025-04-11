@@ -22,11 +22,14 @@ const target = {
 const handler = {
   get(target, prop) {
     console.log(`Свойство ${prop} считалось`);
+
     return target[prop];
   },
   set(target, prop, value) {
     console.log(`Свойству ${prop} задано значение ${value}`);
+
     target[prop] = value;
+
     return true;
   },
 };

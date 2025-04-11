@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { memoize } from './lib';
 
 // «Медленная» функция вычисления квадрата числа
@@ -14,6 +14,7 @@ export default function App() {
 
   const calculate = () => {
     const result = memoizedSquare(NUMBER);
+
     setResult(result);
   };
 
