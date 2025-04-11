@@ -1,6 +1,9 @@
 ---
 layout: ~/layouts/ContentLayout.astro
 title: "Паттерн Factory (Фабрика), теория"
+category: "Паттерн Factory (Фабрика)"
+shortTitle: "Теория"
+type: "theory"
 ---
 
 Ранее уже разбирались <a href="/trainers/design-patterns-js/04-singleton-theory">паттерн Singleton</a> (создание единственного в своём роде объекта) и <a href="/trainers/design-patterns-js/08-prototype-theory">паттерн Prototype</a> (создание объектов на основе общего шаблона). В обоих этих методах объекты создаются «вручную».
