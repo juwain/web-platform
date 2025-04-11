@@ -1,0 +1,12 @@
+{
+  "content": [
+    {
+      "code": {
+        "/App.js": "export default function App() {\n  return <></>;\n}\n",
+        "/apiClient.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": ""
+    }
+  ]
+}
