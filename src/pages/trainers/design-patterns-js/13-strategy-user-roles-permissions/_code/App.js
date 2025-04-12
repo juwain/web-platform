@@ -1,36 +1,39 @@
-import { useState } from 'react';
-import { Article } from './Article';
+import { permissionStrategies } from './permissionStrategies';
 import './style.css';
 
-// Демонстрационные данные
-const demoArticle = {
+const article = {
   id: 1,
   ownerId: 100,
   title: 'Название статьи',
+  text: 'Текст статьи',
 };
 
-const demoUser = {
+const currentUser = {
   id: 100,
   name: 'Иван Иванов',
+  role: 'admin',
 };
 
 export default function App() {
-  const [role, setRole] = useState('user');
+  const permissions = permissionStrategies[currentUser.role];
+
+  const canEdit = permissions.canEdit(article.ownerId, currentUser.id);
+  const canDelete = permissions.canDelete();
 
   return (
-    <>
-      <h1>Управление правами доступа</h1>
+    <article>
+      <h2>{article.title}</h2>
+      <p>{article.text}</p>
 
-      <div className="controls">
-        <label>Выберите роль: </label>
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="admin">Администратор</option>
-          <option value="user">Пользователь</option>
-          <option value="guest">Гость</option>
-        </select>
+      <div className="actions">
+        <button disabled={!canEdit} type="button">
+          Редактировать
+        </button>
+
+        <button disabled={!canDelete} type="button">
+          Удалить
+        </button>
       </div>
-
-      <Article role={role} article={demoArticle} currentUser={demoUser} />
-    </>
+    </article>
   );
 }
