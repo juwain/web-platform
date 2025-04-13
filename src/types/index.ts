@@ -61,11 +61,6 @@ export type TestError = Error & {
   }>;
 };
 
-export interface Goal {
-  name: string;
-  status: string;
-}
-
 export type Spec = {
   error?: TestError;
 } & Describe;

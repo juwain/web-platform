@@ -12,8 +12,8 @@ import {
 import { useEffect, useRef, useState } from 'react';
 import { useMatchingMediaQueries } from 'use-matching-media-queries';
 import { ServiceBar } from '../ServiceBar/ServiceBar';
-import { mapGoalsFromSpecs } from '../../utils/mapGoalsFromSpecs';
-import type { Goal, Spec } from '../../types';
+import { mapGoalsFromTestResult } from '../../utils/mapGoalsFromTestResult';
+import type { Spec, Test } from '../../types';
 
 import { Goals } from '../Goals/Goals';
 import { usePersistCode } from '../utils/usePersistCode';
@@ -27,7 +27,7 @@ export const SandpackTask = ({
   showSidebar: boolean;
 }) => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(showSidebar);
-  const [specs, setSpecs] = useState<Goal[]>();
+  const [specs, setSpecs] = useState<Partial<Test>[]>();
   const [needHighlight, setNeedHighlight] = useState(false);
 
   const isAllSpecsPassed = specs?.every((spec) => spec.status === 'pass');
@@ -37,7 +37,7 @@ export const SandpackTask = ({
   const { dispatch } = useSandpack();
 
   const handleComplete = (result: Record<string, Spec>) => {
-    const specs = mapGoalsFromSpecs(result);
+    const specs = mapGoalsFromTestResult(result);
 
     if (specs?.length !== 0) {
       queueMicrotask(() => setSpecs(specs));

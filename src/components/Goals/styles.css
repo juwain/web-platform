@@ -1,5 +1,8 @@
 .goals {
   padding: 0.5rem 2rem;
+
+  --fail-color: #c80000;
+  --pass-color: #2ecc40;
 }
 
 .goals-title {
@@ -26,15 +29,55 @@
 }
 
 .goals-list li.pass {
-  color: #2ecc40;
+  color: var(--pass-color);
 }
 
 .goals-list li.fail {
-  color: #c80000;
+  color: var(--fail-color);
 }
 
-.goals-list li.completed::before {
+.goals-list li.pass::before {
   content: "☑";
+}
+
+.goals-list li p {
+  margin: 0;
+}
+
+.goals-info-button {
+  font-size: 1rem;
+  width: var(--sp-space-6);
+  justify-content: center;
+  height: var(--sp-space-6) !important;
+  position: absolute;
+  left: -28px;
+}
+
+.tooltip {
+  position: absolute;
+  width: fit-content;
+  background-color: var(--fail-color);
+  color: #fff;
+  padding: 5px 10px;
+  max-width: 100%;
+  bottom: 32px;
+  left: 0px;
+  z-index: 1;
+  white-space: pre-wrap;
+}
+
+.tooltip::before {
+  content: "";
+  border: 7px solid var(--fail-color);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  width: 10px;
+  display: block;
+  height: 10px;
+  position: absolute;
+  bottom: -14px;
+  left: 11px;
 }
 
 .loader {
@@ -66,5 +109,11 @@
   .goals {
     max-height: 200px;
     overflow: auto;
+  }
+
+  .goals-info-button {
+    width: var(--sp-space-5);
+    height: var(--sp-space-5) !important;
+    left: -25px;
   }
 }
