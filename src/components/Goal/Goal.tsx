@@ -2,6 +2,7 @@ import type { Test } from '~/types';
 import { RoundedButton } from '@codesandbox/sandpack-react';
 import { useEffect, useRef, useState } from 'react';
 import Markdown from 'react-markdown';
+import { createPortal } from 'react-dom';
 
 interface GoalProps {
   specs?: Partial<Test>[];
@@ -11,18 +12,35 @@ interface GoalProps {
 
 export function Goal({ specs, index, highlight }: GoalProps) {
   const [tooltipShown, setTooltipShown] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState<{
+    top: number;
+    left: number;
+  }>({ top: 0, left: 0 });
 
-  const handleShowTooltip = () => {
-    setTooltipShown((state) => !state);
-  };
+  const containerRef = useRef<HTMLLIElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
   const spec = specs?.[index];
 
-  const ref = useRef<HTMLDivElement>(null);
+  const handleShowTooltip = () => {
+    if (containerRef.current) {
+      const containerRect = containerRef.current.getBoundingClientRect();
+
+      setTooltipPosition({
+        top: containerRect.top + window.scrollY - 5,
+        left: containerRect.left + window.scrollX,
+      });
+    }
+
+    setTooltipShown((prev) => !prev);
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      if (
+        tooltipRef.current &&
+        !tooltipRef.current.contains(event.target as Node)
+      ) {
         setTooltipShown((state) => !state);
       }
     }
@@ -31,17 +49,29 @@ export function Goal({ specs, index, highlight }: GoalProps) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref]);
+  }, [tooltipRef]);
+
+  const renderTooltip = () => {
+    return createPortal(
+      <div
+        className="tooltip"
+        ref={tooltipRef}
+        style={{
+          top: tooltipPosition.top,
+          left: tooltipPosition.left,
+        }}
+      >
+        {spec?.errors?.map(({ message }) => message)}
+      </div>,
+      document.body,
+    );
+  };
 
   return spec ? (
-    <li className={highlight ? spec.status : ''}>
+    <li className={highlight ? spec.status : ''} ref={containerRef}>
       {highlight && spec?.status === 'fail' && (
         <>
-          {tooltipShown && (
-            <div className="tooltip" ref={ref}>
-              {spec.errors?.map(({ message }) => message)}
-            </div>
-          )}
+          {tooltipShown && renderTooltip()}
           <RoundedButton
             className="goals-info-button"
             onClick={handleShowTooltip}

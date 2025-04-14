@@ -18,6 +18,9 @@
     --color-orange: #fe7d33;
     --color-white: #f5f8fa;
     --color-yellow: #ffd493;
+    --color-red: #c80000;
+    --fail-color: var(--color-red);
+    --pass-color: var(--color-green-accent);
 
     /* Typography */
     --step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
@@ -49,13 +52,11 @@
     --gray: 96, 115, 159;
     --gray-light: 229, 233, 240;
     --gray-dark: 34, 41, 57;
-    --gray-gradient: light-dark(
-        rgba(var(--gray-light), 50%),
-        rgba(var(--gray-dark), 50%)
-      ),
+    --gray-gradient:
+      light-dark(rgba(var(--gray-light), 50%), rgba(var(--gray-dark), 50%)),
       light-dark(var(--color-white), rgb(var(--black)));
-    --box-shadow: 0 2px 6px
-        light-dark(rgba(var(--gray), 25%), rgba(var(--gray-dark), 75%)),
+    --box-shadow:
+      0 2px 6px light-dark(rgba(var(--gray), 25%), rgba(var(--gray-dark), 75%)),
       0 8px 24px light-dark(rgba(var(--gray), 33%), rgba(var(--gray-dark), 85%)),
       0 16px 32px
         light-dark(rgba(var(--gray), 33%), rgba(var(--gray-dark), 85%));

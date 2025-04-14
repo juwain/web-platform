@@ -1,8 +1,5 @@
 .goals {
   padding: 0.5rem 2rem;
-
-  --fail-color: #c80000;
-  --pass-color: #2ecc40;
 }
 
 .goals-title {
@@ -60,10 +57,9 @@
   color: #fff;
   padding: 5px 10px;
   max-width: 100%;
-  bottom: 32px;
-  left: 0px;
   z-index: 1;
   white-space: pre-wrap;
+  translate: 0% -100%;
 }
 
 .tooltip::before {
