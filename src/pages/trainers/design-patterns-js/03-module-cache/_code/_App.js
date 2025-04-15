@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { processSurveyData } from './module';
 
 const surveyData = {
@@ -9,7 +10,13 @@ const surveyData = {
 };
 
 export default function App() {
-  const result = processSurveyData(surveyData);
+  const [result, setResult] = useState(null);
+
+  const calculateResult = () => {
+    const result = processSurveyData(surveyData);
+
+    setResult(result);
+  };
 
   return (
     <>
@@ -21,8 +28,13 @@ export default function App() {
           </li>
         ))}
       </ul>
-      <p>Средние результаты пользователей:</p>
-      <p>{result && result.join(', ')}</p>
+      <button onClick={calculateResult}>Рассчитать</button>
+      {result && (
+        <>
+          <p>Средние результаты пользователей:</p>
+          <p>{result.join(', ')}</p>
+        </>
+      )}
     </>
   );
 }

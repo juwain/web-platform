@@ -5,6 +5,8 @@ const cache = new WeakMap();
 function processSurveyData(obj) {
   // Проверка наличия вычисленного значения в кеше перед вычислением
   if (cache.has(obj)) {
+    console.log('Результат взят из кеша');
+
     return cache.get(obj);
   }
 
