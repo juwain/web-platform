@@ -10,7 +10,7 @@ interface GoalsProps {
 export function Goals({ specs, highlight }: GoalsProps) {
   return (
     <div className="goals">
-      <h2 className="goals-title">Задачи:</h2>
+      <h2 className="goals-title">Тесты:</h2>
       <ul className="goals-list">
         {specs ? (
           specs.map((spec, index) => (
