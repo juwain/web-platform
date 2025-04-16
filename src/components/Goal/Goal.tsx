@@ -61,7 +61,9 @@ export function Goal({ specs, index, highlight }: GoalProps) {
           left: tooltipPosition.left,
         }}
       >
-        {spec?.errors?.map(({ message }) => message)}
+        <div className="tooltipContent">
+          <p>{spec?.errors?.map(({ message }) => message)}</p>
+        </div>
       </div>,
       document.body,
     );

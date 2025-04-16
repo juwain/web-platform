@@ -55,12 +55,23 @@
   width: fit-content;
   background-color: var(--fail-color);
   color: #fff;
-  padding: 5px 10px;
+
   max-width: max(250px, 50vw);
   z-index: 1;
-  /* white-space: pre-wrap; */
+  white-space: pre-wrap;
   translate: 0% -100%;
   font-size: 1rem;
+}
+
+.tooltipContent {
+  max-height: 250px;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--fail-color);
+}
+
+.tooltipContent > p {
+  margin: 5px 10px;
 }
 
 .tooltip::before {
