@@ -1,0 +1,130 @@
+{
+  "content": [
+    {
+      "code": {
+        "/App.js": "const square = (n) => n * n;\n\nexport default function App() {\n  return <></>;\n}\n",
+        "/lib.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем в `App.js` функцию `square` для вычисления квадрата числа. Пока функция не используется в интерфейсе.",
+      "highlight": ["1"]
+    },
+    {
+      "code": {
+        "/App.js": "const square = (n) => n * n;\n\nconst NUMBER = 10;\n\nexport default function App() {\n  return <></>;\n}\n",
+        "/lib.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем константу `NUMBER` со значением 10. Это число будет использоваться в качестве базового значения для вычислений.",
+      "highlight": ["3"]
+    },
+    {
+      "code": {
+        "/App.js": "const square = (n) => n * n;\n\nconst NUMBER = 10;\n\nexport default function App() {\n  return (\n    <>\n      <button>Вычислить квадрат {NUMBER}</button>\n    </>\n  );\n}\n",
+        "/lib.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем кнопку, которая будет вычислять значение. Пока кнопка не имеет обработчика клика, но уже показывает текущее значение `NUMBER`.",
+      "highlight": ["8"]
+    },
+    {
+      "code": {
+        "/App.js": "const square = (n) => n * n;\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const calculate = () => {\n    const result = square(NUMBER);\n\n    console.log(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n    </>\n  );\n}\n",
+        "/lib.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Реализуем обработчик `calculate` для кнопки. При клике вызывается функция `square`, результат выводится в консоль.",
+      "highlight": ["6-10", "14"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\n\nconst square = (n) => n * n;\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = square(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n    </>\n  );\n}\n",
+        "/lib.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Интегрируем хук состояния `useState` для хранения результата вычислений. Теперь результат сохраняется в состоянии компонента.",
+      "highlight": ["1", "8", "13"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\n\nconst square = (n) => n * n;\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = square(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n\n      {result && (\n        <p>\n          {NUMBER}\n          <sup>2</sup> = {result}\n        </p>\n      )}\n    </>\n  );\n}\n",
+        "/lib.js": ""
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем условный рендеринг результата. При наличии данных выводим результат вычисления в интерфейс.",
+      "highlight": ["20-25"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\n\nconst square = (n) => n * n;\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = square(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n\n      {result && (\n        <p>\n          {NUMBER}\n          <sup>2</sup> = {result}\n        </p>\n      )}\n    </>\n  );\n}\n",
+        "/lib.js": "function memoize(fn) {\n  return new Proxy(fn, {\n    apply: (fn, _, args) => {\n      const result = fn(...args);\n\n      return result;\n    },\n  });\n}\n\nexport { memoize };\n"
+      },
+      "activeFile": "/lib.js",
+      "description": "В файле `lib.js` создаём заготовку функции `memoize`. Используем `Proxy` для перехвата вызовов. Внутри пока что просто вызываем перехваченную функцию и передаём агрументы.",
+      "highlight": ["1-11"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\nimport { memoize } from './lib';\n\nconst square = (n) => n * n;\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = square(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n\n      {result && (\n        <p>\n          {NUMBER}\n          <sup>2</sup> = {result}\n        </p>\n      )}\n    </>\n  );\n}\n",
+        "/lib.js": "function memoize(fn) {\n  return new Proxy(fn, {\n    apply: (fn, _, args) => {\n      const result = fn(...args);\n\n      return result;\n    },\n  });\n}\n\nexport { memoize };\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Импортируем функцию мемоизации в компонент (хотя сама логика кеширования ещё не реализована).",
+      "highlight": ["2"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\nimport { memoize } from './lib';\n\nconst square = (n) => n * n;\n\n// Мемоизированная версия\nconst memoizedSquare = memoize(square);\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = square(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n\n      {result && (\n        <p>\n          {NUMBER}\n          <sup>2</sup> = {result}\n        </p>\n      )}\n    </>\n  );\n}\n",
+        "/lib.js": "function memoize(fn) {\n  return new Proxy(fn, {\n    apply: (fn, _, args) => {\n      const result = fn(...args);\n\n      return result;\n    },\n  });\n}\n\nexport { memoize };\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Создаём мемоизированную версию функции `square`. Пока это просто обёртка над оригинальной функцией без реального кеширования.",
+      "highlight": ["6-7"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\nimport { memoize } from './lib';\n\nconst square = (n) => n * n;\n\n// Мемоизированная версия\nconst memoizedSquare = memoize(square);\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = memoizedSquare(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n\n      {result && (\n        <p>\n          {NUMBER}\n          <sup>2</sup> = {result}\n        </p>\n      )}\n    </>\n  );\n}\n",
+        "/lib.js": "function memoize(fn) {\n  return new Proxy(fn, {\n    apply: (fn, _, args) => {\n      const result = fn(...args);\n\n      return result;\n    },\n  });\n}\n\nexport { memoize };\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Заменяем вызов оригинальной функции на мемоизированную версию. На этом этапе поведение не меняется, но все вызовы теперь проходят через систему мемоизации.",
+      "highlight": ["15"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\nimport { memoize } from './lib';\n\nconst square = (n) => n * n;\n\n// Мемоизированная версия\nconst memoizedSquare = memoize(square);\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = memoizedSquare(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n\n      {result && (\n        <p>\n          {NUMBER}\n          <sup>2</sup> = {result}\n        </p>\n      )}\n    </>\n  );\n}\n",
+        "/lib.js": "function memoize(fn) {\n  const cache = new Map();\n  \n  return new Proxy(fn, {\n    apply: (fn, _, args) => {\n      const result = fn(...args);\n\n      return result;\n    },\n  });\n}\n\nexport { memoize };\n"
+      },
+      "activeFile": "/lib.js",
+      "description": "Добавляем кеш-хранилище в виде `Map`.",
+      "highlight": ["2"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\nimport { memoize } from './lib';\n\nconst square = (n) => n * n;\n\n// Мемоизированная версия\nconst memoizedSquare = memoize(square);\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = memoizedSquare(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n\n      {result && (\n        <p>\n          {NUMBER}\n          <sup>2</sup> = {result}\n        </p>\n      )}\n    </>\n  );\n}\n",
+        "/lib.js": "function memoize(fn) {\n  const cache = new Map();\n  \n  return new Proxy(fn, {\n    apply: (fn, _, args) => {\n      const key = JSON.stringify(args);\n      \n      const result = fn(...args);\n\n      return result;\n    },\n  });\n}\n\nexport { memoize };\n"
+      },
+      "activeFile": "/lib.js",
+      "description": "Добавляем генерацию уникального ключа через сериализацию аргументов. Ключ будет использоваться при дрбавлении вычисленного значения в `cache`.",
+      "highlight": ["6"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\nimport { memoize } from './lib';\n\nconst square = (n) => n * n;\n\n// Мемоизированная версия\nconst memoizedSquare = memoize(square);\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = memoizedSquare(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n\n      {result && (\n        <p>\n          {NUMBER}\n          <sup>2</sup> = {result}\n        </p>\n      )}\n    </>\n  );\n}\n",
+        "/lib.js": "function memoize(fn) {\n  const cache = new Map();\n  \n  return new Proxy(fn, {\n    apply: (fn, _, args) => {\n      const key = JSON.stringify(args);\n      \n      const result = fn(...args);\n\n      // записываем результат в кеш\n      cache.set(key, result);\n      \n      return result;\n    },\n  });\n}\n\nexport { memoize };\n"
+      },
+      "activeFile": "/lib.js",
+      "description": "Сохраняем результат вычислений в кеш по заготовленную ключу `key`.",
+      "highlight": ["10-11"]
+    },
+    {
+      "code": {
+        "/App.js": "import { useState } from 'react';\nimport { memoize } from './lib';\n\nconst square = (n) => n * n;\n\n// Мемоизированная версия\nconst memoizedSquare = memoize(square);\n\nconst NUMBER = 10;\n\nexport default function App() {\n  const [result, setResult] = useState(null);\n  \n  const calculate = () => {\n    const result = memoizedSquare(NUMBER);\n\n    setResult(result);\n  };\n  \n  return (\n    <>\n      <button onClick={calculate}>Вычислить квадрат {NUMBER}</button>\n\n      {result && (\n        <p>\n          {NUMBER}\n          <sup>2</sup> = {result}\n        </p>\n      )}\n    </>\n  );\n}\n",
+        "/lib.js": "function memoize(fn) {\n  const cache = new Map();\n  \n  return new Proxy(fn, {\n    apply: (fn, _, args) => {\n      const key = JSON.stringify(args);\n\n      // если результат есть в кеше, возвращаем его\n      if (cache.has(key)) {\n        console.log(`Результат для ${args} взят из кеша`);\n\n        return cache.get(key);\n      }\n      \n      const result = fn(...args);\n\n      // записываем результат в кеш\n      cache.set(key, result);\n      \n      return result;\n    },\n  });\n}\n\nexport { memoize };\n"
+      },
+      "activeFile": "/lib.js",
+      "description": "Добавляем проверку наличия вычисленного значения в кеше перед вычислениями. При повторных вызовах с одинаковыми аргументами функция возвращает результат из кеша, что повышает производительность. Кеширование функции готово!",
+      "highlight": ["8-13"]
+    }
+  ]
+}

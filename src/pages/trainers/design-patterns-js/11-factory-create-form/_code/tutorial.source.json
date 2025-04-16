@@ -1,0 +1,134 @@
+{
+  "content": [
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return <></>;\n}\n",
+        "/factory.js": "",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "В файле `App.js` определяем конфиг формы: массив объектов с настройками полей. Каждый элемент содержит тип, подпись, имя и дополнительные параметры.",
+      "highlight": ["3-12"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{config.type}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем рендеринг полей из конфига. Используем `map` для прохода по массиву и вывода типа поля.",
+      "highlight": ["15-21"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{config.type}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n};\n\nexport { FormFieldFactory };",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "В файле `factory.js` добавляем заготовку для фабрики полей. Инициализируем объект `FormFieldFactory`, который будет содержать логику генерации элементов формы.",
+      "highlight": ["1-4"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{config.type}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n  }\n};\n\nexport { FormFieldFactory };",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "Добавляем заготовку метода `createField` в фабрику. В нём будет задана логика создания разных типов полей.",
+      "highlight": ["2-3"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{config.type}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n    switch (config.type) {\n      case 'text':\n        return 'input[type=\"text\"]';\n    }\n  },\n};\n\nexport { FormFieldFactory };\n",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "Реализуем обработку ветки текстовых полей в фабрике. Пока что возвращаем строку для теста.",
+      "highlight": ["3-6"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{config.type}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n    switch (config.type) {\n      case 'text':\n        return 'input[type=\"text\"]';\n\n      case 'select':\n        return 'select > option';\n    }\n  },\n};\n\nexport { FormFieldFactory };\n",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "Расширяем фабрику поддержкой полей `select`. Также возвращаем пока что текстовую заглушку.",
+      "highlight": ["7-8"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{config.type}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n    switch (config.type) {\n      case 'text':\n        return 'input[type=\"text\"]';\n\n      case 'select':\n        return 'select > option';\n\n      case 'checkbox':\n        return 'label > input[type=\"checkbox\"] + text';\n    }\n  },\n};\n\nexport { FormFieldFactory };\n",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "Добавляем обработку полей `checkbox` с выводом тестового текста.",
+      "highlight": ["10-11"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{config.type}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n    switch (config.type) {\n      case 'text':\n        return 'input[type=\"text\"]';\n\n      case 'select':\n        return 'select > option';\n\n      case 'checkbox':\n        return 'label > input[type=\"checkbox\"] + text';\n\n      default:\n        return null;\n    }\n  },\n};\n\nexport { FormFieldFactory };\n",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "Добавим обработку случая, когда в конфиге передан неизвестный тип поля. В этом случае возвращаем `null`.",
+      "highlight": ["13-14"]
+    },
+    {
+      "code": {
+        "/App.js": "import { FormFieldFactory } from './factory';\nimport './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{FormFieldFactory.createField(config)}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n    switch (config.type) {\n      case 'text':\n        return 'input[type=\"text\"]';\n\n      case 'select':\n        return 'select > option';\n\n      case 'checkbox':\n        return 'label > input[type=\"checkbox\"] + text';\n\n      default:\n        return null;\n    }\n  },\n};\n\nexport { FormFieldFactory };\n",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Интегрируем фабрику в компонент `App`. Заменяем прямое отображение типа поля на вызов фабричного метода.",
+      "highlight": ["1", "19"]
+    },
+    {
+      "code": {
+        "/App.js": "import { FormFieldFactory } from './factory';\nimport './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{FormFieldFactory.createField(config)}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n    switch (config.type) {\n      case 'text':\n        return (\n          <input\n            type={config.type}\n            placeholder={config.label}\n            name={config.name}\n          />\n        );\n\n      case 'select':\n        return 'select > option';\n\n      case 'checkbox':\n        return 'label > input[type=\"checkbox\"] + text';\n\n      default:\n        return null;\n    }\n  },\n};\n\nexport { FormFieldFactory };\n",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "Возвращаемся в фабрику и дополняем ветку текстовых полей: возвращаем JSX-элемент вместо строки. Подставляем в атрибуты `placeholder` и `name` поля из конфига.",
+      "highlight": ["5-11"]
+    },
+    {
+      "code": {
+        "/App.js": "import { FormFieldFactory } from './factory';\nimport './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{FormFieldFactory.createField(config)}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n    switch (config.type) {\n      case 'text':\n        return (\n          <input\n            type={config.type}\n            placeholder={config.label}\n            name={config.name}\n          />\n        );\n\n      case 'select':\n        return (\n          <>\n            <label htmlFor={config.name}>{config.label} </label>\n            <select name={config.name}></select>\n          </>\n        );\n\n      case 'checkbox':\n        return 'label > input[type=\"checkbox\"] + text';\n\n      default:\n        return null;\n    }\n  },\n};\n\nexport { FormFieldFactory };\n",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "Дополним ветку для обработки типа `select`. Возвращаем выпадающий список и подпись к нему.",
+      "highlight": ["14-19"]
+    },
+    {
+      "code": {
+        "/App.js": "import { FormFieldFactory } from './factory';\nimport './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{FormFieldFactory.createField(config)}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n    switch (config.type) {\n      case 'text':\n        return (\n          <input\n            type={config.type}\n            placeholder={config.label}\n            name={config.name}\n          />\n        );\n\n      case 'select':\n        return (\n          <>\n            <label htmlFor={config.name}>{config.label} </label>\n            <select name={config.name}>\n              {config.options.map((opt) => (\n                <option key={opt} value={opt}>\n                  {opt}\n                </option>\n              ))}\n            </select>\n          </>\n        );\n\n      case 'checkbox':\n        return 'label > input[type=\"checkbox\"] + text';\n\n      default:\n        return null;\n    }\n  },\n};\n\nexport { FormFieldFactory };\n",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "Реализуем полноценный `<select>` с динамическими `<option>`. Используем `map` для преобразования массива опций в DOM-элементы.",
+      "highlight": ["18-22"]
+    },
+    {
+      "code": {
+        "/App.js": "import { FormFieldFactory } from './factory';\nimport './style.css';\n\nconst formConfig = [\n  { type: 'text', label: 'Ваше имя', name: 'name' },\n  {\n    type: 'select',\n    label: 'Страна',\n    name: 'country',\n    options: ['Россия', 'США', 'Германия'],\n  },\n  { type: 'checkbox', label: 'Согласен с условиями', name: 'agree' },\n];\n\nexport default function App() {\n  return (\n    <form>\n      {formConfig.map((config) => (\n        <div key={config.name}>{FormFieldFactory.createField(config)}</div>\n      ))}\n    </form>\n  );\n}\n",
+        "/factory.js": "const FormFieldFactory = {\n  createField(config) {\n    switch (config.type) {\n      case 'text':\n        return (\n          <input\n            type={config.type}\n            placeholder={config.label}\n            name={config.name}\n          />\n        );\n\n      case 'select':\n        return (\n          <>\n            <label htmlFor={config.name}>{config.label} </label>\n            <select name={config.name}>\n              {config.options.map((opt) => (\n                <option key={opt} value={opt}>\n                  {opt}\n                </option>\n              ))}\n            </select>\n          </>\n        );\n\n      case 'checkbox':\n        return (\n          <label>\n            <input type=\"checkbox\" name={config.name} /> {config.label}\n          </label>\n        );\n\n      default:\n        return null;\n    }\n  },\n};\n\nexport { FormFieldFactory };\n",
+        "/style.css": "form div {\n  margin: 0.5em 0;\n}\n"
+      },
+      "activeFile": "/factory.js",
+      "description": "Завершаем реализацию доработкой ветки `checkbox`. Создаём составной элемент с `<label>` и `<input>` и текстом внутри. Фабрика элементов формы готова!",
+      "highlight": ["29-31"]
+    }
+  ]
+}

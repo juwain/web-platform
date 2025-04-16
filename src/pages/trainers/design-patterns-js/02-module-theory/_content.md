@@ -1,6 +1,9 @@
 ---
 layout: ~/layouts/ContentLayout.astro
 title: "Паттерн Module (Модуль), теория"
+shortTitle: "Теория"
+category: "Паттерн Module (Модуль)"
+type: "theory"
 ---
 
 Модульность — ключевой принцип в построении архитектуры приложения, помогающий разделить сущности в коде и разложить их по полочкам.
@@ -37,7 +40,7 @@ export { publicProperty, publicMethod };
 // app.js
 
 // Публичные поля импортируются потребителем
-import { publicProperty, publicMethod } from "module.js";
+import { publicProperty, publicMethod } from "./module";
 
 publicMethod(publicProperty);
 // выведет в консоль 'public 123'

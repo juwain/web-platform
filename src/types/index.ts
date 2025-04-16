@@ -3,10 +3,16 @@ import type { AstroInstance } from "astro";
 export interface PartData {
   url: string;
   title: string;
+  shortTitle: string;
+  category: string;
+  type: string;
 }
 
 export interface Part extends AstroInstance {
   title: string;
+  category: string;
+  shortTitle: string;
+  type: string;
 }
 
 export interface LessonParent extends Part {
@@ -54,11 +60,6 @@ export type TestError = Error & {
     }> | null;
   }>;
 };
-
-export interface Goal {
-  name: string;
-  status: string;
-}
 
 export type Spec = {
   error?: TestError;

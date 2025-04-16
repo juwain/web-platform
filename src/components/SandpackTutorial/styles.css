@@ -11,5 +11,14 @@
     left: calc(var(--sp-space-4) * -1);
     padding-left: 7px;
     z-index: -1;
+    transition: 0.25s;
+    color: currentColor;
+  }
+}
+
+@starting-style {
+  .cm-line-highlight::before {
+    background-color: transparent;
+    color: transparent;
   }
 }

@@ -1,4 +1,5 @@
 ---
+import { groupBy } from "~/utils/groupBy";
 import TrainersLayout from "../layouts/TrainersLayout.astro";
 import type { PartData } from "../types";
 import SiteHeader from "./SiteHeader.astro";
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const { parts, title, description, picture } = Astro.props;
+
+const groupedParts = groupBy(parts, ({ category }) => category);
 ---
 
 <TrainersLayout title={title}>
@@ -22,12 +25,19 @@ const { parts, title, description, picture } = Astro.props;
     </div>
     {description && <p class="contents-description" set:html={description} />}
     <a class="button contents-button" href={parts[0].url}>Начать тренажёр</a>
-    <h2>Содержание:</h2>
-    <ul>
+    <h2 class="sr-only">Содержание:</h2>
+    <ul class="contents-list">
       {
-        parts.map((part) => (
-          <li>
-            <a href={part.url}>{part.title}</a>
+        Object.entries(groupedParts).map(([category, categoryParts]) => (
+          <li class="contents-category">
+            <h3 class="contents-category-title">{category}</h3>
+            <ul class="contents-category-parts">
+              {categoryParts.map(({ url, shortTitle, title, type }) => (
+                <li class:list={["contents-category-part", type]}>
+                  <a href={url}>{shortTitle ?? title}</a>
+                </li>
+              ))}
+            </ul>
           </li>
         ))
       }
@@ -65,5 +75,45 @@ const { parts, title, description, picture } = Astro.props;
 
   .contents-button {
     margin: 1rem auto;
+  }
+
+  .contents-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .contents-category {
+    margin-block: 1.5rem;
+    position: relative;
+    border-left: 3px solid rgba(170, 170, 170, 0.2);
+    margin-left: -13px;
+    padding-left: 10px;
+  }
+
+  .contents-category-title {
+    font-size: var(--main-font-family);
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .contents-category-parts {
+    list-style: none;
+    padding: 0;
+  }
+
+  .contents-category-part::before {
+    vertical-align: middle;
+  }
+
+  .contents-category-part.theory::before {
+    content: "📖";
+  }
+
+  .contents-category-part.tutorial::before {
+    content: "🧭";
+  }
+
+  .contents-category-part.challenge::before {
+    content: "🧠";
   }
 </style>

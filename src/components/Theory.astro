@@ -76,7 +76,7 @@ const iconHeight = `${icon.height}px`;
   }
 
   .theory-content {
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
 
   .theory-close-dialog {
@@ -85,7 +85,13 @@ const iconHeight = `${icon.height}px`;
   }
 
   :global(.theory-content h1) {
+    margin: 0;
     padding-right: 30px;
+    font-size: 1.5em;
+  }
+
+  :global(.theory-content h2) {
+    font-size: 1.2em;
   }
 
   :global(.theory-content p:has(img)) {
@@ -103,6 +109,12 @@ const iconHeight = `${icon.height}px`;
     .dialog-menu[open],
     .dialog-menu[open].dialog-menu--closing {
       width: 100vw;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(.theory-content img[src*="svg"]) {
+      filter: invert(1);
     }
   }
 </style>

@@ -1,4 +1,3 @@
-import { FormFieldFactory } from './factory';
 import './style.css';
 
 const formConfig = [
@@ -13,13 +12,5 @@ const formConfig = [
 ];
 
 export default function App() {
-  return (
-    <form>
-      {formConfig.map((config) => (
-        <div key={config.name}>{FormFieldFactory.createField(config)}</div>
-      ))}
-
-      <button type="submit">Отправить</button>
-    </form>
-  );
+  return <></>;
 }

@@ -1,0 +1,194 @@
+{
+  "content": [
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nexport default function App() {\n  return (\n    <></>\n  );\n}\n",
+        "/permissionStrategies.js": "",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "В файле `App.js` создаём демо-данные статьи с базовыми полями: идентификатор, заголовок и текст.",
+      "highlight": ["3-7"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nexport default function App() {\n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Выводим в интерфейс данные статьи.",
+      "highlight": ["11-14"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nexport default function App() {\n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button type=\"button\">\n          Редактировать\n        </button>\n\n        <button type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем блок действий со статьёй, с кнопками «Редактировать» и «Удалить».",
+      "highlight": ["15-23"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nexport default function App() {\n  const canEdit = true;\n  const canDelete = true;\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button type=\"button\">\n          Редактировать\n        </button>\n\n        <button type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Вводим флаги `canEdit` и `canEdit`. Для теста прописываем временно значения `true`.",
+      "highlight": ["10-11"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nexport default function App() {\n  const canEdit = true;\n  const canDelete = true;\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Связываем флаги доступа с атрибутом `disabled` кнопок. Если флаги в `true`, то кнопки не заблокированы.",
+      "highlight": ["19", "23"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nexport default function App() {\n  const canEdit = false;\n  const canDelete = false;\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Меняем значения флагов на `false` для демонстрации работы.",
+      "highlight": ["10-11"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'admin',\n};\n\nexport default function App() {\n  const canEdit = false;\n  const canDelete = false;\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем демо-объект текущего пользователя с ролью `admin`.",
+      "highlight": ["9-13"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'admin',\n};\n\nexport default function App() {\n  const canEdit = currentUser.role === 'admin';\n  const canDelete = currentUser.role === 'admin';\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Реализуем проверку прав через сравнение роли пользователя. Для `admin` кнопки управления доступны.",
+      "highlight": ["16-17"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'guest',\n};\n\nexport default function App() {\n  const canEdit = currentUser.role === 'admin';\n  const canDelete = currentUser.role === 'admin';\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Тестируем сценарий гостевого доступа. Меняем роль пользователя на `guest`, кнопки блокируются.",
+      "highlight": ["12"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'guest',\n};\n\nexport default function App() {\n  const canEdit = currentUser.role === 'admin';\n  const canDelete = currentUser.role === 'admin';\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/permissionStrategies.js",
+      "description": "Вынесем в отдельный модуль в объект `permissionStrategies` логику проверки прав пользователя.",
+      "highlight": ["1-3"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'guest',\n};\n\nexport default function App() {\n  const canEdit = currentUser.role === 'admin';\n  const canDelete = currentUser.role === 'admin';\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {\n  admin: {\n    canEdit: () => true,\n    canDelete: () => true,\n  },\n};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/permissionStrategies.js",
+      "description": "Определяем стратегию прав для администратора. В поле `admin` создаём методы `canEdit` и `canDelete`, возвращающие `true`.",
+      "highlight": ["2-5"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'guest',\n};\n\nexport default function App() {\n  const canEdit = currentUser.role === 'admin';\n  const canDelete = currentUser.role === 'admin';\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {\n  admin: {\n    canEdit: () => true,\n    canDelete: () => true,\n  },\n  guest: {\n    canEdit: () => false,\n    canDelete: () => false,\n  },\n};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/permissionStrategies.js",
+      "description": "Добавляем стратегию для гостевых пользователей. Полностью ограничиваем доступ возвращающимися значениями `false`.",
+      "highlight": ["6-9"]
+    },
+    {
+      "code": {
+        "/App.js": "import { permissionStrategies } from './permissionStrategies';\nimport './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'guest',\n};\n\nexport default function App() {\n  const canEdit = currentUser.role === 'admin';\n  const canDelete = currentUser.role === 'admin';\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {\n  admin: {\n    canEdit: () => true,\n    canDelete: () => true,\n  },\n  guest: {\n    canEdit: () => false,\n    canDelete: () => false,\n  },\n};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Интегрируем стратегии в основной компонент. Импортируем модуль прав для использования в логике приложения.",
+      "highlight": ["1"]
+    },
+    {
+      "code": {
+        "/App.js": "import { permissionStrategies } from './permissionStrategies';\nimport './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'guest',\n};\n\nexport default function App() {\n  const permissions = permissionStrategies[currentUser.role];\n  \n  const canEdit = permissions.canEdit();\n  const canDelete = permissions.canDelete();\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {\n  admin: {\n    canEdit: () => true,\n    canDelete: () => true,\n  },\n  guest: {\n    canEdit: () => false,\n    canDelete: () => false,\n  },\n};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Изменяем проверку прав через стратегию доступа для текущего пользователя. Динамически определяем доступные действия на основе роли.",
+      "highlight": ["17", "19-20"]
+    },
+    {
+      "code": {
+        "/App.js": "import { permissionStrategies } from './permissionStrategies';\nimport './style.css';\n\nconst article = {\n  id: 1,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'admin',\n};\n\nexport default function App() {\n  const permissions = permissionStrategies[currentUser.role];\n  \n  const canEdit = permissions.canEdit();\n  const canDelete = permissions.canDelete();\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {\n  admin: {\n    canEdit: () => true,\n    canDelete: () => true,\n  },\n  guest: {\n    canEdit: () => false,\n    canDelete: () => false,\n  },\n};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Тестируем работу системы прав. Устанавливаем роль `admin` и проверяем активное состояние обеих кнопок.",
+      "highlight": ["13"]
+    },
+    {
+      "code": {
+        "/App.js": "import { permissionStrategies } from './permissionStrategies';\nimport './style.css';\n\nconst article = {\n  id: 1,\n  ownerId: 100,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'admin',\n};\n\nexport default function App() {\n  const permissions = permissionStrategies[currentUser.role];\n  \n  const canEdit = permissions.canEdit();\n  const canDelete = permissions.canDelete();\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {\n  admin: {\n    canEdit: () => true,\n    canDelete: () => true,\n  },\n  guest: {\n    canEdit: () => false,\n    canDelete: () => false,\n  },\n};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем идентификатор владельца `ownerId` к данным статьи. Для роли `user` будет доступно редактирование только собственной статьи.",
+      "highlight": ["6"]
+    },
+    {
+      "code": {
+        "/App.js": "import { permissionStrategies } from './permissionStrategies';\nimport './style.css';\n\nconst article = {\n  id: 1,\n  ownerId: 100,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'admin',\n};\n\nexport default function App() {\n  const permissions = permissionStrategies[currentUser.role];\n  \n  const canEdit = permissions.canEdit();\n  const canDelete = permissions.canDelete();\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {\n  admin: {\n    canEdit: () => true,\n    canDelete: () => true,\n  },\n  user: {\n    canEdit: (ownerId, currentUserId) => ownerId === currentUserId,\n    canDelete: () => false,\n  },\n  guest: {\n    canEdit: () => false,\n    canDelete: () => false,\n  },\n};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/permissionStrategies.js",
+      "description": "Расширяем стратегии веткой для обычных пользователей `user`. Вводим в методе прав редактирования проверку совпадения id владельца статьи и id текущего пользователя. Права на удаление у пользователей не будет.",
+      "highlight": ["6-9"]
+    },
+    {
+      "code": {
+        "/App.js": "import { permissionStrategies } from './permissionStrategies';\nimport './style.css';\n\nconst article = {\n  id: 1,\n  ownerId: 100,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'admin',\n};\n\nexport default function App() {\n  const permissions = permissionStrategies[currentUser.role];\n  \n  const canEdit = permissions.canEdit(article.ownerId, currentUser.id);\n  const canDelete = permissions.canDelete();\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {\n  admin: {\n    canEdit: () => true,\n    canDelete: () => true,\n  },\n  user: {\n    canEdit: (ownerId, currentUserId) => ownerId === currentUserId,\n    canDelete: () => false,\n  },\n  guest: {\n    canEdit: () => false,\n    canDelete: () => false,\n  },\n};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "В метод `canEdit` пробрасываем данные `ownerId` и `id` для корректной работы метода для роли `user`.",
+      "highlight": ["20"]
+    },
+    {
+      "code": {
+        "/App.js": "import { permissionStrategies } from './permissionStrategies';\nimport './style.css';\n\nconst article = {\n  id: 1,\n  ownerId: 100,\n  title: 'Название статьи',\n  text: 'Текст статьи',\n};\n\nconst currentUser = {\n  id: 100,\n  name: 'Иван Иванов',\n  role: 'user',\n};\n\nexport default function App() {\n  const permissions = permissionStrategies[currentUser.role];\n  \n  const canEdit = permissions.canEdit(article.ownerId, currentUser.id);\n  const canDelete = permissions.canDelete();\n  \n  return (\n    <article>\n      <h2>{article.title}</h2>\n      <p>{article.text}</p>\n\n      <div className=\"actions\">\n        <button disabled={!canEdit} type=\"button\">\n          Редактировать\n        </button>\n\n        <button disabled={!canDelete} type=\"button\">\n          Удалить\n        </button>\n      </div>\n    </article>\n  );\n}\n",
+        "/permissionStrategies.js": "const permissionStrategies = {\n  admin: {\n    canEdit: () => true,\n    canDelete: () => true,\n  },\n  user: {\n    canEdit: (ownerId, currentUserId) => ownerId === currentUserId,\n    canDelete: () => false,\n  },\n  guest: {\n    canEdit: () => false,\n    canDelete: () => false,\n  },\n};\n\nexport { permissionStrategies };\n",
+        "/style.css": ".actions {\n  display: flex;\n  gap: 10px;\n  padding: 20px;\n  border: 1px solid #cccccc;\n}\n\n.controls {\n  display: flex;\n  gap: 10px;\n  margin-bottom: 10px;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Тестируем сценарий для пользователя. Устанавливаем роль `user`, проверяя доступность редактирования и недоступность удаления. Стратегии доступа по ролям пользователей готовы!",
+      "highlight": ["14"]
+    }
+  ]
+}

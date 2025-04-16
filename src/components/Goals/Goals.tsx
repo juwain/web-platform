@@ -1,24 +1,25 @@
-import type { FC } from 'react';
+import type { Test } from '~/types';
 import './styles.css';
+import { Goal } from '../Goal/Goal';
 
 interface GoalsProps {
-  specs?: {
-    name: string;
-    status: string;
-  }[];
+  specs?: Partial<Test>[];
   highlight: boolean;
 }
 
-export const Goals: FC<GoalsProps> = ({ specs, highlight }) => {
+export function Goals({ specs, highlight }: GoalsProps) {
   return (
     <div className="goals">
-      <h2 className="goals-title">Задачи:</h2>
+      <h2 className="goals-title">Тесты:</h2>
       <ul className="goals-list">
         {specs ? (
-          specs.map((spec) => (
-            <li key={spec.name} className={highlight ? spec.status : ''}>
-              {spec.name}
-            </li>
+          specs.map((spec, index) => (
+            <Goal
+              key={spec.name}
+              specs={specs}
+              index={index}
+              highlight={highlight}
+            />
           ))
         ) : (
           <span className="loader"></span>
@@ -26,4 +27,4 @@ export const Goals: FC<GoalsProps> = ({ specs, highlight }) => {
       </ul>
     </div>
   );
-};
+}

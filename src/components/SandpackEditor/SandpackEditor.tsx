@@ -1,7 +1,8 @@
 import { SandpackProvider } from '@codesandbox/sandpack-react';
 import { useMatchingMediaQueries } from 'use-matching-media-queries';
 import type { SandpackEditorProps } from '../Editor.astro';
-import { SandpackComponents } from '../SandpackComponents/SandpackComponents';
+import { SandpackTutorial } from '../SandpackTutorial/SandpackTutorial';
+import { SandpackTask } from '../SandpackTask/SandpackTask';
 import './styles.css';
 
 const classes = {
@@ -47,11 +48,18 @@ export function SandpackEditor({
       }}
       customSetup={customSetup}
     >
-      <SandpackComponents
-        nextUrl={nextUrl}
-        showSidebar={!isMobile && Boolean(showSidebar)}
-        tutorialSource={tutorialSource}
-      />
+      {hasTutorial ? (
+        <SandpackTutorial
+          nextUrl={nextUrl}
+          showSidebar={!isMobile && Boolean(showSidebar)}
+          tutorialSource={tutorialSource}
+        />
+      ) : (
+        <SandpackTask
+          nextUrl={nextUrl}
+          showSidebar={!isMobile && Boolean(showSidebar)}
+        />
+      )}
     </SandpackProvider>
   );
 }

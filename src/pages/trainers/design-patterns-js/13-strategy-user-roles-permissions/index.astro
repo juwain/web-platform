@@ -11,6 +11,9 @@ import { getNextPartUrl } from "~/utils/getNextPartUrl";
 import type { LessonParent } from "~/types";
 
 export const title = content.frontmatter.title;
+export const shortTitle = content.frontmatter.shortTitle;
+export const category = content.frontmatter.category;
+export const type = content.frontmatter.type;
 
 const getFile = async (name: string, ext: string) => {
   return {
@@ -20,9 +23,8 @@ const getFile = async (name: string, ext: string) => {
 
 const fileNames = [
   { name: "App", ext: "js" },
-  { name: "Article", ext: "js" },
   { name: "permissionStrategies", ext: "js" },
-  { name: "pass.test", ext: "js" },
+  { name: "tutorial.source", ext: "json" },
   { name: "style", ext: "css" },
 ];
 

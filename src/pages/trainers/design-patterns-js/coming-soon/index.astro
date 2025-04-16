@@ -3,6 +3,7 @@ import Info from "~/components/Info.astro";
 import type { LessonParent } from "~/types";
 
 export const title = "Тренажёр в разработке";
+export const category = "Финал";
 
 const parent = (await Astro.glob("../index.astro"))[0] as LessonParent;
 ---

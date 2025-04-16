@@ -9,11 +9,11 @@ interface TutorialProps {
 
 export function Tutorial({ currentStep, content, totalSteps }: TutorialProps) {
   return (
-    <div className="tutorial">
-      <h2 className="tutorial-title">
+    <div className="tutorial-content">
+      <h2 className="tutorial-content-title">
         Шаг {currentStep + 1} {totalSteps && `из ${totalSteps}`}
       </h2>
-      <div className="tutorial-text">
+      <div className="tutorial-content-text">
         <Markdown>{content}</Markdown>
       </div>
     </div>

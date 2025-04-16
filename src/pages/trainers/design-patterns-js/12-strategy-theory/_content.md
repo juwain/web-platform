@@ -1,13 +1,16 @@
 ---
 layout: ~/layouts/ContentLayout.astro
 title: "Паттерн Strategy (Стратегия), теория"
+category: "Паттерн Strategy (Стратегия)"
+shortTitle: "Теория"
+type: "theory"
 ---
 
 Паттерн Strategy (Стратегия) похож на <a href="/trainers/design-patterns-js/10-factory-theory">паттерн Factory</a> подходом. В Factory в зависимости от поданного на вход параметра создаётся и возвращается объект определённого типа. А в Strategy — выполняется определённый для каждого типа параметра произвольный набор действий.
 
 ![Схема паттерна Factory](../assets/scheme-strategy-pattern.svg)
 
-В самом простом виде Стратегия реализуется через одну «суперкласс»/функцию, включающую в себя все ветки условий:
+В самом простом виде Стратегия реализуется через один «суперкласс»/функцию, включающую в себя все ветки условий:
 
 ```js
 function formatText(text, formatType) {
@@ -44,6 +47,8 @@ console.log(formatText("WORLD", "lowercase")); // world
 Как будет выглядеть Стратегия с таким подходом:
 
 ```js
+// textFormatter.js
+
 // Базовый класс стратегии
 class TextFormatStrategy {
   format(text) {
@@ -71,7 +76,7 @@ class CapitalizeStrategy extends TextFormatStrategy {
 }
 
 // Контекст
-class TextFormatter {
+export class TextFormatter {
   constructor(strategy) {
     this.strategy = strategy;
   }
@@ -84,6 +89,12 @@ class TextFormatter {
     return this.strategy.format(text);
   }
 }
+```
+
+```js
+// app.js
+
+import { TextFormatter } from "./textFormatter";
 
 // Использование
 const formatter = new TextFormatter();
@@ -108,6 +119,7 @@ class ReverseStrategy extends TextFormatStrategy {
 }
 
 formatter.setStrategy(new ReverseStrategy());
+
 console.log(formatter.formatText("hello")); // olleh
 ```
 

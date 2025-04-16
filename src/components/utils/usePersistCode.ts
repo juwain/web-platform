@@ -2,9 +2,7 @@ import { useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
 import { useEffect, useLayoutEffect } from 'react';
 import { ls } from '~/utils/localStorage';
 
-export const usePersistCode = (needPersist: boolean) => {
-  if (!needPersist) return {};
-
+export const usePersistCode = () => {
   const { code } = useActiveCode();
   const { sandpack } = useSandpack();
 

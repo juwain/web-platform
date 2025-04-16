@@ -1,6 +1,9 @@
 ---
 layout: ~/layouts/ContentLayout.astro
 title: "Паттерн Singleton (Синглтон), теория"
+category: "Паттерн Singleton (Синглтон)"
+shortTitle: "Теория"
+type: "theory"
 ---
 
 Паттерн Singleton классически реализуется в JS с помощью классов. Согласно этому паттерну у класса может быть только один инстанс, то есть объект создаётся только в одном экземпляре. Обычно это реализуется внутри класса так: новый инстанс создаётся только в случае, если ранее ещё ни одного инстанса создано не было. Если же инстанс уже существует, то возвращается ссылка на него.
@@ -20,10 +23,14 @@ let instance;
 
 class Singleton {
   constructor() {
-    // Если инстанса ещё не было создано, «кешируем» его в переменную
-    if (!instance) {
-      instance = this;
+    // Если инстанс уже был создан ранее, возвращаем ссылку на него
+    if (instance) {
+      return instance;
     }
+
+    // «Кешируем» инстанс в переменную
+    instance = this;
+
     return instance;
   }
 }
@@ -50,9 +57,12 @@ let instance;
 
 class Singleton {
   constructor() {
-    if (!instance) {
-      instance = this;
+    if (instance) {
+      return instance;
     }
+
+    instance = this;
+
     return instance;
   }
 

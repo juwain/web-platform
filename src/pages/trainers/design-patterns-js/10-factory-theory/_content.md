@@ -1,6 +1,9 @@
 ---
 layout: ~/layouts/ContentLayout.astro
 title: "Паттерн Factory (Фабрика), теория"
+category: "Паттерн Factory (Фабрика)"
+shortTitle: "Теория"
+type: "theory"
 ---
 
 Ранее уже разбирались <a href="/trainers/design-patterns-js/04-singleton-theory">паттерн Singleton</a> (создание единственного в своём роде объекта) и <a href="/trainers/design-patterns-js/08-prototype-theory">паттерн Prototype</a> (создание объектов на основе общего шаблона). В обоих этих методах объекты создаются «вручную».
@@ -14,7 +17,8 @@ title: "Паттерн Factory (Фабрика), теория"
 В упрощенном виде фабрика — это одна функция/«суперкласс», который отвечает за всё сразу:
 
 ```js
-class FileProcessor {
+// fileProcessor.js
+export class FileProcessor {
   static processFile(type, content) {
     if (type === "image") {
       // Уникальная логика для изображений
@@ -40,6 +44,11 @@ class FileProcessor {
     }
   }
 }
+```
+
+```js
+// app.js
+import { FileProcessor } from "./fileProcessor";
 
 // Использование
 const imageFile = FileProcessor.processFile("image", "photo.jpg");
@@ -67,6 +76,8 @@ textFile.createTextFile(); // Создание текстового файла�
 При таких условиях стоит выделить каждый «фабричный» тип объекта в отдельный класс/функцию. Как будет выглядеть класс фабрики с таким подходом:
 
 ```js
+// fileFactory.js
+
 // Базовый класс File
 class File {
   constructor(content) {
@@ -98,7 +109,7 @@ class PDFFile extends File {
 }
 
 // Фабрика
-class FileFactory {
+export class FileFactory {
   static processFile(type, content) {
     switch (type) {
       case "image":
@@ -112,6 +123,12 @@ class FileFactory {
     }
   }
 }
+```
+
+```js
+// app.js
+
+import { FileFactory } from "./fileFactory";
 
 // Использование
 const imageFile = FileFactory.processFile("image", "photo.jpg");
