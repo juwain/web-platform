@@ -6,13 +6,13 @@ export default function App() {
   const t = translations[language];
 
   return (
-    <>
-      <main className={theme}>
-        <h1>{t.title}</h1>
-
-        <button onClick={toggleTheme}>{t.toggleTheme}</button>
-
-        <div>
+    <main className={theme}>
+      <h1>{t.title}</h1>
+      <div className="controls">
+        <button type="button" onClick={toggleTheme}>
+          {t.toggleTheme}
+        </button>
+        <div className="switch">
           <label htmlFor="language">{t.languageLabel}</label>
           <select
             name="language"
@@ -23,7 +23,7 @@ export default function App() {
             <option value="en">English</option>
           </select>
         </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }

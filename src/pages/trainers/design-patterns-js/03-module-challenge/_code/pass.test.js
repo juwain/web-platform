@@ -4,7 +4,7 @@ import App from './App';
 import { translations } from './translations';
 
 describe('Компонент App', () => {
-  test('Рендерит основные элементы', () => {
+  test('Рендерятся основные элементы: `<h1>`, `<button>`, `<select>` с корректными текстами', () => {
     render(<App />);
 
     expect(screen.getByRole('heading')).toBeInTheDocument();
@@ -12,7 +12,7 @@ describe('Компонент App', () => {
     expect(screen.getByRole('combobox')).toBeInTheDocument();
   });
 
-  test('Начальное состояние темы и языка', () => {
+  test('Начальное состояние темы и языка: у `<main>` класс `light`, язык – русский', () => {
     render(<App />);
 
     // Проверка класса темы
@@ -24,7 +24,7 @@ describe('Компонент App', () => {
     expect(screen.getByText(translations.ru.languageLabel)).toBeInTheDocument();
   });
 
-  test('Переключение темы', async () => {
+  test('По нажатию на кнопку переключается тема со светлой на тёмную и наоборот', async () => {
     render(<App />);
     const button = screen.getByRole('button');
     const container = screen.getByRole('main');
@@ -38,7 +38,7 @@ describe('Компонент App', () => {
     expect(container).toHaveClass('light');
   });
 
-  test('Смена языка', async () => {
+  test('При смене языка в `<select>` переключается язык интерфейса на выбранный', async () => {
     render(<App />);
     const select = screen.getByRole('combobox');
 

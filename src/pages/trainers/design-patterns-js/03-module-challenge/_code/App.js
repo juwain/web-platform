@@ -6,7 +6,7 @@ export default function App() {
     <main className="light">
       <h1>Настройки</h1>
       <div className="controls">
-        <button>Сменить тему</button>
+        <button type="button">Сменить тему</button>
         <div className="switch">
           <label htmlFor="language">Язык</label>
           <select name="language" value="Русский" onChange={(e) => {}}>
