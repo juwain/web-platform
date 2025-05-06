@@ -1,0 +1,34 @@
+---
+import TrainersLayout from "~/layouts/TrainersLayout.astro";
+import * as content from "./_content.md";
+import ContentFooter from "~/components/ContentFooter.astro";
+import Header from "~/components/Header.astro";
+import { getNextPartUrl } from "~/utils/getNextPartUrl";
+import { getBreadcrumbs } from "~/utils/getBreadcrumbs";
+
+import type { LessonParent } from "~/types";
+
+export const title = content.frontmatter.title;
+export const shortTitle = content.frontmatter.shortTitle;
+export const category = content.frontmatter.category;
+export const type = content.frontmatter.type;
+
+const { Content } = content;
+
+const parent = (await Astro.glob("../index.astro"))[0] as LessonParent;
+
+const { lessonParts } = parent;
+
+const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
+
+const breadcrumbs = getBreadcrumbs(
+  { url: parent.url, title: parent.title },
+  title
+);
+---
+
+<TrainersLayout title={title}>
+  <Header mode="content" breadcrumbs={breadcrumbs} />
+  <Content />
+  <ContentFooter nextUrl={nextUrl} />
+</TrainersLayout>

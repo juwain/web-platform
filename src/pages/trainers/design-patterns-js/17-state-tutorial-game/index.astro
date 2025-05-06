@@ -1,0 +1,65 @@
+---
+import TrainersLayout from "~/layouts/TrainersLayout.astro";
+import Editor from "~/components/Editor.astro";
+import Theory from "~/components/Theory.astro";
+import Header from "~/components/Header.astro";
+
+import * as content from "./theory.md";
+import { getBreadcrumbs } from "~/utils/getBreadcrumbs";
+import { getNextPartUrl } from "~/utils/getNextPartUrl";
+
+import type { LessonParent } from "~/types";
+
+export const title = content.frontmatter.title;
+export const shortTitle = content.frontmatter.shortTitle;
+export const category = content.frontmatter.category;
+export const type = content.frontmatter.type;
+
+const getFile = async (name: string, ext: string) => {
+  return {
+    [`${name}.${ext}`]: (await import(`./_code/${name}.${ext}?raw`)).default,
+  };
+};
+
+const fileNames = [
+  { name: "App", ext: "js" },
+  { name: "guessMachine", ext: "js" },
+  { name: "style", ext: "css" },
+  { name: "tutorial.source", ext: "json" },
+];
+
+const files = Object.assign(
+  {},
+  ...(await Promise.all(fileNames.map(({ name, ext }) => getFile(name, ext))))
+);
+
+const parent = (await Astro.glob("../index.astro"))[0] as LessonParent;
+
+const { lessonParts } = parent;
+
+const breadcrumbs = getBreadcrumbs(
+  { url: parent.url, title: parent.title },
+  title
+);
+
+const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
+---
+
+<TrainersLayout title={title} fullScreen>
+  <Header mode="editor" breadcrumbs={breadcrumbs} />
+  <Editor
+    files={files}
+    template="react"
+    nextUrl={nextUrl}
+    options={{
+      showSidebar: true,
+      customSetup: {
+        dependencies: {
+          "@xstate/react": "5.0.3",
+          xstate: "5.19.2",
+        },
+      },
+    }}
+  />
+  <Theory Content={content.Content} title={title} />
+</TrainersLayout>
