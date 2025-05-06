@@ -23,9 +23,10 @@ const getFile = async (name: string, ext: string) => {
 
 const fileNames = [
   { name: "App", ext: "js" },
-  { name: "guessMachine", ext: "js" },
+  { name: "useEvent", ext: "js" },
+  { name: "Notifications", ext: "js" },
   { name: "style", ext: "css" },
-  { name: "tutorial.source", ext: "json" },
+  // { name: "tutorial.source", ext: "json" },
 ];
 
 const files = Object.assign(
@@ -55,8 +56,7 @@ const nextUrl = getNextPartUrl(lessonParts, Astro.url.pathname);
       showSidebar: true,
       customSetup: {
         dependencies: {
-          "@xstate/react": "5.0.3",
-          xstate: "5.19.2",
+          "react-toastify": "11.0.5",
         },
       },
     }}
