@@ -1,0 +1,290 @@
+{
+  "content": [
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Начинаем с файла `App.js`. Создаём базовый компонент с заголовком и двумя кнопками для отображения сообщений.",
+      "highlight": ["5-14"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "const handlers = {};\n\nconst on = (event, callback) => {}",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Переходим к файлу `useEvent.js`. Создаём объект `handlers` для хранения обработчиков событий и заглушку функции `on` для подписки на события.",
+      "highlight": ["1-3"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "const handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Реализуем логику функции `on`: при вызове создаём массив обработчиков для нового типа события (если его не было) и добавляем переданный `callback` в этот массив.",
+      "highlight": ["4-8"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "const handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {}",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Добавляем функцию `emit` для отправки событий. Пока это заглушка, которая будет отвечать за вызов всех обработчиков определённого события.",
+      "highlight": ["11"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "const handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => fn(payload));\n}",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Реализуем логику `emit`: проверяем наличие обработчиков для события и последовательно вызываем их, передавая данные `payload`.",
+      "highlight": ["12-14"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "const handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Добавляем обработку ошибок в колбеках с помощью `try/catch` в `emit`. Ошибки в обработчиках теперь выводятся в консоль, не прерывая работу системы.",
+      "highlight": ["15-19"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "const handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {};",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Создаём заготовку хука `useEvent` для интеграции системы событий с React-компонентами.",
+      "highlight": ["23"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {};",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Импортируем `useEffect` из React для использования в хуке `useEvent`.",
+      "highlight": ["1"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Реализуем логику хука `useEvent`: при монтировании компонента подписываемся на указанное событие через `on`. Механизм отписки пока отсутствует.",
+      "highlight": ["26-28"]
+    },
+    {
+      "code": {
+        "/App.js": "import './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Экспортируем основные методы работы с шиной событий: `on` для подписки, `emit` для отправки и `useEvent` для интеграции в жизненный цикл компонентов React.",
+      "highlight": ["31"]
+    },
+    {
+      "code": {
+        "/App.js": "import { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "В `App.js` импортируем функцию `emit` из нашей системы событий для будущего использования в обработчиках клика по кнопкам.",
+      "highlight": ["1"]
+    },
+    {
+      "code": {
+        "/App.js": "import { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {};\n  \n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем функцию `handleClick` как заготовку для обработки кликов по кнопкам. Она пока не содержит логики отправки событий.",
+      "highlight": ["5"]
+    },
+    {
+      "code": {
+        "/App.js": "import { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button>Показать ошибку</button>\n          <button>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Реализуем логику `handleClick`: при вызове отправляем событие `'notify'` с типом сообщения и текстом. Формируем `payload` с полями `type` и `message`.",
+      "highlight": ["6-9"]
+    },
+    {
+      "code": {
+        "/App.js": "import { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Привязываем кнопки к созданной логике: клик по кнопкам теперь вызывает `handleClick` с соответствующим типом (`'error'` или `'success'`).",
+      "highlight": ["18-19"]
+    },
+    {
+      "code": {
+        "/App.js": "import { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "export const Notifications = () => {\n  return <></>;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/Notifications.js",
+      "description": "Создаём заготовку компонента `Notifications`. Он будет отвечать за отображение всплывающих сообщений.",
+      "highlight": ["1-3"]
+    },
+    {
+      "code": {
+        "/App.js": "import { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    console.log(message, type);\n  });\n  \n  return <></>;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/Notifications.js",
+      "description": "Интегрируем шину событий в `Notifications`: используем хук `useEvent` для подписки на `'notify'` и тестового вывода полученных данных в консоль.",
+      "highlight": ["1", "4-6"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    console.log(message, type);\n  });\n  \n  return <></>;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/App.js",
+      "description": "Добавляем компонент `Notifications` в `App.js`. Теперь система готова к отображению уведомлений. Хотя визуально они ещё не видны, но при нажатии на кнопки данные уже выводятся в консоль.",
+      "highlight": ["1", "15"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { ToastContainer, toast } from 'react-toastify';\nimport { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    console.log(message, type);\n  });\n  \n  return <></>;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/Notifications.js",
+      "description": "Подключаем библиотеку `react-toastify`: импортируем `ToastContainer` для размещения уведомлений и функцию `toast` для их создания.",
+      "highlight": ["1"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { ToastContainer, toast } from 'react-toastify';\nimport { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    console.log(message, type);\n  });\n  \n  return <ToastContainer position=\"bottom-right\" />;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/Notifications.js",
+      "description": "Возвращаем `ToastContainer` из компонента `Notifications`, задавая позицию отображения в правом нижнем углу.",
+      "highlight": ["9"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { ToastContainer, toast } from 'react-toastify';\nimport { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    toast(message, { type });\n  });\n  \n  return <ToastContainer position=\"bottom-right\" />;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/Notifications.js",
+      "description": "Реализуем отображение уведомлений: при получении события `'notify'` вызываем `toast` с переданным сообщением и типом стилизации. Уведомления работают!",
+      "highlight": ["6"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst off = (event, callback) => {}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { ToastContainer, toast } from 'react-toastify';\nimport { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    toast(message, { type });\n  });\n  \n  return <ToastContainer position=\"bottom-right\" />;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Вернёмся к шине событий и добавим логику отписки в функции `off`.",
+      "highlight": ["13"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n}\n\nconst off = (event, callback) => {\n  if (!handlers[event]) return;\n\n  handlers[event] = handlers[event].filter((fn) => fn !== callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { ToastContainer, toast } from 'react-toastify';\nimport { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    toast(message, { type });\n  });\n  \n  return <ToastContainer position=\"bottom-right\" />;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Реализуем логику `off`: фильтруем массив обработчиков, удаляя переданный `callback` из списка подписчиков конкретного события. Сравнение функций происходит по ссылке.",
+      "highlight": ["14-16"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n\n  return () => off(event, callback);\n}\n\nconst off = (event, callback) => {\n  if (!handlers[event]) return;\n\n  handlers[event] = handlers[event].filter((fn) => fn !== callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { ToastContainer, toast } from 'react-toastify';\nimport { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    toast(message, { type });\n  });\n  \n  return <ToastContainer position=\"bottom-right\" />;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Дорабатываем `on`: теперь функция возвращает метод отписки, который автоматически вызывает `off` для переданного `callback`.",
+      "highlight": ["12"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n\n  return () => off(event, callback);\n}\n\nconst off = (event, callback) => {\n  if (!handlers[event]) return;\n\n  handlers[event] = handlers[event].filter((fn) => fn !== callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    const unsubscribe = on(event, callback);\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { ToastContainer, toast } from 'react-toastify';\nimport { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    toast(message, { type });\n  });\n  \n  return <ToastContainer position=\"bottom-right\" />;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Обновляем хук `useEvent`: сохраняем результат вызова `on` (функцию отписки) для последующего возвращения из эффекта.",
+      "highlight": ["35"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n\n  return () => off(event, callback);\n}\n\nconst off = (event, callback) => {\n  if (!handlers[event]) return;\n\n  handlers[event] = handlers[event].filter((fn) => fn !== callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    const unsubscribe = on(event, callback);\n\n    return unsubscribe;\n  }, [event, callback]);\n};\n\nexport { on, emit, useEvent };",
+        "/Notifications.js": "import { ToastContainer, toast } from 'react-toastify';\nimport { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    toast(message, { type });\n  });\n  \n  return <ToastContainer position=\"bottom-right\" />;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Добавляем возврат функции очистки в `useEffect` хука `useEvent`, обеспечивая автоматическую отписку при размонтировании компонента.",
+      "highlight": ["37"]
+    },
+    {
+      "code": {
+        "/App.js": "import { Notifications } from './Notifications';\nimport { emit } from './useEvent';\nimport './style.css';\n\nexport default function App() {\n  const handleClick = (type) => {\n    emit('notify', {\n      type,\n      message: `Событие: ${type}`,\n    });\n  };\n  \n  return (\n    <>\n      <Notifications />\n      \n      <div className=\"container\">\n        <h1>Система уведомлений</h1>\n\n        <div className=\"controls\">\n          <button onClick={() => handleClick('error')}>Показать ошибку</button>\n          <button onClick={() => handleClick('success')}>Показать успех</button>\n        </div>\n      </div>\n    </>\n  );\n}\n",
+        "/useEvent.js": "import { useEffect } from 'react';\n\nconst handlers = {};\n\nconst on = (event, callback) => {\n  if (!handlers[event]) {\n    handlers[event] = [];\n  }\n\n  handlers[event].push(callback);\n\n  return () => off(event, callback);\n}\n\nconst off = (event, callback) => {\n  if (!handlers[event]) return;\n\n  handlers[event] = handlers[event].filter((fn) => fn !== callback);\n}\n\nconst emit = (event, payload) => {\n  if (!handlers[event]) return;\n\n  handlers[event].forEach((fn) => {\n    try {\n      fn(payload);\n    } catch (error) {\n      console.error('EventBus error:', error);\n    }\n  });\n};\n\nconst useEvent = (event, callback) => {\n  useEffect(() => {\n    const unsubscribe = on(event, callback);\n\n    return unsubscribe;\n  }, [event, callback]);\n};\n\nexport { on, off, emit, useEvent };",
+        "/Notifications.js": "import { ToastContainer, toast } from 'react-toastify';\nimport { useEvent } from './useEvent';\n\nexport const Notifications = () => {\n  useEvent('notify', ({ type, message }) => {\n    toast(message, { type });\n  });\n  \n  return <ToastContainer position=\"bottom-right\" />;\n};\n",
+        "/style.css": ".container {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.controls {\n  display: flex;\n  gap: 1rem;\n}\n"
+      },
+      "activeFile": "/useEvent.js",
+      "description": "Экспортируем метод `off` вместе с другими функциями, чтобы отписку можно было вызывать по необходимости извне шины событий. Нотификации с `react-toastify` на шине событий готовы!",
+      "highlight": ["41"]
+    }
+  ]
+}
