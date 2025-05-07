@@ -84,13 +84,13 @@ observable.notify("Пока!");
 const button = document.querySelector(".button");
 const handler = () => {};
 
-// Так подписываемся на событие
+// так подписываемся на событие
 button.addEventListener("click", handler);
 
-// Так отписываемся
+// так отписываемся
 button.removeEventListener("click", handler);
 
-// Под капотом button emit-тит событие 'click',
+// под капотом button emit-тит событие 'click',
 // по которому запускается обработчик
 button.click();
 ```
