@@ -6,7 +6,7 @@ shortTitle: "Теория"
 type: "theory"
 ---
 
-Паттерн Strategy (Стратегия) похож на <a href="/trainers/design-patterns-js/10-factory-theory">паттерн Factory</a> подходом. В Factory в зависимости от поданного на вход параметра создаётся и возвращается объект определённого типа. А в Strategy — выполняется определённый для каждого типа параметра произвольный набор действий.
+Паттерн Strategy (Стратегия) похож на <a href="/web-platform-site/trainers/design-patterns-js/10-factory-theory">паттерн Factory</a> подходом. В Factory в зависимости от поданного на вход параметра создаётся и возвращается объект определённого типа. А в Strategy — выполняется определённый для каждого типа параметра произвольный набор действий.
 
 ![Схема паттерна Factory](../assets/scheme-strategy-pattern.svg)
 

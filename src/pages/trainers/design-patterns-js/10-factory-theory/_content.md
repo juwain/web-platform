@@ -6,7 +6,7 @@ shortTitle: "Теория"
 type: "theory"
 ---
 
-Ранее уже разбирались <a href="/trainers/design-patterns-js/04-singleton-theory">паттерн Singleton</a> (создание единственного в своём роде объекта) и <a href="/trainers/design-patterns-js/08-prototype-theory">паттерн Prototype</a> (создание объектов на основе общего шаблона). В обоих этих методах объекты создаются «вручную».
+Ранее уже разбирались <a href="/web-platform-site/trainers/design-patterns-js/04-singleton-theory">паттерн Singleton</a> (создание единственного в своём роде объекта) и <a href="/trainers/design-patterns-js/08-prototype-theory">паттерн Prototype</a> (создание объектов на основе общего шаблона). В обоих этих методах объекты создаются «вручную».
 
 А что если требуется создать одну функцию/класс, который может «производить» объекты разных типов, чтобы в каждом внутри была «зашита» собственная логика и данные?
 
