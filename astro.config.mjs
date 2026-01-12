@@ -7,7 +7,8 @@ import expressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://webplatform.tech",
+  site: "https://juwain.github.io",
+  base: "/web-platform-site",
   integrations: [
     sitemap(),
     react(),
