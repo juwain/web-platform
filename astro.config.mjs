@@ -8,7 +8,9 @@ import expressiveCode from "astro-expressive-code";
 // https://astro.build/config
 export default defineConfig({
   site: "https://juwain.github.io",
-  base: process.env.BASE_PATH || "/",
+  base: process.env.BASE_PATH
+    ? process.env.BASE_PATH.replace(/\/$/, "") + "/"
+    : "/",
   integrations: [
     sitemap(),
     react(),
