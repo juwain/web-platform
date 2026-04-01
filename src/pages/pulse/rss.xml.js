@@ -11,7 +11,7 @@ export async function GET(context) {
     description: "Ежедневный дайджест новостей веб-разработки",
     site: context.site,
     items: posts.map((post) => ({
-      link: `/web-platform/pulse/${post.id}/`,
+      link: `${import.meta.env.BASE_URL}pulse/${post.id}/`,
       content: sanitizeHtml(parser.render(post.body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
       }),

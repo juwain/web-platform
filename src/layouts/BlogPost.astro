@@ -71,7 +71,7 @@ import BackToTop from "@utils/BackToTop.astro";
         <div class="hero-image">
           {
             heroImage && (
-              <img width={1020} height={510} src={`/web-platform/${heroImage}`} alt="" />
+              <img width={1020} height={510} src={`${import.meta.env.BASE_URL}${heroImage.replace(/^\//, '')}`} alt="" />
             )
           }
         </div>

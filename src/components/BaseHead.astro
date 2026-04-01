@@ -19,80 +19,124 @@ const {
   description,
   image = "/blog-placeholder-about.jpg",
 } = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const fontFaceCSS = `
+  @font-face {
+    font-family: "PTMonoWeb";
+    src: url("${baseUrl}fonts/pt-mono_regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "PTMonoWeb";
+    src: url("${baseUrl}fonts/pt-mono_bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "PTAstraSansWeb";
+    src: url("${baseUrl}fonts/pt-astra-sans_bold-italic.woff2") format("woff2");
+    font-weight: 700;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "PTAstraSansWeb";
+    src: url("${baseUrl}fonts/pt-astra-sans_italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+  }
+  @font-face {
+    font-family: "PTAstraSansWeb";
+    src: url("${baseUrl}fonts/pt-astra-sans_bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "PTAstraSansWeb";
+    src: url("${baseUrl}fonts/pt-astra-sans_regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+  }
+`;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+<!-- Fonts -->
+<style is:raw set:html={fontFaceCSS} />
+
 <!-- Standard favicon -->
-<link rel="icon" type="image/x-icon" href="/web-platform/favicon.ico" />
+<link rel="icon" type="image/x-icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
 
 <!-- PNG favicon alternatives -->
 <link
   rel="icon"
   type="image/png"
   sizes="16x16"
-  href="/web-platform/favicons/favicon-16x16.png"
+  href={`${import.meta.env.BASE_URL}favicons/favicon-16x16.png`}
 />
 <link
   rel="icon"
   type="image/png"
   sizes="32x32"
-  href="/web-platform/favicons/favicon-32x32.png"
+  href={`${import.meta.env.BASE_URL}favicons/favicon-32x32.png`}
 />
 <link
   rel="icon"
   type="image/png"
   sizes="48x48"
-  href="/web-platform/favicons/favicon-48x48.png"
+  href={`${import.meta.env.BASE_URL}favicons/favicon-48x48.png`}
 />
 
 <!-- Apple Touch Icons -->
 <link
   rel="apple-touch-icon"
   sizes="57x57"
-  href="/web-platform/apple-touch-icon/apple-touch-icon-57x57.png"
+  href={`${import.meta.env.BASE_URL}apple-touch-icon/apple-touch-icon-57x57.png`}
 />
 <link
   rel="apple-touch-icon"
   sizes="60x60"
-  href="/web-platform/apple-touch-icon/apple-touch-icon-60x60.png"
+  href={`${import.meta.env.BASE_URL}apple-touch-icon/apple-touch-icon-60x60.png`}
 />
 <link
   rel="apple-touch-icon"
   sizes="72x72"
-  href="/web-platform/apple-touch-icon/apple-touch-icon-72x72.png"
+  href={`${import.meta.env.BASE_URL}apple-touch-icon/apple-touch-icon-72x72.png`}
 />
 <link
   rel="apple-touch-icon"
   sizes="76x76"
-  href="/web-platform/apple-touch-icon/apple-touch-icon-76x76.png"
+  href={`${import.meta.env.BASE_URL}apple-touch-icon/apple-touch-icon-76x76.png`}
 />
 <link
   rel="apple-touch-icon"
   sizes="114x114"
-  href="/web-platform/apple-touch-icon/apple-touch-icon-114x114.png"
+  href={`${import.meta.env.BASE_URL}apple-touch-icon/apple-touch-icon-114x114.png`}
 />
 <link
   rel="apple-touch-icon"
   sizes="120x120"
-  href="/web-platform/apple-touch-icon/apple-touch-icon-120x120.png"
+  href={`${import.meta.env.BASE_URL}apple-touch-icon/apple-touch-icon-120x120.png`}
 />
 <link
   rel="apple-touch-icon"
   sizes="144x144"
-  href="/web-platform/apple-touch-icon/apple-touch-icon-144x144.png"
+  href={`${import.meta.env.BASE_URL}apple-touch-icon/apple-touch-icon-144x144.png`}
 />
 <link
   rel="apple-touch-icon"
   sizes="152x152"
-  href="/web-platform/apple-touch-icon/apple-touch-icon-152x152.png"
+  href={`${import.meta.env.BASE_URL}apple-touch-icon/apple-touch-icon-152x152.png`}
 />
 <link
   rel="apple-touch-icon"
   sizes="180x180"
-  href="/web-platform/apple-touch-icon/apple-touch-icon-180x180.png"
+  href={`${import.meta.env.BASE_URL}apple-touch-icon/apple-touch-icon-180x180.png`}
 />
 
 <meta name="generator" content={Astro.generator} />
@@ -100,42 +144,42 @@ const {
 <!-- Font preloads -->
 <link
   rel="preload"
-  href="/web-platform/fonts/pt-astra-sans_bold-italic.woff2"
+  href={`${import.meta.env.BASE_URL}fonts/pt-astra-sans_bold-italic.woff2`}
   as="font"
   type="font/woff"
   crossorigin
 />
 <link
   rel="preload"
-  href="/web-platform/fonts/pt-astra-sans_bold.woff2"
+  href={`${import.meta.env.BASE_URL}fonts/pt-astra-sans_bold.woff2`}
   as="font"
   type="font/woff"
   crossorigin
 />
 <link
   rel="preload"
-  href="/web-platform/fonts/pt-astra-sans_regular.woff2"
+  href={`${import.meta.env.BASE_URL}fonts/pt-astra-sans_regular.woff2`}
   as="font"
   type="font/woff"
   crossorigin
 />
 <link
   rel="preload"
-  href="/web-platform/fonts/pt-astra-sans_italic.woff2"
+  href={`${import.meta.env.BASE_URL}fonts/pt-astra-sans_italic.woff2`}
   as="font"
   type="font/woff"
   crossorigin
 />
 <link
   rel="preload"
-  href="/web-platform/fonts/pt-mono_bold.woff2"
+  href={`${import.meta.env.BASE_URL}fonts/pt-mono_bold.woff2`}
   as="font"
   type="font/woff"
   crossorigin
 />
 <link
   rel="preload"
-  href="/web-platform/fonts/pt-mono_regular.woff2"
+  href={`${import.meta.env.BASE_URL}fonts/pt-mono_regular.woff2`}
   as="font"
   type="font/woff"
   crossorigin

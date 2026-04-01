@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Веб-платформа** — Astro static site (GitHub Pages) with blog, interactive trainers, and "Pulse" feed. Russian-language content. Based on Astro Blog starter kit.
 
 - Site: `https://juwain.github.io/web-platform/`
-- Base path: `/web-platform` (configured in `astro.config.mjs`)
+- Base path: configured via `BASE_PATH` env var (default `/web-platform`) in `astro.config.mjs`
 
 ## Commands
 
@@ -44,7 +44,7 @@ No test framework configured. Pre-commit hook runs `pnpm run build` (via husky).
 
 ## Key Conventions
 
-- All asset paths in templates use `/web-platform/...` prefix (matching `base` config)
+- All asset paths in templates use `import.meta.env.BASE_URL` (auto-derived from `base` config)
 - Content frontmatter dates: `pubDate: YYYY-MM-DD` (coerced to Date)
 - Trainers use `Astro.glob` for lesson navigation (deprecated — prefer `import.meta.glob` when updating)
 - Fonts: PT Astra Sans, PT Mono (loaded from `/web-platform/fonts/`)

@@ -11,10 +11,10 @@ import SocialLinks from "./SocialLinks.astro";
       <Image src={logo} width={80} alt="" />
     </a>
     <div class="internal-links">
-      <HeaderLink href="/web-platform">Главная</HeaderLink>
-      <HeaderLink href="/web-platform/blog">Блог</HeaderLink>
-      <HeaderLink href="/web-platform/pulse">Пульс</HeaderLink>
-      <HeaderLink href="/web-platform/trainers">Тренажёры</HeaderLink>
+      <HeaderLink href={`${import.meta.env.BASE_URL}`}>Главная</HeaderLink>
+      <HeaderLink href={`${import.meta.env.BASE_URL}blog`}>Блог</HeaderLink>
+      <HeaderLink href={`${import.meta.env.BASE_URL}pulse`}>Пульс</HeaderLink>
+      <HeaderLink href={`${import.meta.env.BASE_URL}trainers`}>Тренажёры</HeaderLink>
     </div>
     <SocialLinks type="light" />
   </nav>
